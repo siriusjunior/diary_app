@@ -11,5 +11,8 @@
                 = f.password_field :password, class: 'login-form__input'
             .text-right
                 = f.submit 'ログイン', class: 'btn btn-raised btn_green pull-right'        
-    span.login-form__link-nav アカウントをお持ちではないですか?<br>
-    = link_to 'アカウントの新規作成', new_user_path
+    span.login-form__link-nav アカウントをお持ちではないですか?
+    = link_to '新規作成', new_user_path, class: 'login-form__link'
+    <br>
+    span.login-form__link-nav パスワードをお忘れの場合は
+    = link_to 'こちら', new_user_path
