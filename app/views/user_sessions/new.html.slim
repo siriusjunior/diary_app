@@ -9,8 +9,12 @@
             .form-group
                 = f.label :password, 'パスワード', class: 'bmd-label-floating'
                 = f.password_field :password, class: 'login-form__input'
-            .text-right
-                = f.submit 'ログイン', class: 'btn btn-raised btn_green pull-right'        
+            .remember-me
+                .remember-me__input
+                    = check_box_tag :remember, params[:remember], false
+                    = label_tag :remember, 'ログイン状態を保持する', class: 'remember-me__tag'
+                .remember-me__btn
+                    = f.submit 'ログイン', class: 'btn btn-raised btn_green'        
     span.login-form__link-nav アカウントをお持ちではないですか?
     = link_to '新規作成', new_user_path, class: 'login-form__link'
     <br>
