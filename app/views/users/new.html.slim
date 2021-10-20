@@ -1,5 +1,5 @@
 .login-visual.login-visual_mg-t.text-center
-    = image_tag 'diary-logo.png', size: '98x94', alt: 'ログインページのロゴ', class: 'login-logo'
+    = link_to image_tag('diary-logo.png', size: '98x94', alt: 'ログインページのロゴ', class: 'login-logo'), root_path
 .login-form.pb-5
     .card.mb-3
         = form_with model: @user, class: 'card-body p-4', local: true do |f|

@@ -3,6 +3,9 @@
 # Table name: users
 #
 #  id                           :bigint           not null, primary key
+#  activation_state             :string(255)
+#  activation_token             :string(255)
+#  activation_token_expires_at  :datetime
 #  crypted_password             :string(255)
 #  email                        :string(255)      not null
 #  remember_me_token            :string(255)
@@ -14,6 +17,7 @@
 #
 # Indexes
 #
+#  index_users_on_activation_token   (activation_token)
 #  index_users_on_email              (email) UNIQUE
 #  index_users_on_remember_me_token  (remember_me_token)
 #
