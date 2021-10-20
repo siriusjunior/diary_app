@@ -1,23 +1,22 @@
-.login-section
-    .login-form
-        .card.mb-3 
-            = form_with model: @user, class: 'card-body', local: true do |f|
-                = render 'shared/error_messages', object: @user
-                .form-group
-                    = f.label :username, 'ユーザー名', class: 'bmd-label-floating'
-                    = f.text_field :username, class: 'form-control'
-                .form-group
-                    = f.label :email, 'メールアドレス', class: 'bmd-label-floating'
-                    = f.text_field :email, class: 'form-control'
-                .form-group
-                    = f.label :password, 'パスワード', class: 'bmd-label-floating'
-                    = f.password_field :password, class: 'form-control'
-                .form-group
-                    = f.label :password_confirmation, 'パスワード確認', class: 'bmd-label-floating'
-                    = f.password_field :password_confirmation, class: 'form-control'
-                    
-                = f.submit '登録', class: 'btn btn-raised btn-primary'
-        .card
-            .card-body
-                | アカウントをお持ちですか
-                = link_to 'ログインする', login_path
+.login-visual.login-visual_mg-t.text-center
+    = image_tag 'diary-logo.png', size: '98x94', alt: 'ログインページのロゴ', class: 'login-logo'
+.login-form.pb-5
+    .card.mb-3
+        = form_with model: @user, class: 'card-body p-4', local: true do |f|
+            = render 'shared/error_messages', object: @user
+            .form-group
+                = f.label :username, 'ユーザー名', class: 'bmd-label-floating'
+                = f.text_field :username, class: 'login-form__input'
+            .form-group
+                = f.label :email, 'メールアドレス', class: 'bmd-label-floating'
+                = f.text_field :email, class: 'login-form__input'
+            .form-group
+                = f.label :password, 'パスワード', class: 'bmd-label-floating'
+                = f.password_field :password, class: 'login-form__input'
+            .form-group
+                = f.label :password_confirmation, 'パスワード確認', class: 'bmd-label-floating'
+                = f.password_field :password_confirmation, class: 'login-form__input'
+            .text-right
+                = f.submit '登録', class: 'btn btn-raised btn_green pull-right'        
+    span.login-form__link-nav アカウントをお持ちですか?
+    = link_to 'ログインする', login_path

@@ -2,11 +2,16 @@ class UserSessionsController < ApplicationController
   def new; end
 
   def create
-    @user = login(params[:email], params[:password])
-    if @user
-      redirect_back_or_to root_path, success: "ログインしました"
+    if User.find_by(email: params[:email])
+      @user = login(params[:email], params[:password])
+      if @user
+        redirect_back_or_to root_path, success: "ログインしました"
+      else
+        flash.now[:danger] = "ログインに失敗しました"
+        render :new
+      end
     else
-      flash.now[:danger] = "ログインに失敗しました"
+      flash.now[:danger] = "メールアドレスが存在しません"
       render :new
     end
   end

@@ -3,22 +3,71 @@
 @import "font-awesome";
 
 body {
+    box-sizing: border-box;
+    margin: 0;
     position: relative;
     height: 100vh;
+    background-color: #FAFAFA;
 }
 
-.login-section {
-    position: relative;
-    height: 100vh;
+.alert ul {
+    padding-inline-start: 20px;
+}
 
-    .login-form {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 400px;
+.login-visual {
+    width: 100%;
+    height: 130px;
+    background-image: url("../images/diary-logo.png");
+    &_mg-t {
+        margin-top: 120px;
     }
 }
-// .wrapper {
 
+.login-form {
+    width: 340px;
+    margin: 0 auto;
+    &__input {
+        display: block;
+        border: 1px solid #DBDBDB;
+        font-size: 1.2rem;
+        color: rgb(116, 116, 116);
+        height: 40px;
+        width: 100%;
+    }
+    &__link-nav {
+        color: #666;
+        font-size: 14px;
+    }
+    a {
+        font-size: 14px;
+    }
+}
+
+.btn {
+    &_green {
+        background-color: #519233;
+        color: white;
+    }
+    &:hover {
+        background-color: #62a344;
+        color: white;
+        border-color: #519233;
+    }
+}
+
+form {
+    margin: 0;
+}
+
+// .login-section {
+//     position: relative;
+//     height: 100vh;
+
+//     .login-form {
+//         position: absolute;
+//         top: 50%;
+//         left: 50%;
+//         transform: translate(-50%, -50%);
+//         width: 400px;
+//     }
 // }
