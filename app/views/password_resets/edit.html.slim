@@ -1,0 +1,14 @@
+.login-visual.login-visual_mg-t.text-center
+    = link_to image_tag('diary-logo.png', size: '98x94', alt: 'ログインページのロゴ', class: 'login-logo'), root_path
+.login-form.pb-5
+    .card.mb-3
+        = form_with model: @user, url: password_reset_path(@token), :html => {:method => :put}, class: 'card-body p-4', local: true do |f|
+            = render 'shared/error_messages', object: @user
+            .form-group
+                = f.label :password, 'パスワード', class: 'bmd-label-floating'
+                = f.password_field :password, class: 'login-form__input'
+            .form-group
+                = f.label :password_confirmation, 'パスワード確認', class: 'bmd-label-floating'
+                = f.password_field :password_confirmation, class: 'login-form__input'
+            .text-right
+                = f.submit 'リセット', class: 'btn btn-raised btn_green pull-right'

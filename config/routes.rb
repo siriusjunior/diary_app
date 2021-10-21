@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get :activate
     end
   end
+  resources :password_resets, only: %i[new create edit update]
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'

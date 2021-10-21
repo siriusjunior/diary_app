@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       auto_login(@user)
-      redirect_to login_path, info: 'メールを送信いたしました。メールをご確認の上、アカウントを有効化してください。'
+      redirect_to login_path, info: 'メールを送信いたしました。メールをご確認の上、アカウントを有効化してください'
     else
       flash.now[:danger] = 'ユーザーの作成に失敗しました'
       render :new
