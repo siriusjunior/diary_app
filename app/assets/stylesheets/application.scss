@@ -74,6 +74,65 @@ form {
         margin-left: 5px;
     }
 }
+.header {
+    height: 100px;
+    &__bg {
+        background-color: #267700;
+    }
+    &__wrapper {
+        margin: 0 auto;
+        width: 990px;
+    }
+    &__logo {
+        width: 40px;
+        height: auto;
+        &_mg-r {
+            margin-right: 20px;
+        }
+    }
+    &-btn {
+        border-radius: 30px;
+        border-width: 0;
+        background-color: #519233;
+        border-color: white;
+        color: white!important;
+        text-align: center;
+        width: 90px;
+        height: 40px;
+        &:hover {
+            background-color: #67ac47;
+            transition: .3s;
+        }
+        &_mg-r {
+            margin-right: 20px;
+        }
+    }
+    &__fa{
+        color: white;
+        &_mg-r-20 {
+            margin-right: 20px;
+        }
+        &_mg-r-10 {
+            margin-right: 10px;
+        }
+    }
+}
+
+.search {
+    &__form {
+        background-color: #519233;
+        color: white;
+        height: 40px;
+        border: none;
+        padding-left: 20px;
+        &::placeholder {
+            color: #c5c5c5;
+        }
+        &_mg-r {
+            margin-right: 20px;
+        }
+    }
+}
 
 // .login-section {
 //     position: relative;
