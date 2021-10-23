@@ -12,6 +12,7 @@ gem 'puma', '~> 3.11'
 
 gem 'font-awesome-sass', '~> 5.15.1'
 gem 'jquery-rails'
+gem 'popper_js' 
 # Use SCSS for stylesheets
 gem 'sass-rails'
 
