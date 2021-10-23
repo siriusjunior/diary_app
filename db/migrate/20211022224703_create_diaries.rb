@@ -4,6 +4,7 @@ class CreateDiaries < ActiveRecord::Migration[5.2]
       t.text :body, null: false
       t.text :check
       t.string :image
+      t.integer :date_sequence
       t.references :user, foreign_key: true
 
       t.timestamps
