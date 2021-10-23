@@ -1,0 +1,15 @@
+.card.mb-5.diary
+    .card-header
+        .d-flex.align-items-center
+        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+        = diary.user.username
+        - if current_user&.own?(diary)
+            .ml-auto
+            = link_to diary_path(diary), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do
+                = icon 'far', 'trash-alt', class: 'fa-lg'
+            = link_to edit_diary_path(diary) do
+                = icon 'far', 'edit', class: 'fa-lg'
+    = link_to diary_path(diary) do
+    .card-body
+        .card-text
+        = diary.body

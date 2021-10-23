@@ -35,4 +35,10 @@ class User < ApplicationRecord
   validates :password, confirmation: true
   validates :password_confirmation, presence: true
 
+  has_many :diaries, dependent: :destroy
+
+  def own?(object)
+    id == object.user_id
+  end
+  
 end

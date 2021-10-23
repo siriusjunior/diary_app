@@ -1,0 +1,40 @@
+.diary-detail.card
+    .image-box
+    .image-info-box
+        .profile-box.p-3
+            .d-flex.align-items-center
+                = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+                = @diary.user.username
+                - if current_user&.own?(@diary)
+        .ml-auto
+            = link_to diary_path(@diary), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'} do
+            = icon 'far', 'trash-alt', class: 'fa-lg'
+            = link_to edit_diary_path(@diary) do
+            = icon 'far', 'edit', class: 'fa-lg'
+    hr.m-0
+    .diary-body.p-3
+    / 投稿の本文
+    .row.no-gutters
+        .col-2
+        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+        .col-10
+        = simple_format(@diary.body)
+    hr
+        / コメント一覧
+    .row.no-gutters
+        .col-2
+        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+        .col-10
+        | ダミーコメントダミーコメントダミーコメント
+    hr
+    .row.no-gutters
+        .col-2
+        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+        .col-10
+        | ダミーコメントダミーコメントダミーコメント
+    hr.m-0
+    .diary-comment.p-3
+    form.form-inline.mb-0
+        input type="text" class="form-control input-comment-body" placeholder="コメント"
+        button type="submit" class="btn btn-primary btn-raised"
+        | 投稿
