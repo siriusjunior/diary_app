@@ -23,4 +23,5 @@ class Diary < ApplicationRecord
   belongs_to :user
   has_one :diary_date_counter
   validates :body, presence: true, length: { maximum: 1000 }
+  mount_uploader :image, DiaryImageUploader
 end
