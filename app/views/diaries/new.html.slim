@@ -1,37 +1,22 @@
 .wrapper.py-5
     h2.text-center.mb-5 ダイアリーの新規作成
-    = form_with model: @diary, class:'card mb-5 new-diary new-diary_center', local: true do |f|
-        .card-header.d-flex.flex-column
-            = render 'shared/error_messages', object: f.object
+    = form_with model: @diary, class:'card p-4 mb-5 new-diary new-diary_center d-flex flex-column', local: true do |f|
+        = render 'shared/error_messages', object: f.object
+        .new-diary__header.d-flex.justify-content-between.align-items-center.mb-4
             .diary__profile
                 = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
                 = current_user.username
-            .form-group.d-flex.justify-content-start.uploader__image.align-items-center.pb-1
-                = f.label :image, 'アップロード画像', class: 'mr-3 uploader__label'
-                = f.file_field :image, onchange: 'previewDiaryImageFile(preview)', accept: 'image/*'
-                / バリデーションエラーが発生してフォーム再表示の際に、キャッシュを利用してファイルを保持する
-                = f.hidden_field :image_cache
-                img id='preview' class='uploader__placeholder ml-1' 
-                / = image_tag @diary.image.url, class: 'uploader__placeholder mr-3', id: 'preview' 
-            .form-group
-                = f.label :body, 'ダイアリー本文', class: 'uploader__label'
-                = f.text_area :body, class: 'form-control new-diary__textarea'
-            = f.submit "投稿する", class: 'btn btn-primary btn-raised new-diary__btn my-4'
+            span
+                = 
 
-
-    / .card.mb-5.diary.diary_center
-    / .card-header.d-flex.justify-content-between.align-items-center
-    /     .diary__profile
-    /         = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-    /         = diary.user.username
-    / .card-body
-    /     span.d-flex.justify-content-between
-    /         span.diary__date
-    /             = diary.date_sequence 
-    /             |日目
-    /         span.diary__time-ago
-    /             = time_ago_in_words(diary.created_at)
-    /             |前
-    /     p.diary__content
-    /     a.diary__dummy-img href="#"
-    / .diary__footer
+        .form-group.d-flex.justify-content-start.uploader__image.align-items-center.pb-1
+            = f.label :image, 'アップロード画像(任意)', class: 'mr-5 uploader__label'
+            = f.file_field :image, onchange: 'previewDiaryImageFile(preview)', accept: 'image/*'
+            / バリデーションエラーが発生してフォーム再表示の際に、キャッシュを利用してファイルを保持する
+            = f.hidden_field :image_cache
+            img id='preview' class='uploader__placeholder ml-1' 
+            / = image_tag @diary.image.url, class: 'uploader__placeholder mr-3', id: 'preview' 
+        .form-group
+            = f.label :body, 'ダイアリー本文', class: 'mr-5 uploader__label'
+            = f.text_area :body, class: 'form-control new-diary__textarea'
+        = f.submit "投稿する", class: 'btn btn-primary btn-raised new-diary__btn my-4'
