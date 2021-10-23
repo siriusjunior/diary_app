@@ -176,6 +176,30 @@ form {
         font-size: .9rem;
     }
 }
+.uploader {
+    &__placeholder {
+        background-color: silver;
+        width: 50px;
+        height: 50px;
+    }
+    &__image {
+        border-bottom: silver solid 1px;
+    }
+    &__label {
+        color: $black;
+        font-size: .9rem;
+    }
+}
+.new-diary {
+    max-width: 710px;
+    &_center {
+        margin: 0 auto;
+    }
+    &__btn {
+        width: 100px;
+        margin: 0 0 0 auto;
+    }
+}
 
 
 @mixin box_sizing {
