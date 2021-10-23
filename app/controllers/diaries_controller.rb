@@ -5,7 +5,7 @@ class DiariesController < ApplicationController
   end
 
   def new
-    @diary = Diary.new 
+    @diary = Diary.new
   end
 
   def create

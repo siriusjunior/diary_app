@@ -166,6 +166,15 @@ form {
     &__comment-icon {
         margin-right: 20px;
     }
+    &__date {
+        color: gray;
+        font-size: 1.05rem;
+        font-weight: bold;
+    }
+    &__time-ago {
+        color: silver;
+        font-size: .9rem;
+    }
 }
 
 

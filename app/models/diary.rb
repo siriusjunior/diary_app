@@ -21,5 +21,6 @@
 #
 class Diary < ApplicationRecord
   belongs_to :user
+  has_one :diary_date_counter
   validates :body, presence: true, length: { maximum: 1000 }
 end
