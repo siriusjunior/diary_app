@@ -2,6 +2,8 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+$black: #666;
+
 body {
     box-sizing: border-box;
     margin: 0;
@@ -9,8 +11,14 @@ body {
     height: 100vh;
     background-color: #FAFAFA;
 }
+h2 {
+    color: $black;
+}
 .alert ul {
     padding-inline-start: 20px;
+}
+.card-header {
+    border: 0!important;
 }
 .login-visual {
     width: 100%;
@@ -74,14 +82,14 @@ form {
         margin-left: 5px;
     }
 }
+.wrapper {
+    margin: 0 auto;
+    width: 990px;
+}
 .header {
     height: 100px;
     &__bg {
         background-color: #267700;
-    }
-    &__wrapper {
-        margin: 0 auto;
-        width: 990px;
     }
     &__logo {
         width: 40px;
@@ -131,6 +139,32 @@ form {
         &_mg-r {
             margin-right: 20px;
         }
+    }
+}
+.diary {
+    max-width: 710px;
+    &_center {
+        margin: 0 auto;
+    }
+    &__content {
+        color: $black;
+        background-image: linear-gradient(#ccc 1px, transparent 1px);
+        background-size: 100% 3em;
+        line-height: 3;
+        padding-bottom: 1px;
+        padding-top: 0;
+    }
+    &__comment {
+        color: #62A2D5;
+    }
+    &__dummy-img {
+        display: block;
+        width: 20px;
+        height: 20px;
+        background-color: silver;
+    }
+    &__comment-icon {
+        margin-right: 20px;
     }
 }
 

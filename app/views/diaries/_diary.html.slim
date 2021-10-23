@@ -1,15 +1,20 @@
-.card.mb-5.diary
-    .card-header
-        .d-flex.align-items-center
-        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-        = diary.user.username
+.card.mb-5.diary.diary_center
+    .card-header.d-flex.justify-content-between.align-items-center
+        .diary__profile
+            = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
+            = link_to diary.user.username, diary.user
         - if current_user&.own?(diary)
-            .ml-auto
-            = link_to diary_path(diary), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do
-                = icon 'far', 'trash-alt', class: 'fa-lg'
-            = link_to edit_diary_path(diary) do
-                = icon 'far', 'edit', class: 'fa-lg'
+            .diary__user-links
+                = link_to diary_path(diary), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do
+                    = icon 'far', 'trash-alt', class: 'fa-lg'
+                = link_to edit_diary_path(diary) do
+                    = icon 'far', 'edit', class: 'fa-lg'
     = link_to diary_path(diary) do
     .card-body
-        .card-text
-        = diary.body
+        p.diary__content
+            = diary.body
+    .diary__footer.pb-4.pr-4.d-flex.justify-content-end
+        a.diary__comment-icon href="#"
+            = icon 'far', 'comment', class: 'fa-lg fa-light'
+            span.diary__comment 1件
+        a.diary__dummy-img href="#"
