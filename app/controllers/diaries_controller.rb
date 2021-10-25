@@ -11,8 +11,8 @@ class DiariesController < ApplicationController
   def create
     @diary = current_user.diaries.build(diary_params)
     if @diary.save
-      # 次回投稿時の@diaryは2になる
-      @diary.increment(:date_sequence, 1)
+      # 次回投稿時の@diaryは2になるがuserに保持しないと意味なくね
+      # @diary.increment(:date_sequence, 1)
       redirect_to diaries_path
     else
       render :new

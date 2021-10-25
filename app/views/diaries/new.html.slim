@@ -8,6 +8,7 @@
                 = current_user.username
             span.new-diary__date
                 |ダイアリー
+                / = @diary.calculate_date
                 = @diary.date_sequence
                 |日目
 

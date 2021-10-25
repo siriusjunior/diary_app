@@ -34,8 +34,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8 }
   validates :password, confirmation: true
   validates :password_confirmation, presence: true
-
-  has_one :diary_date_counter, dependent: :destroy
+  
   has_many :diaries, dependent: :destroy
 
   def own?(object)

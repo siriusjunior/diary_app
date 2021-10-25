@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_23_061933) do
+ActiveRecord::Schema.define(version: 2021_10_25_204259) do
 
   create_table "diaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "body", null: false
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(version: 2021_10_23_061933) do
     t.datetime "updated_at", null: false
     t.index ["diary_id"], name: "index_diary_date_counters_on_diary_id"
     t.index ["user_id"], name: "index_diary_date_counters_on_user_id"
+  end
+
+  create_table "diary_resets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_diary_resets_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -57,4 +64,5 @@ ActiveRecord::Schema.define(version: 2021_10_23_061933) do
   add_foreign_key "diaries", "users"
   add_foreign_key "diary_date_counters", "diaries"
   add_foreign_key "diary_date_counters", "users"
+  add_foreign_key "diary_resets", "users"
 end
