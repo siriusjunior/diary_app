@@ -199,6 +199,11 @@ form {
         width: 100px;
         margin: 0 0 0 auto;
     }
+    &__date {
+        color: $black;
+        font-size: 1.0rem;
+        font-weight: bold;
+    }
 }
 
 

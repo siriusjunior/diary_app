@@ -11,6 +11,8 @@ class DiariesController < ApplicationController
   def create
     @diary = current_user.diaries.build(diary_params)
     if @diary.save
+      # 次回投稿時の@diaryは2になる
+      @diary.increment(:date_sequence, 1)
       redirect_to diaries_path
     else
       render :new
@@ -34,11 +36,15 @@ class DiariesController < ApplicationController
     @diary = Diary.find(params[:id])
   end
 
-  # def destroy
-  # end
+  def destroy
+    @diary = current_user.diaries.find(params[:id])
+    @diary.destroy!
+    redirect_to root_path, success: 'ダイアリーを削除しました'
+  end
 
   private
+
     def diary_params
-      params.require(:diary).permit(:diary, :image)
+      params.require(:diary).permit(:diary, :image, :body)
     end
 end
