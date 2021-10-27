@@ -8,6 +8,7 @@
 #  activation_token                    :string(255)
 #  activation_token_expires_at         :datetime
 #  crypted_password                    :string(255)
+#  diary_date                          :integer          default(1), not null
 #  email                               :string(255)      not null
 #  remember_me_token                   :string(255)
 #  remember_me_token_expires_at        :datetime
@@ -34,6 +35,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8 }
   validates :password, confirmation: true
   validates :password_confirmation, presence: true
+  validates :diary_date, presence: true
   
   has_many :diaries, dependent: :destroy
 

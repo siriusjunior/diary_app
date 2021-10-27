@@ -191,6 +191,7 @@ form {
     }
 }
 .new-diary {
+    position: relative;
     max-width: 710px;
     &_center {
         margin: 0 auto;
@@ -203,6 +204,26 @@ form {
         color: $black;
         font-size: 1.0rem;
         font-weight: bold;
+    }
+}
+.reset-btn {
+    position: absolute;
+    top: 4rem;
+    right: 1.5rem;
+    width: 100px;
+    line-height: 30px;
+    border-radius: 5px;
+    font-size: .9rem;
+    text-align: center;
+    background-color: #929292;
+    color: white;
+    border-color: transparent;
+    &__container {
+        margin: 0 0 0 auto;
+    }
+    &:hover {
+        background-color: #acacac;
+        transition: .3s;
     }
 }
 

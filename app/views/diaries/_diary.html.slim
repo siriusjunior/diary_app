@@ -13,7 +13,7 @@
     .card-body
         span.d-flex.justify-content-between
             span.diary__date
-                = diary.date_sequence 
+                = diary.date_sequence
                 |日目
             span.diary__time-ago
                 = time_ago_in_words(diary.created_at)

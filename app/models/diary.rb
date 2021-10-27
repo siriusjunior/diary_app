@@ -21,14 +21,7 @@
 #
 class Diary < ApplicationRecord
   belongs_to :user
-  has_one :diary_date_counter
   validates :body, presence: true, length: { maximum: 1000 }
+  validates :date_sequence, presence: true
   mount_uploader :image, DiaryImageUploader
-
-  def calculate_date
-    current_user.diaries.joins(:diary_resets)
-						.where(diary_resets: { id: Diary_reset.select('max(id)') }) # 最新のダイアリーリセット一件
-						.where(‘diary_reset.created_at < ?’, Time.current)
-						.count
-  end
 end

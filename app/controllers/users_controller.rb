@@ -28,4 +28,8 @@ class UsersController < ApplicationController
       def user_params
         params.require(:user).permit(:email, :password, :password_confirmation, :username)
       end
+
+      def reset_diary_date
+        self.update(diary_date: 1)
+      end
 end
