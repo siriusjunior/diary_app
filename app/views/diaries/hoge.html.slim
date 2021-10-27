@@ -1,0 +1,5 @@
+.wrapper.py-5
+    h2.text-center.mb-5 ダイアリーの新規作成
+    = @user.username
+= link_to diary_reset_path, { method: :patch, class: "reset-btn reset-btn_mg card card_no-shadow new-diary new-diary_center d-flex flex-column mb-4" } do
+    = "リセット"

@@ -11,12 +11,11 @@ class DiariesController < ApplicationController
 
   def create
     @diary = current_user.diaries.build(diary_params)
-    @user = User.find(current_user.id)
+    # ここで@user.diary_dateが初期化されていない
     if @diary.save
-      @diary.update!(date_sequence: @user.diary_date)
-      @user.increment!(:diary_date, 1)
-      redirect_to diaries_path
+      redirect_to diaries_path, success: 'ダイアリーを投稿しました'
     else
+      flash.now[:danger] = 'ダイアリーの投稿に失敗しました'
       render :new
     end
   end
@@ -47,6 +46,7 @@ class DiariesController < ApplicationController
   private
 
     def diary_params
-      params.require(:diary).permit(:diary, :image, :body)
+      params.require(:diary).permit(:image, :body, :date_sequence)
     end
+
 end

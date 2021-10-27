@@ -23,13 +23,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def reset_diary_date
+    @diary = Diary.new
+    @user = User.find(current_user.id)
+    @user.reset_diary
+    render 'diaries/new'
+  end
+
     private
       
       def user_params
         params.require(:user).permit(:email, :password, :password_confirmation, :username)
-      end
-
-      def reset_diary_date
-        self.update(diary_date: 1)
       end
 end

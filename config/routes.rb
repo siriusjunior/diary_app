@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       get :activate
     end
   end
-  get 'diary_reset', to: 'users#reset_diary_date'
+  patch 'diary_reset', to: 'users#reset_diary_date'
   resources :password_resets, only: %i[new create edit update]
   resources :diaries
 

@@ -43,4 +43,8 @@ class User < ApplicationRecord
     id == object.user_id
   end
   
+  def reset_diary
+    update(diary_date: 1)
+  end
+
 end

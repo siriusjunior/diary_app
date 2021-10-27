@@ -17,6 +17,11 @@ h2 {
 .alert ul {
     padding-inline-start: 20px;
 }
+.card {
+    &_no-shadow {
+        box-shadow: none;
+    }
+}
 .card-header {
     border: 0!important;
 }
@@ -191,7 +196,6 @@ form {
     }
 }
 .new-diary {
-    position: relative;
     max-width: 710px;
     &_center {
         margin: 0 auto;
@@ -207,23 +211,25 @@ form {
     }
 }
 .reset-btn {
-    position: absolute;
-    top: 4rem;
-    right: 1.5rem;
     width: 100px;
-    line-height: 30px;
     border-radius: 5px;
     font-size: .9rem;
+    line-height: 40px;
     text-align: center;
     background-color: #929292;
-    color: white;
+    color: #fff;
     border-color: transparent;
     &__container {
         margin: 0 0 0 auto;
     }
     &:hover {
+        text-decoration: none;
         background-color: #acacac;
         transition: .3s;
+        color: #fff;
+    }
+    &_mg {
+        margin: 0 0 0 auto;
     }
 }
 
