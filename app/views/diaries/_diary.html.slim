@@ -23,4 +23,6 @@
         a.diary__comment-icon href="#"
             = icon 'far', 'comment', class: 'fa-lg fa-light'
             span.diary__comment 1件
-        a.diary__dummy-img href="#"
+        - if diary.image.present?
+            = link_to diary.image.url, "data-lightbox" => diary.id do
+                = image_tag diary.image.url, height: '40', width: '40'
