@@ -6,7 +6,6 @@ class DiariesController < ApplicationController
 
   def new
     @diary = Diary.new
-    # @user = User.find(current_user.id)
   end
 
   def create

@@ -27,6 +27,11 @@ class UsersController < ApplicationController
     @diary = Diary.new
     current_user.skip_password = true
     current_user.reset_diary
+    respond_to do |format|
+      flash.now[:info] = 'ダイアリー日数がリセットされました'
+      format.js
+      format.html
+    end
   end
 
     private
