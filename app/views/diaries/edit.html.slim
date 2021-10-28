@@ -24,8 +24,6 @@
                     = image_tag @diary.image.url, id: 'preview', height: '50', width: '50'
             - else 
                 img id='preview' class='uploader__placeholder ml-1' 
-                / a#preview_link.uploader__placeholder.ml-1 href="#" data-lightbox="preview-image"
-                /     img#preview src="#" height='50' width='50'
         .form-group
             = f.label :body, 'ダイアリー本文', class: 'mr-5 uploader__label'
             = f.text_area :body, class: 'form-control new-diary__textarea'
