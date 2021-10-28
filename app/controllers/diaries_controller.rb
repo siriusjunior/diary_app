@@ -6,12 +6,11 @@ class DiariesController < ApplicationController
 
   def new
     @diary = Diary.new
-    @user = User.find(current_user.id)
+    # @user = User.find(current_user.id)
   end
 
   def create
     @diary = current_user.diaries.build(diary_params)
-    # ここで@user.diary_dateが初期化されていない
     if @diary.save
       redirect_to diaries_path, success: 'ダイアリーを投稿しました'
     else

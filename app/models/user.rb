@@ -29,12 +29,13 @@
 #
 class User < ApplicationRecord
   authenticates_with_sorcery!
+  attr_accessor :skip_password
 
   validates :username, presence: true
   validates :email, uniqueness: true, presence: true
-  validates :password, length: { minimum: 8 }
-  validates :password, confirmation: true
-  validates :password_confirmation, presence: true
+  validates :password, length: { minimum: 8 }, unless: :skip_password
+  validates :password, confirmation: true, unless: :skip_password
+  validates :password_confirmation, presence: true, unless: :skip_password
   validates :diary_date, presence: true
   
   has_many :diaries, dependent: :destroy

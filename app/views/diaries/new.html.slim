@@ -8,7 +8,8 @@
                 = current_user.username
             span.new-diary__date
                 |ダイアリー
-                = @user.diary_date
+                = current_user.diary_date
+                / = @user.diary_date
                 |日目
         = link_to diary_reset_path, { method: :patch, class: "reset-btn reset-btn_mg card card_no-shadow new-diary new-diary_center d-flex flex-column mb-4" } do
             = "リセット"
@@ -18,7 +19,6 @@
             / バリデーションエラーが発生してフォーム再表示の際に、キャッシュを利用してファイルを保持する
             = f.hidden_field :image_cache
             img id='preview' class='uploader__placeholder ml-1' 
-            / = image_tag @diary.image.url, class: 'uploader__placeholder mr-3', id: 'preview' 
         .form-group
             = f.label :body, 'ダイアリー本文', class: 'mr-5 uploader__label'
             = f.text_area :body, class: 'form-control new-diary__textarea'
