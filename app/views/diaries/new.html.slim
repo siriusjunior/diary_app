@@ -9,9 +9,8 @@
             span.new-diary__date
                 |ダイアリー
                 = current_user.diary_date
-                / = @user.diary_date
                 |日目
-        = link_to diary_reset_path, { method: :patch, class: "reset-btn reset-btn_mg card card_no-shadow new-diary new-diary_center d-flex flex-column mb-4" } do
+        = link_to diary_reset_path, { method: :patch, class: "reset-btn reset-btn_mg card card_no-shadow new-diary new-diary_center d-flex flex-column mb-4", remote: true } do
             = "リセット"
         .form-group.d-flex.justify-content-start.uploader__image.align-items-center.pb-1
             = f.label :image, 'アップロード画像(任意)', class: 'mr-5 uploader__label'

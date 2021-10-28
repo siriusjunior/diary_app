@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  # before_action :require_login, only: %i[reset_diary_date]
   def new
     @user = User.new
   end
@@ -28,11 +27,6 @@ class UsersController < ApplicationController
     @diary = Diary.new
     current_user.skip_password = true
     current_user.reset_diary
-    render 'diaries/new'
-    # @diary = Diary.new
-    # @user = User.find(current_user.id)
-    # @user.reset_diary
-    # render 'diaries/new'
   end
 
     private
