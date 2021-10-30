@@ -45,11 +45,11 @@ class DiariesController < ApplicationController
   def reset_image
     @diary = Diary.find(params[:id])
     @diary.update_attribute(:image, nil)
-    render :edit
-    # respond_to do |format|
-    #   format.js
-    #   format.html
-    # end
+    # render :edit
+    respond_to do |format|
+      format.js
+      format.html { render :edit }
+    end
   end
 
   private
