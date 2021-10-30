@@ -30,10 +30,6 @@ class Diary < ApplicationRecord
     self.user.diary_date
   end
 
-  def reset_image
-    self.image
-  end
-
   def increment_diary_date
     self.user.increment!(:diary_date)
   end

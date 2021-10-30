@@ -22,8 +22,7 @@ function previewEditImageFile(preview){
     }
 }
 
-function previewAddImageFile(preview){
-
+function previewEditImageFile(preview){
     var data = `<a id="preview_link" class="uploader__placeholder ml-1" data-lightbox="image-60" href=""><img id="preview" height="50" width="50" src=""></a>`
     // inputタグの取得
     const target = this.event.target;
