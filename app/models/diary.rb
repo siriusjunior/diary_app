@@ -21,7 +21,8 @@
 #
 class Diary < ApplicationRecord
   belongs_to :user
-  validates :body, presence: true, length: { maximum: 1000 }
+  validates :body, presence: true, length: { maximum: 500 }
+  validates :check, length: { maximum: 200 }
   validates :date_sequence, presence: true
   mount_uploader :image, DiaryImageUploader
   before_create :register_date_sequence

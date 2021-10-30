@@ -54,7 +54,7 @@ class DiariesController < ApplicationController
   private
 
     def diary_params
-      params.require(:diary).permit(:image, :image_cache, :remove_image, :body, :date_sequence)
+      params.require(:diary).permit(:image, :image_cache, :check, :remove_image, :body, :date_sequence)
     end
 
 end

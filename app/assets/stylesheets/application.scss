@@ -159,6 +159,12 @@ form {
         padding-bottom: 1px;
         padding-top: 0;
     }
+    &__check {
+        color: #800000;
+    }
+    &__check-title {
+        font-weight: bold;
+    }
     &__comment {
         color: #62A2D5;
     }
