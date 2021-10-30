@@ -19,10 +19,10 @@
                 = time_ago_in_words(diary.created_at)
         p.diary__content
             = diary.body
-    .diary__footer.pb-4.pr-4.d-flex.justify-content-end
+    .diary__footer.pb-4.pr-4.d-flex.justify-content-end.align-items-center
         a.diary__comment-icon href="#"
             = icon 'far', 'comment', class: 'fa-lg fa-light'
             span.diary__comment 1件
         - if diary.image.present?
-            = link_to diary.image.url, "data-lightbox" => "image-#{diary.id}" do
+            = link_to diary.image.url, class: 'diary__image', "data-lightbox" => "image-#{diary.id}" do
                 = image_tag diary.image.url, height: '40', width: '40'

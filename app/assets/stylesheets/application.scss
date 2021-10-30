@@ -169,7 +169,7 @@ form {
         background-color: silver;
     }
     &__comment-icon {
-        margin-right: 20px;
+        margin-right: 0;
     }
     &__date {
         color: gray;
@@ -179,6 +179,9 @@ form {
     &__time-ago {
         color: silver;
         font-size: .9rem;
+    }
+    &__image {
+        margin-left: 20px;
     }
 }
 .uploader {
@@ -230,6 +233,26 @@ form {
     }
     &_mg {
         margin: 0 0 0 auto;
+    }
+}
+.image-reset {
+    border: 1px solid #666!important;
+    width: 110px;
+    border-radius: 2px;
+    font-size: .85rem;
+    line-height: 25px;
+    text-align: center;
+    background-color: #EFEFEF;
+    color: #000;
+    border-color: transparent;
+    white-space: nowrap;
+    &:hover {
+        text-decoration: none;
+        background-color: #e2e2e2;
+        color: #000;
+    }
+    &_mg {
+        margin: 0 auto;
     }
 }
 

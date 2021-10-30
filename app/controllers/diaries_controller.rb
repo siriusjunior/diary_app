@@ -42,10 +42,14 @@ class DiariesController < ApplicationController
     redirect_to root_path, success: 'ダイアリーを削除しました'
   end
 
-  def reset_diary_image
+  def reset_image
     @diary = Diary.find(params[:id])
     @diary.update_attribute(:image, nil)
     render :edit
+    # respond_to do |format|
+    #   format.js
+    #   format.html
+    # end
   end
 
   private
