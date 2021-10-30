@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     end
   end
   patch 'diary_reset', to: 'users#reset_diary_date'
+  patch '/diaries/:id', to: 'diaries#reset_diary_image', as: 'reset_image'
+  # patch 'image_reset', to: 'diaries#reset_diary_image'
   resources :password_resets, only: %i[new create edit update]
   resources :diaries
 

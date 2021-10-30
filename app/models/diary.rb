@@ -25,19 +25,23 @@ class Diary < ApplicationRecord
   validates :date_sequence, presence: true
   mount_uploader :image, DiaryImageUploader
   before_create :register_date_sequence
-  after_save :increment_diary_date
 
   def user_diary_date
     self.user.diary_date
   end
 
-  private
+  def reset_image
+    self.image
+  end
 
+  def increment_diary_date
+    self.user.increment!(:diary_date)
+  end
+  
+  private
+  
     def register_date_sequence
       self.date_sequence = user_diary_date
     end
 
-    def increment_diary_date
-      self.user.increment!(:diary_date)
-    end
 end

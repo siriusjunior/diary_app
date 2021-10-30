@@ -23,7 +23,9 @@
                 = link_to @diary.image.url, id: 'preview_link', class:'uploader__placeholder ml-1', "data-lightbox" => "image-#{@diary.id}" do
                     = image_tag @diary.image.url, id: 'preview', height: '50', width: '50'
             - else 
-                img id='preview' class='uploader__placeholder ml-1' 
+                img id='preview' class='uploader__placeholder ml-1'
+            = link_to reset_image_path(@diary), { method: :patch, data: { confirm: 'アップロード画像を削除しますか？' }, class: "reset-btn"} do
+                = "画像リセット"
         .form-group
             = f.label :body, 'ダイアリー本文', class: 'mr-5 uploader__label'
             = f.text_area :body, class: 'form-control new-diary__textarea'

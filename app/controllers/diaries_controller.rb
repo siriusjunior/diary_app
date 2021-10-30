@@ -12,6 +12,7 @@ class DiariesController < ApplicationController
     @diary = current_user.diaries.build(diary_params)
     if @diary.save
       redirect_to diaries_path, success: 'ダイアリーを投稿しました'
+      @diary.increment_diary_date
     else
       flash.now[:danger] = 'ダイアリーの投稿に失敗しました'
       render :new
@@ -41,10 +42,16 @@ class DiariesController < ApplicationController
     redirect_to root_path, success: 'ダイアリーを削除しました'
   end
 
+  def reset_diary_image
+    @diary = Diary.find(params[:id])
+    @diary.update_attribute(:image, nil)
+    render :edit
+  end
+
   private
 
     def diary_params
-      params.require(:diary).permit(:image, :body, :date_sequence)
+      params.require(:diary).permit(:image, :image_cache, :remove_image, :body, :date_sequence)
     end
 
 end
