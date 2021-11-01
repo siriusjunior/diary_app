@@ -11,6 +11,7 @@ body {
     height: 100vh;
     background-color: #FAFAFA;
 }
+
 h2 {
     color: $black;
 }
@@ -18,6 +19,7 @@ h2 {
     padding-inline-start: 20px;
 }
 .card {
+    text-decoration: none!important;
     &_no-shadow {
         box-shadow: none;
     }
@@ -154,6 +156,9 @@ form {
     &_center {
         margin: 0 auto;
     }
+    &__profile {
+        text-decoration: none;
+    }
     &__content {
         color: $black;
         background-image: linear-gradient(#ccc 1px, transparent 1px);
@@ -161,6 +166,14 @@ form {
         line-height: 3;
         padding-bottom: 1px;
         padding-top: 0;
+    }
+    &__link {
+        cursor: pointer;
+        transition: all 0.5s ease 0s;
+        &:hover {
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+            transform: translateY(-0.5em);
+        }
     }
     &__check {
         color: #800000;

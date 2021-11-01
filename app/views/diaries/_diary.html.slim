@@ -1,14 +1,16 @@
-.card.mb-5.diary.diary_center
+= link_to(diary_path(diary), class: 'card mb-5 diary diary_center diary__link') do
     .card-header.d-flex.justify-content-between.align-items-center
         .diary__profile
             = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-            = link_to diary.user.username, diary.user
+            = diary.user.username
         - if current_user&.own?(diary)
             .diary__user-links
-                = link_to diary_path(diary), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do
-                    = icon 'far', 'trash-alt', class: 'fa-lg'
-                = link_to edit_diary_path(diary) do
-                    = icon 'far', 'edit', class: 'fa-lg'
+                object
+                    = link_to diary_path(diary), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do
+                        = icon 'far', 'trash-alt', class: 'fa-lg'
+                object
+                    = link_to edit_diary_path(diary) do
+                        = icon 'far', 'edit', class: 'fa-lg'
     .card-body
         span.d-flex.justify-content-between
             span.diary__date
@@ -25,10 +27,11 @@
                 text.diary__check
                     = diary.check
     .diary__footer.pb-4.pr-4.d-flex.justify-content-end.align-items-center
-        = link_to "ダイアリー詳細", diary_path(diary), class: "mr-3"
-        a.diary__comment-icon href="#"
-            = icon 'far', 'comment', class: 'fa-lg fa-light'
-            span.diary__comment 1件
+        object
+            a.diary__comment-icon href="#"
+                = icon 'far', 'comment', class: 'fa-lg fa-light'
+                span.diary__comment 1件
         - if diary.image.present?
-            = link_to diary.image.url, class: 'diary__image', "data-lightbox" => "image-#{diary.id}" do
-                = image_tag diary.image.url, height: '40', width: '40'
+            object
+                = link_to diary.image.url, class: 'diary__image', "data-lightbox" => "image-#{diary.id}" do
+                    = image_tag diary.image.url, height: '40', width: '40'
