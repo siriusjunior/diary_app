@@ -148,6 +148,9 @@ form {
 }
 .diary {
     max-width: 710px;
+    &__wrapper {
+        max-width: 710px;
+    }
     &_center {
         margin: 0 auto;
     }
@@ -188,6 +191,47 @@ form {
     }
     &__image {
         margin-left: 20px;
+    }
+    &__mg {
+        margin: 0 auto;
+    }
+}
+.comment {
+    &__wrapper {
+        max-width: 710px;
+        margin: 0 auto;
+    }
+    &__count {
+        display: block;
+        color: $black;
+        font-size: .9rem;
+    }
+    &__name {
+        font-size: 1rem;
+        color: $black;
+        &_mg {
+            margin-right: 10px;
+        }
+    }
+    &__content {
+        color: $black;
+    }
+    &__date {
+        color: gray;
+        font-size: .8rem;
+    }
+}
+.comment-post {
+    &__wrapper {
+        max-width: 710px;
+    }
+    &__input {
+        display: block;
+        width: 100%;
+        font-size: .8rem;
+        line-height: 30px;
+        color: $black;
+        border-bottom: 1px solid silver;
     }
 }
 .uploader {

@@ -25,6 +25,7 @@
                 text.diary__check
                     = diary.check
     .diary__footer.pb-4.pr-4.d-flex.justify-content-end.align-items-center
+        = link_to "ダイアリー詳細", diary_path(diary), class: "mr-3"
         a.diary__comment-icon href="#"
             = icon 'far', 'comment', class: 'fa-lg fa-light'
             span.diary__comment 1件
