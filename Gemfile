@@ -18,6 +18,7 @@ gem 'sass-rails'
 
 gem 'slim-rails'
 gem 'html2slim'
+gem 'kaminari'
 
 gem 'annotate'
 gem 'sorcery'

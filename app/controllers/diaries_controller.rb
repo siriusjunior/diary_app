@@ -1,7 +1,7 @@
 class DiariesController < ApplicationController
   before_action :require_login, only: %i[new create update destroy]
   def index
-    @diaries = Diary.all.includes(:user).order(created_at: :desc)
+    @diaries = Diary.all.includes(:user).page(params[:page]).per(15).order(created_at: :desc)
   end
 
   def new
