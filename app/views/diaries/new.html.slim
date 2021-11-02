@@ -25,4 +25,8 @@
         .form-group
             = f.label :body, 'ダイアリー本文', class: 'mr-5 uploader__label'
             = f.text_area :body, class: 'form-control new-diary__textarea'
+            / p.new-diary__js-text-count
         = f.submit "投稿する", class: 'btn btn-primary btn-raised new-diary__btn my-4', id: 'diary-submit', data: { confirm: "ダイアリー#{current_user.diary_date}日目を投稿します" }
+        
+        / btn.btn#foo-btn onclick="js_alert()" hoo
+        / 挙動テスト
