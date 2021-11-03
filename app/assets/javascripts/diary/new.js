@@ -52,11 +52,15 @@ $(function (){
     });
 });
 
-
-// 挙動テスト
+// 挙動チェック
 // $(window).load(function (){
 //     alert('Hello JavaScript');
+//     console.log("呼ばれてる？？？")
 // });
 // function js_alert(){
 //     alert('Hello JavaScript');
 // }
+// $(function (){
+//     console.log("呼ばれてる？？？")
+//     document.getElementById('hello').textContent = "Hello JavaScript"
+// });

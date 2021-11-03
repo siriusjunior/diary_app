@@ -16,3 +16,9 @@
 //= require activestorage
 //= require bootstrap-material-design/dist/js/bootstrap-material-design.js
 //= require_tree .
+
+// 挙動チェック
+// $(function (){
+//     console.log("呼ばれてる？？？")
+//     document.getElementById('hello').textContent = "Hello JavaScript"
+// });
