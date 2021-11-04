@@ -258,9 +258,14 @@ form {
         max-width: 710px;
     }
     &__btn {
-        width: 70px;
         line-height: 17px;
         font-size: .8rem;
+    }
+    &__edit-btn {
+        width: 90px;
+    }
+    &__post-btn {
+        width: 70px;
     }
     &__input {
         width: 100%;
@@ -282,6 +287,11 @@ form {
     width: 100%;
     &__btn {
         font-size: .8rem;
+    }
+    &__form {
+        &_mg {
+            margin: 0 0 0 auto;
+        }
     }
 }
 .uploader {
@@ -379,6 +389,13 @@ form {
 }
 .w-0 {
     width: 0%;
+}
+
+.d-block {
+    display: block!important;
+}
+.d-none {
+    display: none!important;
 }
 
 @mixin box_sizing {

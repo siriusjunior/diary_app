@@ -3,4 +3,5 @@
 - else
     | $('.comments-box').prepend("#{j render('comments/comment', comment: @comment)}");
     | $('#comment-count').html("#{ @comment.diary.comments.count }件のコメント");
+    | $('#comment-edit-form').addClass('d-none').removeClass('d-block');
     | $('.comment-post__input').val('');

@@ -1,6 +1,6 @@
 = form_with model: [@diary, @comment], class: 'comment-edit d-flex mb-0 flex-column', remote: true do |f|
     = f.text_field :body, class: 'form-control comment-edit__form', placeholder: 'コメント'
-    .comment-edit__bottom.d-flex.mt-1.justify-content-end
+    .comment-edit__bottom.d-flex.mt-1.justify-content-end.comment-edit__form
         object
             = link_to comment_path(@comment), class: 'btn btn_cancell btn-raised comment-edit__btn', remote: true do
                 |キャンセル
