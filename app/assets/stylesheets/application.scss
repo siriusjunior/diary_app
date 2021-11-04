@@ -233,6 +233,12 @@ form {
         color: gray;
         font-size: .8rem;
     }
+    &__item {
+        width: 100%;
+    }
+    &__middle {
+        width: 90%;
+    }
 }
 .comment-post {
     width: 100%;
@@ -347,6 +353,10 @@ form {
 
 .pagination {
     margin-top: 100px!important;
+}
+
+.fa-md {
+    font-size: 1.0em;
 }
 
 @mixin box_sizing {

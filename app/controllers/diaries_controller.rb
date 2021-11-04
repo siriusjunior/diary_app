@@ -38,7 +38,7 @@ class DiariesController < ApplicationController
 
   def show
     @diary = Diary.find(params[:id])
-    @comments = @diary.comments.includes(:user).order(created_at: :asc)
+    @comments = @diary.comments.includes(:user).order(created_at: :desc)
     @comment = Comment.new
   end
 
