@@ -235,16 +235,32 @@ form {
     }
 }
 .comment-post {
+    width: 100%;
+    &__upper {
+        width: 100%;
+    }
     &__wrapper {
         max-width: 710px;
     }
-    &__input {
-        display: block;
-        width: 100%;
+    &__btn {
+        width: 70px;
+        line-height: 17px;
         font-size: .8rem;
-        line-height: 30px;
+    }
+    &__input {
+        width: 100%;
+        font-size: .9rem;
+        line-height: 40px;
         color: $black;
-        border-bottom: 1px solid silver;
+        &::placeholder {
+            font-size: .8rem;
+        }
+    }
+    &__editable {
+        line-height: 20px;
+        font-size: 1.0rem;
+        color: $black;
+        // background-color: tomato;
     }
 }
 .uploader {

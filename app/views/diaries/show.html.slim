@@ -34,39 +34,26 @@ div.comment__wrapper.diary__mg.mb-3
     span.comment__count.mb-3.pt-2 ３件のコメント
     div.comment-post.mb-4
         .comment-post__wrapper.d-flex.justify-content-start.align-items-center
-            = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-            span.comment-post__input コメントを入力...
+            / span.comment-post__input コメントを入力...
+            = form_with model: [@diary, @comment], class: 'comment-post d-flex mb-0 flex-column justify-content-between', remote: true do |f|
+                .comment-post__upper.d-flex.justify-content-between.mb-1
+                    = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
+                    = f.text_field :body, class: 'form-control comment-post__input', placeholder: 'コメントを入力...'
+                .comment-post__bottom.d-flex.justify-content-end
+                    = f.submit 'コメント', data: { confirm: "このコメントを投稿しますか？" }, class: 'px-0 comment-post__btn btn btn-primary btn-raised'
+        div.comment__wrapper.mb-3
+            = render 'comments/comments', comments: @comments
+        / div.px-2.comment-post__editable contenteditable="true"
+        /     span
+
+
+/ コメント一覧
+    = render 'comments/comments', comments: @comments
+    - if logged_in?
+    hr.m-0
+    .post-comment.p-3
+        = render 'comments/form', post: @post, comment: @comment
 / コメントのパーシャル
-div.comment__wrapper.mb-3
-    div.comment__item.d-flex.align-items-center.justify-content-start.mb-4
-        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-        div.d-flex.flex-column
-            div.comment__upper.d-flex.align-items-center.justify-content-start.mb-1
-                span.comment__name.comment__name_mg knopary
-                span.comment__date 1日前
-            span.comment__content ダミーテキストダミーテキストダミーテキスト
-        div.d-flex.justify-content-between
-            icon.far.trash-alt.fa-lg
-            icon.far.edit.fa-lg
-    div.comment__item.d-flex.align-items-center.justify-content-start.mb-4
-        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-        div.d-flex.flex-column
-            div.comment__upper.d-flex.align-items-center.justify-content-start.mb-1
-                span.comment__name.comment__name_mg knopary
-                span.comment__date 1日前
-            span.comment__content ダミーテキストダミーテキストダミーテキスト
-        div.d-flex.justify-content-between
-            icon.far.trash-alt.fa-lg
-            icon.far.edit.fa-lg
-    div.comment__item.d-flex.align-items-center.justify-content-start.mb-4
-        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-        div.d-flex.flex-column
-            div.comment__upper.d-flex.align-items-center.justify-content-start.mb-1
-                span.comment__name.comment__name_mg knopary
-                span.comment__date 1日前
-            span.comment__content ダミーテキストダミーテキストダミーテキスト
-        div.d-flex.justify-content-between
-            icon.far.trash-alt.fa-lg
-            icon.far.edit.fa-lg
+
 
 

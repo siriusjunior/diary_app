@@ -39,6 +39,7 @@ class User < ApplicationRecord
   validates :diary_date, presence: true
   
   has_many :diaries, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def own?(object)
     id == object.user_id

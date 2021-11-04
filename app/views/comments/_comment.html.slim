@@ -1,0 +1,17 @@
+div.comment__item.d-flex.align-items-start.justify-content-start.my-3
+        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
+        div.d-flex.flex-column
+            div.comment__upper.d-flex.align-items-center.justify-content-start.mb-1
+                span.comment__name.comment__name_mg
+                    = comment.user.username
+                span.comment__date
+                    = time_ago_in_words(comment.created_at)
+            span.comment__content
+                = comment.body
+        div.d-flex.justify-content-between
+                object
+                    = link_to comment_path(comment), method: :delete, data: { confirm: 'コメントを削除しますか？' } do
+                        = icon 'far', 'trash-alt', class: 'fa-lg'
+                object.ml-3
+                    = link_to edit_comment_path(comment) do
+                        = icon 'far', 'edit', class: 'fa-lg'

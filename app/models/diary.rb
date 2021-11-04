@@ -27,6 +27,8 @@ class Diary < ApplicationRecord
   mount_uploader :image, DiaryImageUploader
   before_create :register_date_sequence
 
+  has_many :comments, dependent: :destroy
+
   def user_diary_date
     self.user.diary_date
   end

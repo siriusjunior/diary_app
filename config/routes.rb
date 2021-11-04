@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   end
   patch 'diary_reset', to: 'users#reset_diary_date'
   resources :password_resets, only: %i[new create edit update]
-  resources :diaries do
+  resources :diaries, shallow: true  do
+    resources :comments
     member do
       patch :reset_image
     end
