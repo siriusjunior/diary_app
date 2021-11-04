@@ -1,4 +1,5 @@
 .wrapper.py-5
     h2.text-center.mb-5 みんなの最新ダイアリー
-    = render @diaries
-    = paginate @diaries
+    #diaries
+        = render :partial => "diaries"
+    = paginate @diaries, remote: true

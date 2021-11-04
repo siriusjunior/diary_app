@@ -6,7 +6,7 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all'
-    = javascript_include_tag 'application'
+    / = javascript_include_tag 'application'
     link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet"
     script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" 
     script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript" 
@@ -21,4 +21,4 @@ html
     = yield
     = debug(params) if Rails.env.development?
   / 読み込みタイミングの調整による挙動チェック
-  / = javascript_include_tag 'application'
+  = javascript_include_tag 'application'

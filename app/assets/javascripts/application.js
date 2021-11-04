@@ -22,3 +22,9 @@
 //     console.log("呼ばれてる？？？")
 //     document.getElementById('hello').textContent = "Hello JavaScript"
 // });
+
+// $(function (){
+//     $(".page-link").on("click", function(){
+//         alert('link clicked');
+//     });
+// });
