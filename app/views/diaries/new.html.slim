@@ -29,4 +29,8 @@
         = f.submit "投稿する", class: 'btn btn-primary btn-raised new-diary__btn my-4', id: 'diary-submit', data: { confirm: "ダイアリー#{current_user.diary_date}日目を投稿します" }
         
         / btn.btn#foo-btn onclick="js_alert()" hoo
-        / 挙動テスト
+        / 挙動チェック
+        / p#hello
+        /     | Hello World
+    / タイミング調整で個別jsファイルの読み込み
+    / = javascript_include_tag 'assets/diary/new'

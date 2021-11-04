@@ -51,6 +51,10 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+  # config.assets.compile = true
+
+  # 挙動調整のため追記するかも、app/assets/javascripts/配下に置かれているJSファイル群はAssets Pipeline の対象外になってしまうので以下の行を追加
+  # config.assets.precompile += ['*.js']
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

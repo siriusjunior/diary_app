@@ -1,7 +1,11 @@
 class DiariesController < ApplicationController
   before_action :require_login, only: %i[new create update destroy]
   def index
-    @diaries = Diary.all.includes(:user).order(created_at: :desc)
+    @diaries = Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
@@ -11,7 +15,7 @@ class DiariesController < ApplicationController
   def create
     @diary = current_user.diaries.build(diary_params)
     if @diary.save
-      redirect_to diaries_path, success: 'ダイアリーを投稿しました'
+      redirect_to diaries_path, success: "ダイアリー#{@diary.date_sequence}日目を投稿しました"
       @diary.increment_diary_date
     else
       flash.now[:danger] = 'ダイアリーの投稿に失敗しました'

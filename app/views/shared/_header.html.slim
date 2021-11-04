@@ -15,6 +15,6 @@ header.navbar.navbar-expand-lg.navbar-light.header.header__bg
             a.nav-link href="#"
                 = icon 'fa', 'comments', class: 'fa-lg header__fa header__fa_mg-r-20'
             li.nav-item
-            = link_to '投稿する', root_path, class: 'nav-link header-btn header-btn_mg-r'
+            = link_to '投稿する', new_diary_path, class: 'nav-link header-btn header-btn_mg-r'
             li.nav-item
             = link_to 'ログアウト', logout_path, class: 'nav-link header-btn', method: :delete

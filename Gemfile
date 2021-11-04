@@ -18,11 +18,13 @@ gem 'sass-rails'
 
 gem 'slim-rails'
 gem 'html2slim'
+gem 'kaminari'
 
 gem 'annotate'
 gem 'sorcery'
 gem 'rails-i18n', '~> 5.1' 
 gem 'carrierwave'
+gem 'mini_magick'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -37,7 +39,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
 
 gem 'rubocop', require:false
 gem 'rubocop-rails', require:false

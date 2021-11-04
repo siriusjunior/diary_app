@@ -8,6 +8,11 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認
+      diary:
+        body: ダイアリー本文
+        check: チェック
+        date_sequence: ダイアリー日数
+        image: アップロード画像
     # attributes:
     #   created_at: 作成日時
     #   updated_at: 更新日時
