@@ -1,0 +1,32 @@
+.wrapper.py-5
+    h2.text-center.mb-5 ダイアリーの新規作成
+    = form_with model: @diary, class:'card p-4 mb-5 new-diary new-diary_center d-flex flex-column', local: true do |f|
+        = render 'shared/error_messages', object: f.object
+        .new-diary__header.d-flex.justify-content-between.align-items-center
+            .diary__profile
+                = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
+                = current_user.username
+            span.new-diary__date
+                |ダイアリー
+                = current_user.diary_date
+                |日目
+        = link_to diary_reset_path, { method: :patch, data: { confirm: 'ダイアリー日数をリセットしますか？' }, class: "reset-btn reset-btn_mg card card_no-shadow new-diary new-diary_center d-flex flex-column mb-4", remote: true } do
+            = "リセット"
+        .form-group.d-flex.justify-content-start.uploader__image.align-items-center.pb-1
+            = f.label :image, 'アップロード画像(任意)', class: 'mr-5 uploader__label'
+            = f.file_field :image, onchange: 'previewDiaryImageFile(preview)', accept: 'image/*'
+            / バリデーションエラーが発生してフォーム再表示の際に、キャッシュを利用してファイルを保持する
+            = f.hidden_field :image_cache
+            - if @diary.image.present?
+                = link_to @diary.image.url, id: 'preview_link', class:'uploader__placeholder ml-1', "data-lightbox" => "image-#{@diary.id}" do
+                    = image_tag @diary.image.url, id: 'preview', height: '50', width: '50'
+            - else  
+                img id='preview' class='uploader__placeholder ml-1'
+        .form-group
+            = f.label :body, 'ダイアリー本文', class: 'mr-5 uploader__label'
+            = f.text_area :body, class: 'form-control new-diary__textarea'
+            / p.new-diary__js-text-count
+        = f.submit "投稿する", class: 'btn btn-primary btn-raised new-diary__btn my-4', id: 'diary-submit', data: { confirm: "ダイアリー#{current_user.diary_date}日目を投稿します" }
+        
+        / btn.btn#foo-btn onclick="js_alert()" hoo
+        / 挙動テスト

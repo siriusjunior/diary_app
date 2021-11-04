@@ -8,6 +8,7 @@
 #  activation_token                    :string(255)
 #  activation_token_expires_at         :datetime
 #  crypted_password                    :string(255)
+#  diary_date                          :integer          default(1), not null
 #  email                               :string(255)      not null
 #  remember_me_token                   :string(255)
 #  remember_me_token_expires_at        :datetime
@@ -28,11 +29,23 @@
 #
 class User < ApplicationRecord
   authenticates_with_sorcery!
+  attr_accessor :skip_password
 
   validates :username, presence: true
   validates :email, uniqueness: true, presence: true
-  validates :password, length: { minimum: 8 }
-  validates :password, confirmation: true
-  validates :password_confirmation, presence: true
+  validates :password, length: { minimum: 8 }, unless: :skip_password
+  validates :password, confirmation: true, unless: :skip_password
+  validates :password_confirmation, presence: true, unless: :skip_password
+  validates :diary_date, presence: true
+  
+  has_many :diaries, dependent: :destroy
+
+  def own?(object)
+    id == object.user_id
+  end
+  
+  def reset_diary
+    update(diary_date: 1)
+  end
 
 end

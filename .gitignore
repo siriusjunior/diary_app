@@ -31,5 +31,5 @@
 /config/master.key
 /config/database.yml
 vendor
-
+/public/uploads
 dump.rdb
