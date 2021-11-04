@@ -36,11 +36,6 @@ div.comment__wrapper.diary__mg.mb-3
         |件のコメント
     div.comment-post.mb-4
         .comment-post__wrapper.d-flex.justify-content-start.align-items-center
-            = form_with model: [@diary, @comment], class: 'comment-post d-flex mb-0 flex-column justify-content-between', remote: true do |f|
-                .comment-post__upper.d-flex.justify-content-between.mb-1
-                    = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-                    = f.text_field :body, class: 'form-control comment-post__input', placeholder: 'コメントを入力...'
-                .d-flex.justify-content-end
-                    = f.submit 'コメント', class: 'px-0 comment-post__btn btn btn-primary btn-raised'
+            = render 'comments/post_form', diary: @diary, comment: @comment
         div.comment__wrapper.mb-3
             = render 'comments/comments', comments: @comments
