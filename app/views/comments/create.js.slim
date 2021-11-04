@@ -2,4 +2,5 @@
     | $('.comments-box').prepend("#{j render('shared/error_messages', object: @comment)}");
 - else
     | $('.comments-box').prepend("#{j render('comments/comment', comment: @comment)}");
+    | $('#comment-count').html("#{ @comment.diary.comments.count }件のコメント");
     | $('.comment-post__input').val('');

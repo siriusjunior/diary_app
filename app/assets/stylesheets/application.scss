@@ -68,11 +68,20 @@ form {
     &_green {
         background-color: #519233;
         color: white;
+        &:hover {
+            background-color: #62a344;
+            color: white;
+            border-color: #519233;
+        }
     }
-    &:hover {
-        background-color: #62a344;
-        color: white;
-        border-color: #519233;
+    
+    &_cancell {
+        background-color: rgb(136, 136, 136);
+        color: #fff;
+        &:hover {
+            background-color: rgb(160, 160, 160);
+            color: white;
+        }
     }
 }
 .remember-me {
@@ -269,6 +278,12 @@ form {
         // background-color: tomato;
     }
 }
+.comment-edit {
+    width: 100%;
+    &__btn {
+        font-size: .8rem;
+    }
+}
 .uploader {
     &__placeholder {
         background-color: silver;
@@ -356,7 +371,14 @@ form {
 }
 
 .fa-md {
-    font-size: 1.0em;
+    font-size: .95em;
+}
+
+.w-100{
+    width: 100%;
+}
+.w-0 {
+    width: 0%;
 }
 
 @mixin box_sizing {

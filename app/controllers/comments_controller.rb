@@ -8,11 +8,23 @@ class CommentsController < ApplicationController
 
     def edit
         @comment = current_user.comments.find(params[:id])
+        respond_to do |format|
+            format.html
+            format.js
+        end
     end
 
     def update
         @comment = current_user.comments.find(params[:id])
         @comment.update(comment_update_params)
+    end
+
+    def show
+        @comment = current_user.comments.find(params[:id])
+        respond_to do |format|
+            format.html
+            format.js
+        end
     end
 
     def destroy
