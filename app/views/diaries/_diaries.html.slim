@@ -1,2 +1,3 @@
 - @diaries.each do |diary|
     = render partial: diary
+= paginate @diaries, remote: true
