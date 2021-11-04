@@ -15,7 +15,7 @@ class DiariesController < ApplicationController
   def create
     @diary = current_user.diaries.build(diary_params)
     if @diary.save
-      redirect_to diaries_path, success: 'ダイアリーを投稿しました'
+      redirect_to diaries_path, success: "ダイアリー#{@diary.date_sequence}日目を投稿しました"
       @diary.increment_diary_date
     else
       flash.now[:danger] = 'ダイアリーの投稿に失敗しました'
