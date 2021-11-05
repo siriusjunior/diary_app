@@ -32,11 +32,13 @@
             object
                 = render 'like_area', diary: diary
         / コメントアイコン
-        object.ml-3
-            a.diary__comment-icon href="#"
-                = icon 'far', 'comment', class: 'fa-lg fa-light'
-                span.diary__comment.ml-1
-                    = diary.comments.count
+        - if diary.comment_authorization?
+            object.ml-3
+                / = link_to 'コメント', post_path(activity.subject.post, anchor: "comment-#{activity.subject.id}")
+                = link_to diary_path(diary) do
+                    = icon 'far', 'comment', class: 'fa-lg fa-light'
+                    span.diary__comment.ml-1
+                        = diary.comments.count
         - if diary.image.present?
             object
                 = link_to diary.image.url, class: 'diary__image ml-3', "data-lightbox" => "image-#{diary.id}" do
