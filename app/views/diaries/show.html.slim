@@ -42,7 +42,16 @@ hr.comment__wrapper
             div.comment__wrapper.mb-3
                 / コメントのレンダリング
                 = render 'comments/comments', comments: @comments
-- else 
-    div.comment__wrapper.diary__mg.my-2
-        span.comment__info
-            |コメントはオフになっています
+- else
+    - if current_user&.own?(@diary)
+        div.comment__wrapper.diary__mg.my-2
+            span.comment__info
+                |コメントはオフになっています。
+                object
+                    = link_to edit_diary_path(@diary) do
+                        |設定
+                    |を変更する
+    - else 
+        div.comment__wrapper.diary__mg.my-2
+            span.comment__info
+                |コメントはオフになっています
