@@ -192,6 +192,7 @@ form {
     }
     &__comment {
         color: #62A2D5;
+        -webkit-font-smoothing: antialiased;
     }
     &__dummy-img {
         display: block;
@@ -211,9 +212,6 @@ form {
     &__time-ago {
         color: silver;
         font-size: .9rem;
-    }
-    &__image {
-        margin-left: 20px;
     }
     &__mg {
         margin: 0 auto;
@@ -396,6 +394,15 @@ form {
 
 .fa-md {
     font-size: .95em;
+}
+
+.like-icon {
+    color: #F91781;
+    -webkit-font-smoothing: antialiased;
+}
+.unlike-icon {
+    color: silver;
+    -webkit-font-smoothing: antialiased;
 }
 
 .w-100{

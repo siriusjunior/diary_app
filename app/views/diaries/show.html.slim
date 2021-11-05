@@ -25,8 +25,12 @@
                 text.diary__check
                     = @diary.check
     .diary__footer.pb-4.pr-4.d-flex.justify-content-end.align-items-center
+        / いいねボタン
+        - if current_user && !current_user.own?(@diary)
+            object
+                = render 'like_area', diary: @diary
         - if @diary.image.present?
-            = link_to @diary.image.url, class: 'diary__image', "data-lightbox" => "image-#{@diary.id}" do
+            = link_to @diary.image.url, class: 'diary__image ml-3', "data-lightbox" => "image-#{@diary.id}" do
                 = image_tag @diary.image.url, height: '40', width: '40'
 hr.comment__wrapper
 / コメントエリア

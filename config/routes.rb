@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       patch :reset_image
     end
   end
+  resources :likes, only: %i[create destroy]
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

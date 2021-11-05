@@ -27,11 +27,17 @@
                 text.diary__check
                     = diary.check
     .diary__footer.pb-4.pr-4.d-flex.justify-content-end.align-items-center
-        object
+        / いいねボタン
+        - if current_user && !current_user.own?(diary)
+            object
+                = render 'like_area', diary: diary
+        / コメントアイコン
+        object.ml-3
             a.diary__comment-icon href="#"
                 = icon 'far', 'comment', class: 'fa-lg fa-light'
-                span.diary__comment 1件
+                span.diary__comment.ml-1
+                    = diary.comments.count
         - if diary.image.present?
             object
-                = link_to diary.image.url, class: 'diary__image', "data-lightbox" => "image-#{diary.id}" do
+                = link_to diary.image.url, class: 'diary__image ml-3', "data-lightbox" => "image-#{diary.id}" do
                     = image_tag diary.image.url, height: '40', width: '40'
