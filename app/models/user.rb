@@ -40,6 +40,8 @@ class User < ApplicationRecord
   
   has_many :diaries, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes
+  has_many :like_diaries, through: :likes, source: :diary
 
   def own?(object)
     id == object.user_id
@@ -47,6 +49,18 @@ class User < ApplicationRecord
   
   def reset_diary
     update(diary_date: 1)
+  end
+
+  def like(diary)
+    like_diaries << diary
+  end
+
+  def unlike(diary)
+    like_diaries.destroy(diary)
+  end
+
+  def like?(diary)
+    like_diaries.include?(diary)
   end
 
 end

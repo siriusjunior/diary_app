@@ -50,8 +50,9 @@ class CommentsController < ApplicationController
                 # 0つまりfalseだった場合
                 respond_to do |format|
                     format.js { render ajax_redirect_to(root_path) }
+                    # 想定している挙動とは違ったため保留
                     # flash.now[:danger] = 'コメントは投稿者により認められていません'
-                    format.js { render ajax_flash(flash) }
+                    # format.js { render ajax_flash(flash) }
                 end
             end
         end
