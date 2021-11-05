@@ -29,13 +29,20 @@
             = link_to @diary.image.url, class: 'diary__image', "data-lightbox" => "image-#{@diary.id}" do
                 = image_tag @diary.image.url, height: '40', width: '40'
 hr.comment__wrapper
-/ コメントの投稿フォーム
-div.comment__wrapper.diary__mg.mb-3
-    span.comment__count.mb-3.pt-2#comment-count
-        = @diary.comments.count
-        |件のコメント
-    div.comment-post.mb-4
-        .comment-post__wrapper.d-flex.justify-content-start.align-items-center
-            = render 'comments/post_form', diary: @diary, comment: @comment
-        div.comment__wrapper.mb-3
-            = render 'comments/comments', comments: @comments
+/ コメントエリア
+-  if @diary.comment_authorization
+    div.comment__wrapper.diary__mg.mb-3
+        span.comment__count.mb-3.pt-2#comment-count
+            = @diary.comments.count
+            |件のコメント
+        div.comment-post.mb-4
+            .comment-post__wrapper.d-flex.justify-content-start.align-items-center
+                / コメントの投稿フォーム
+                = render 'comments/post_form', diary: @diary, comment: @comment
+            div.comment__wrapper.mb-3
+                / コメントのレンダリング
+                = render 'comments/comments', comments: @comments
+- else 
+    div.comment__wrapper.diary__mg.my-2
+        span.comment__info
+            |コメントはオフになっています

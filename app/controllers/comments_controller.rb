@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
     include AjaxHelper
     before_action :require_login, only: %i[create edit update destroy]
-    before_action :check_authorization, only: %i[create edit]
+    before_action :check_authorization, only: %i[create]
 
     def create
         @comment = current_user.comments.build(comment_params)
