@@ -30,7 +30,7 @@ class DiariesController < ApplicationController
   def update
     @diary = current_user.diaries.find(params[:id])
     if @diary.update(diary_params)
-      redirect_to diaries_path
+      redirect_to diary_path(@diary)
     else
       render :edit
     end
@@ -38,6 +38,8 @@ class DiariesController < ApplicationController
 
   def show
     @diary = Diary.find(params[:id])
+    @comments = @diary.comments.includes(:user).order(created_at: :desc)
+    @comment = Comment.new
   end
 
   def destroy

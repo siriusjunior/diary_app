@@ -68,11 +68,20 @@ form {
     &_green {
         background-color: #519233;
         color: white;
+        &:hover {
+            background-color: #62a344;
+            color: white;
+            border-color: #519233;
+        }
     }
-    &:hover {
-        background-color: #62a344;
-        color: white;
-        border-color: #519233;
+    
+    &_cancell {
+        background-color: rgb(160, 160, 160);
+        color: #fff;
+        &:hover {
+            background-color: rgb(175, 175, 175);
+            color: white;
+        }
     }
 }
 .remember-me {
@@ -233,18 +242,56 @@ form {
         color: gray;
         font-size: .8rem;
     }
+    &__item {
+        width: 100%;
+    }
+    &__middle {
+        width: 90%;
+    }
 }
 .comment-post {
+    width: 100%;
+    &__upper {
+        width: 100%;
+    }
     &__wrapper {
         max-width: 710px;
     }
-    &__input {
-        display: block;
-        width: 100%;
+    &__btn {
+        line-height: 17px;
         font-size: .8rem;
-        line-height: 30px;
+    }
+    &__edit-btn {
+        width: 90px;
+    }
+    &__post-btn {
+        width: 70px;
+    }
+    &__input {
+        width: 100%;
+        font-size: .9rem;
+        line-height: 40px;
         color: $black;
-        border-bottom: 1px solid silver;
+        &::placeholder {
+            font-size: .8rem;
+        }
+    }
+    &__editable {
+        line-height: 20px;
+        font-size: 1.0rem;
+        color: $black;
+        // background-color: tomato;
+    }
+}
+.comment-edit {
+    width: 100%;
+    &__btn {
+        font-size: .8rem;
+    }
+    &__form {
+        &_mg {
+            margin: 0 0 0 auto;
+        }
     }
 }
 .uploader {
@@ -331,6 +378,24 @@ form {
 
 .pagination {
     margin-top: 100px!important;
+}
+
+.fa-md {
+    font-size: .95em;
+}
+
+.w-100{
+    width: 100%;
+}
+.w-0 {
+    width: 0%;
+}
+
+.d-block {
+    display: block!important;
+}
+.d-none {
+    display: none!important;
 }
 
 @mixin box_sizing {

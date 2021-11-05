@@ -1,9 +1,3 @@
-//= require jquery3
-//= require popper
-//= require rails-ujs
-//= require activestorage
-//= require bootstrap-material-design/dist/js/bootstrap-material-design.js
-
 function previewDiaryImageFile(preview){
     var data = `<a id="preview_link" class="uploader__placeholder ml-1" data-lightbox="image-60" href=""><img id="preview" height="50" width="50" src=""></a>`
     // inputタグの取得

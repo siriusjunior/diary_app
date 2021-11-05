@@ -1,0 +1,3 @@
+| $('#comment-#{ @comment.id } .comment__middle').addClass("w-0").empty();
+| $('#comment-#{ @comment.id } .comment__icons').empty();
+| $('#comment-#{ @comment.id }').append("#{j render('comments/edit_form', object: @comment)}");

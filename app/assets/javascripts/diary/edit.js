@@ -1,9 +1,3 @@
-//= require jquery3
-//= require popper
-//= require rails-ujs
-//= require activestorage
-//= require bootstrap-material-design/dist/js/bootstrap-material-design.js
-
 function previewEditImageFile(preview){
     // inputタグの取得
     const target = this.event.target;

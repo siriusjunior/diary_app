@@ -31,42 +31,11 @@
 hr.comment__wrapper
 / コメントの投稿フォーム
 div.comment__wrapper.diary__mg.mb-3
-    span.comment__count.mb-3.pt-2 ３件のコメント
+    span.comment__count.mb-3.pt-2#comment-count
+        = @diary.comments.count
+        |件のコメント
     div.comment-post.mb-4
         .comment-post__wrapper.d-flex.justify-content-start.align-items-center
-            = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-            span.comment-post__input コメントを入力...
-/ コメントのパーシャル
-div.comment__wrapper.mb-3
-    div.comment__item.d-flex.align-items-center.justify-content-start.mb-4
-        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-        div.d-flex.flex-column
-            div.comment__upper.d-flex.align-items-center.justify-content-start.mb-1
-                span.comment__name.comment__name_mg knopary
-                span.comment__date 1日前
-            span.comment__content ダミーテキストダミーテキストダミーテキスト
-        div.d-flex.justify-content-between
-            icon.far.trash-alt.fa-lg
-            icon.far.edit.fa-lg
-    div.comment__item.d-flex.align-items-center.justify-content-start.mb-4
-        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-        div.d-flex.flex-column
-            div.comment__upper.d-flex.align-items-center.justify-content-start.mb-1
-                span.comment__name.comment__name_mg knopary
-                span.comment__date 1日前
-            span.comment__content ダミーテキストダミーテキストダミーテキスト
-        div.d-flex.justify-content-between
-            icon.far.trash-alt.fa-lg
-            icon.far.edit.fa-lg
-    div.comment__item.d-flex.align-items-center.justify-content-start.mb-4
-        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-        div.d-flex.flex-column
-            div.comment__upper.d-flex.align-items-center.justify-content-start.mb-1
-                span.comment__name.comment__name_mg knopary
-                span.comment__date 1日前
-            span.comment__content ダミーテキストダミーテキストダミーテキスト
-        div.d-flex.justify-content-between
-            icon.far.trash-alt.fa-lg
-            icon.far.edit.fa-lg
-
-
+            = render 'comments/post_form', diary: @diary, comment: @comment
+        div.comment__wrapper.mb-3
+            = render 'comments/comments', comments: @comments

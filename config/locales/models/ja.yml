@@ -2,6 +2,8 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      diary: ダイアリー
+      comment: コメント
     attributes:
       user:
         username: ユーザー名
@@ -13,6 +15,9 @@ ja:
         check: チェック
         date_sequence: ダイアリー日数
         image: アップロード画像
+      comment:
+        body: コメント
+
     # attributes:
     #   created_at: 作成日時
     #   updated_at: 更新日時
