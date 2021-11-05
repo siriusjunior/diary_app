@@ -14,4 +14,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
 # 挙動調整のため追記するかも、ページでjavascriptを読み込むための設定
+Rails.application.config.assets.precompile += %w( *.js )
 # Rails.application.config.assets.precompile += ['*.js']
