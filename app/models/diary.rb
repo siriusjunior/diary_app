@@ -2,14 +2,15 @@
 #
 # Table name: diaries
 #
-#  id            :bigint           not null, primary key
-#  body          :text(65535)      not null
-#  check         :text(65535)
-#  date_sequence :integer          default(1), not null
-#  image         :string(255)
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  user_id       :bigint
+#  id                    :bigint           not null, primary key
+#  body                  :text(65535)      not null
+#  check                 :text(65535)
+#  comment_authorization :boolean          default(TRUE), not null
+#  date_sequence         :integer          default(1), not null
+#  image                 :string(255)
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  user_id               :bigint
 #
 # Indexes
 #

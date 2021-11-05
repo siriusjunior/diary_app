@@ -1,0 +1,33 @@
+= form_with model: @diary, class:'card p-4 mb-5 new-diary new-diary_center d-flex flex-column', local: true do |f|
+    = render 'shared/error_messages', object: f.object
+    .new-diary__header.d-flex.justify-content-between.align-items-center
+        .diary__profile
+            = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
+            = current_user.username
+        span.new-diary__date
+            |ダイアリー
+            = @diary.date_sequence
+            |日目
+    .form-group.mb-5.d-flex.justify-content-start.uploader__image.align-items-center.pb-1
+        - if @diary.image.present?
+            = f.label :image, 'アップロード画像', class: 'mr-5 uploader__label'
+            = f.file_field :image, onchange: 'previewEditImageFile(preview)', accept: 'image/*'
+        - else 
+            = f.label :image, 'アップロード画像 (任意)', class: 'mr-5 uploader__label'
+            = f.file_field :image, onchange: 'previewEditImageFile(preview)', accept: 'image/*'
+        / バリデーションエラーが発生してフォーム再表示の際に、キャッシュを利用してファイルを保持する
+        = f.hidden_field :image_cache
+        - if @diary.image.present?
+            = link_to @diary.image.url, id: 'preview_link', class:'uploader__placeholder ml-1', "data-lightbox" => "image-#{@diary.id}" do
+                = image_tag @diary.image.url, id: 'preview', height: '50', width: '50'
+        - else 
+            img id='preview' class='uploader__placeholder ml-1'
+        = link_to reset_image_diary_path(@diary), { controller: :diaries, action: :reset_diary_image, method: :patch, data: { confirm: 'アップロード画像を削除します。よろしいですか？' }, class: "image-reset image-reset_mg px-2", remote: true } do
+            = "画像をリセット"
+    .form-group.mb-5
+        = f.label :body, 'ダイアリー本文', class: 'mr-5 uploader__label'
+        = f.text_area :body, class: 'form-control new-diary__textarea', rows: '10'
+    .form-group
+        = f.label :check, 'チェック本文', class: 'mr-5 uploader__label'
+        = f.text_area :check, class: 'form-control new-diary__textarea', rows: '5'
+    = f.submit "保存する", class: 'btn btn-primary btn-raised new-diary__btn my-4', data: { confirm: "ダイアリーの編集内容を保存します" }

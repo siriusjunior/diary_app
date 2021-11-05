@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_033713) do
+ActiveRecord::Schema.define(version: 2021_11_05_023124) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "body", null: false
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2021_11_04_033713) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "comment_authorization", default: true, null: false
     t.index ["user_id"], name: "index_diaries_on_user_id"
   end
 
