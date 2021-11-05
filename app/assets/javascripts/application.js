@@ -4,4 +4,4 @@
 //= require bootstrap-material-design/dist/js/bootstrap-material-design.js
 //= require_tree .
 
-console.log("呼ばれてる？？？");
+// console.log("呼ばれてる？？？");
