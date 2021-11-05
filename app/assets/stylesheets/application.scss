@@ -249,6 +249,12 @@ form {
         width: 90%;
     }
 }
+.comment-authorization {
+    &__label {
+        color: $black;
+        font-size: .9rem;
+    }
+}
 .comment-post {
     width: 100%;
     &__upper {
