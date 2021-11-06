@@ -29,6 +29,8 @@ class Diary < ApplicationRecord
   before_create :register_date_sequence
 
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :like_users, through: :likes, source: :user
 
   def user_diary_date
     self.user.diary_date

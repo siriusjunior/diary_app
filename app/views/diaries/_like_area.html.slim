@@ -1,0 +1,5 @@
+div id="like_area-#{diary.id}"
+    - if current_user.like?(diary)
+        = render 'unlike', diary: diary 
+    - else 
+        = render 'like', diary: diary

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_05_023124) do
+ActiveRecord::Schema.define(version: 2021_11_05_111408) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "body", null: false
@@ -50,6 +50,16 @@ ActiveRecord::Schema.define(version: 2021_11_05_023124) do
     t.index ["user_id"], name: "index_diary_resets_on_user_id"
   end
 
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "diary_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["diary_id"], name: "index_likes_on_diary_id"
+    t.index ["user_id", "diary_id"], name: "index_likes_on_user_id_and_diary_id", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -79,4 +89,6 @@ ActiveRecord::Schema.define(version: 2021_11_05_023124) do
   add_foreign_key "diary_date_counters", "diaries"
   add_foreign_key "diary_date_counters", "users"
   add_foreign_key "diary_resets", "users"
+  add_foreign_key "likes", "diaries"
+  add_foreign_key "likes", "users"
 end
