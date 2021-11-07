@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
   
   resources :users do
-    %i[new create]
+    %i[index new create show]
     member do
       get :activate
     end
