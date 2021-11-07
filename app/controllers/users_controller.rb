@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
 
   def index
+    @users = User.all.includes(:diaries).page(params[:page]).per(10).order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
