@@ -377,6 +377,36 @@ form {
         margin: 0 auto;
     }
 }
+.userprofile {
+    width: 100%;
+    color: $black;
+    &__label {
+        width: 20%;
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+    }
+    &__label-t {
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+    }
+    &__contents {
+        width: 80%;
+        font-size: .8rem;
+    }
+    &__section {
+        width: 100%;
+    }
+    &__icons {
+        width: 18.3%;
+    }
+    &__info {
+        width: 81.7%;
+    }
+    &__link {
+        margin: 0 0 0 auto;
+        font-size: .8rem;
+    }
+}
 .pagination {
     justify-content: center;
     margin-top: 40px;
@@ -403,6 +433,63 @@ form {
 .unlike-icon {
     color: silver;
     -webkit-font-smoothing: antialiased;
+}
+
+.follow-btn {
+    line-height: 1.0;
+    background-color: #1196F0;
+    border-top: 2px solid #1196F0;
+    border-bottom: 2px solid #1196F0;
+    border-radius: 30px;
+    color: #FFF;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    &:hover {
+        background-color: #52b2f1;
+        color: #FFF;
+    }
+}
+.unfollow-btn {
+    line-height: 1.0;
+    width: 116px;
+    background-color: #FFF;
+    border: 2px solid #1196F0;
+    border-radius: 30px;
+    color: #1196F0;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    &:hover {
+        background-color: #FFF;
+        color: #52b2f1;
+        border: 2px solid #52b2f1;
+    }
+}
+.block-btn {
+    line-height: 1.0;
+    width: 116px;
+    background-color: #E0245E;
+    border: 2px solid #E0245E;
+    border-radius: 30px;
+    color: #FFF;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    &:hover {
+        background-color: #e73a71;
+        color: #FFF;
+        border: 2px solid #E0245E;
+    }
+}
+.chat-btn {
+    color: #1196F0;
+    border: 1px solid #1196F0;
+    border-radius: 30px;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    &:hover {
+        color: #52b2f1;
+        border: 1px solid #52b2f1;
+    }
 }
 
 .w-100{

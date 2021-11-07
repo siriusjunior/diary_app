@@ -84,7 +84,7 @@ class User < ApplicationRecord
   end
 
   def feed
-    Post.where(user_id: following_ids << id)
+    Diary.where(user_id: following_ids << id)
   end
 
 end
