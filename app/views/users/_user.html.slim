@@ -1,11 +1,12 @@
-.card.mb-5.diary.diary_center
-    .card-header.d-flex.userprofile
+= link_to(user_path(user), class: 'card mb-5 diary diary_center diary__link') do
+    object.card-header.d-flex.userprofile
         .userprofile__icons.d-flex.flex-column.align-items-center
             = image_tag 'profile-placeholder.png', size: '60x60', class: 'rounded-circle mb-1'
             span.mb-1.userprofile__username
                 = user.username
-            a.mb-2 href="#"
-                = icon 'far', 'comments', class: 'fa-lg chat-btn'
+            object.mb-2
+                a href="#"
+                    = icon 'far', 'comments', class: 'fa-lg chat-btn'
             = render 'users/follow_area', user: user
             .btn.btn-raised.block-btn.mt-1
                 |ブロック
