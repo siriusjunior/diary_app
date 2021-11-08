@@ -21,13 +21,14 @@ div id="comment-#{comment.id}"
         / コメントいいねボタン
         / ログインしている場合
         - if current_user
-            - if current_user && !current_user.own?(comment)
+            / コメント所有者・非所有者にも表示
+            - if current_user && !current_user.own?(comment) || current_user && current_user.own?(comment)
                 div.like-comment__fill
                 object.mr-3
                     = render 'comments/comment_like_area', comment: comment
                 i.fas.fa-thumbs-down.unlike-comment-icon
-            / コメント所有者には非表示
-            - else current_user && current_user.own?(comment)
+            / コメント所有者に非表示にする設定に戻す場合は以下を使用
+            / - else current_user && current_user.own?(comment)
         / ログインしていないユーザーにもコメントいいね表示
         - else
             div.like-comment__fill
