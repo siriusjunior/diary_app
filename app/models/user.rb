@@ -77,7 +77,7 @@ class User < ApplicationRecord
     like_comments << comment
   end
 
-  def unlike(comment)
+  def comment_unlike(comment)
     like_comments .destroy(comment)
   end
   
