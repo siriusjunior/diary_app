@@ -1,10 +1,11 @@
 class DiariesController < ApplicationController
+  include SessionsHelper
   before_action :require_login, only: %i[new create update destroy]
   def index
-    @diaries = Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
-    respond_to do |format|
-      format.html
-      format.js
+    @diaries = if current_user
+      current_user.feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+    else
+      Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
     end
   end
 
@@ -37,6 +38,9 @@ class DiariesController < ApplicationController
   end
 
   def show
+    if !current_user
+      store_location
+    end
     @diary = Diary.find(params[:id])
     @comments = @diary.comments.includes(:user).order(created_at: :desc)
     @comment = Comment.new

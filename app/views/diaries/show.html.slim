@@ -33,7 +33,7 @@
             = link_to @diary.image.url, class: 'diary__image ml-3', "data-lightbox" => "image-#{@diary.id}" do
                 = image_tag @diary.image.url, height: '40', width: '40'
 hr.comment__wrapper
-/ コメントエリア
+/ コメントエリアはauthorizationがオンになっていれば表示
 -  if @diary.comment_authorization
     div.comment__wrapper.diary__mg.mb-3
         span.comment__count.mb-3.pt-2#comment-count
@@ -42,7 +42,10 @@ hr.comment__wrapper
         div.comment-post.mb-4
             .comment-post__wrapper.d-flex.justify-content-start.align-items-center
                 / コメントの投稿フォーム
-                = render 'comments/post_form', diary: @diary, comment: @comment
+                - if current_user
+                    = render 'comments/post_form', diary: @diary, comment: @comment
+                - else 
+                    = render 'comments/before_login_form'
             div.comment__wrapper.mb-3
                 / コメントのレンダリング
                 = render 'comments/comments', comments: @comments

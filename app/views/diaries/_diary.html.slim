@@ -2,7 +2,8 @@
     .card-header.d-flex.justify-content-between.align-items-center
         .diary__profile
             = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-            = diary.user.username
+            object
+                = link_to diary.user.username,diary.user
         - if current_user&.own?(diary)
             .diary__user-links
                 object
@@ -28,9 +29,18 @@
                     = diary.check
     .diary__footer.pb-4.pr-4.d-flex.justify-content-end.align-items-center
         / いいねボタン
-        - if current_user && !current_user.own?(diary)
-            object
-                = render 'like_area', diary: diary
+        / ログインしている場合
+        - if current_user
+            - if current_user && !current_user.own?(diary)
+                object
+                    = render 'like_area', diary: diary
+            - else current_user && current_user.own?(diary)
+        / ログインしていないユーザーにもいいね表示
+        - else
+            object#unlike-icon
+                = icon 'far', 'heart', class: 'fa-lg unlike-icon'
+                span.unlike-icon.ml-1
+                    = diary.likes.count
         / コメントアイコン
         - if diary.comment_authorization?
             object.ml-3
