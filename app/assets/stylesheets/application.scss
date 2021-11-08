@@ -419,6 +419,19 @@ form {
         font-size: .8rem;
     }
 }
+.like-comment {
+    &__fill {
+        width: 50px;
+    }
+}
+.like-comment-icon {
+    color: #d1d0d0;
+    font-size: .9rem;
+}
+.unlike-comment-icon {
+    color: #d1d0d0;
+    font-size: .9rem;
+}
 .pagination {
     justify-content: center;
     margin-top: 40px;

@@ -1,4 +1,5 @@
-div.comment__item.d-flex.align-items-start.justify-content-start.mt-4 id="comment-#{comment.id}"
+div id="comment-#{comment.id}"
+    div.comment__item.d-flex.align-items-start.justify-content-start.mt-4.mb-1
         = image_tag 'profile-placeholder.png', size: '40x40', class: 'comment__icon rounded-circle mr-2'
         div.d-flex.flex-column.comment__middle
             div.comment__upper.d-flex.align-items-center.justify-content-start.mb-1
@@ -16,3 +17,7 @@ div.comment__item.d-flex.align-items-start.justify-content-start.mt-4 id="commen
                     object.ml-3
                         = link_to edit_comment_path(comment), remote: true do
                             = icon 'far', 'edit', class: 'fa-md' 
+    div.like-comment.d-flex
+        div.like-comment__fill
+        i.far.fa-thumbs-up.like-comment-icon.mr-4
+        i.far.fa-thumbs-down.unlike-comment-icon

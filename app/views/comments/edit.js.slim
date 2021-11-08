@@ -1,3 +1,4 @@
 | $('#comment-#{ @comment.id } .comment__middle').addClass("w-0").empty();
 | $('#comment-#{ @comment.id } .comment__icons').empty();
-| $('#comment-#{ @comment.id }').append("#{j render('comments/edit_form', object: @comment)}");
+| $('#comment-#{ @comment.id } .like-comment').empty();
+| $('#comment-#{ @comment.id } .comment__item').append("#{j render('comments/edit_form', object: @comment)}");
