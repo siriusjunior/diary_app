@@ -1,0 +1,14 @@
+.comment-post.d-flex.mb-0.flex-column.justify-content-between
+    .comment-post__upper.d-flex.justify-content-start.align-items-center.mb-1
+        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
+        div.comment-post__before_login
+            span コメントをするには
+            = link_to login_path do
+                |ログイン
+            |が必要です
+/ コメント投稿フォームのリンク付きビジュアル
+/ .comment-post.d-flex.mb-0.flex-column.justify-content-between
+/     .comment-post__upper.d-flex.justify-content-between.mb-1
+/         = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
+/         = link_to login_path, class: 'w-100 comment-post__before_login' do
+/             input.form-control.comment-post__input placeholder = "コメントを入力..." value=''

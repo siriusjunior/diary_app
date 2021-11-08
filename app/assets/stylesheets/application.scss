@@ -295,6 +295,13 @@ form {
         color: $black;
         // background-color: tomato;
     }
+    &__before_login {
+        -webkit-font-smoothing: antialiased;
+        width: 100%;
+        font-size: .9rem;
+        color: $black;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
 }
 .comment-edit {
     width: 100%;
