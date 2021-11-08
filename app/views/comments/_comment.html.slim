@@ -18,11 +18,25 @@ div id="comment-#{comment.id}"
                         = link_to edit_comment_path(comment), remote: true do
                             = icon 'far', 'edit', class: 'fa-md' 
     div.like-comment.d-flex.align-items-center
-        - if current_user && !current_user.own?(comment)
+        / コメントいいねボタン
+        / ログインしている場合
+        - if current_user
+            - if current_user && !current_user.own?(comment)
+                div.like-comment__fill
+                object.mr-3
+                    = render 'comments/comment_like_area', comment: comment
+                i.fas.fa-thumbs-down.unlike-comment-icon
+            / コメント所有者には非表示
+            - else current_user && current_user.own?(comment)
+        / ログインしていないユーザーにもコメントいいね表示
+        - else
             div.like-comment__fill
-            object.mr-3
-                = render 'comments/comment_like_area', comment: comment
-            i.fas.fa-thumbs-down.unlike-comment-icon
+            object#like-icon.d-flex.align-items-center.mr-3
+                = icon 'fas', 'thumbs-up', class: 'fa-lg unlike-icon like-comment-icon'
+                span.unlike-icon.ml-1
+                    = comment.comment_likes.count
+            object#like-icon.d-flex.align-items-center
+                = icon 'fas', 'thumbs-down', class: 'fa-lg unlike-icon unlike-comment-icon'
         / レイアウトだけのコメントいいね
         / div.like-comment__fill
         / i.far.fa-thumbs-up.like-comment-icon.mr-4

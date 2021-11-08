@@ -1,4 +1,4 @@
 = link_to likes_path(diary_id: diary.id), method: :post, remote: true do 
     = icon 'far', 'heart', class: 'fa-lg unlike-icon'
-span.ml-1
+span.ml-1.unlike-icon
     = diary.likes.count

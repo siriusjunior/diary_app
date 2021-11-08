@@ -34,6 +34,7 @@
             - if current_user && !current_user.own?(diary)
                 object
                     = render 'like_area', diary: diary
+            / ダイアリー所有者には非表示
             - else current_user && current_user.own?(diary)
         / ログインしていないユーザーにもいいね表示
         - else
