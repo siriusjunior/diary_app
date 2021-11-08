@@ -38,12 +38,8 @@ class DiariesController < ApplicationController
   end
 
   def show
-    if !current_user
-      store_location
-    end
     @diary = Diary.find(params[:id])
     @comments = @diary.comments.includes(:user).includes(:comment_likes).order(created_at: :desc).sort{|a,b| b.comment_likes.size <=> a.comment_likes.size}
-    # @comments = @diary.comments.includes(:user).order(created_at: :desc)
     @comment = Comment.new
   end
 

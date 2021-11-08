@@ -20,4 +20,9 @@ class UserSessionsController < ApplicationController
     logout
     redirect_back_or_to root_path, success: "ログアウトしました"
   end
+
+  def store_location
+    session[:return_to] = request.referer if request.get?
+    redirect_to login_path, info: "こちらからログインしてください"
+  end
 end
