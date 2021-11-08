@@ -73,6 +73,18 @@ class User < ApplicationRecord
     like_diaries.include?(diary)
   end
 
+  def comment_like(comment)
+    like_comments << comment
+  end
+
+  def unlike(comment)
+    like_comments .destroy(comment)
+  end
+  
+  def comment_like?(comment)
+    like_comments.include?(comment)
+  end
+
   def follow(other_user)
     following << other_user
   end
