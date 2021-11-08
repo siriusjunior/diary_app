@@ -18,6 +18,11 @@ div id="comment-#{comment.id}"
                         = link_to edit_comment_path(comment), remote: true do
                             = icon 'far', 'edit', class: 'fa-md' 
     div.like-comment.d-flex
-        div.like-comment__fill
-        i.far.fa-thumbs-up.like-comment-icon.mr-4
-        i.far.fa-thumbs-down.unlike-comment-icon
+        - if current_user && !current_user.own?(comment)
+            div.like-comment__fill
+            object
+                = render 'comments/comment_like_area', comment: comment
+        / レイアウトだけのコメントいいね
+        / div.like-comment__fill
+        / i.far.fa-thumbs-up.like-comment-icon.mr-4
+        / i.far.fa-thumbs-down.unlike-comment-icon

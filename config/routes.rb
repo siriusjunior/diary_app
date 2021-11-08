@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
+  resources :comment_likes, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
 
   if Rails.env.development?
