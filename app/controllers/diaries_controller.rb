@@ -59,7 +59,7 @@ class DiariesController < ApplicationController
   end
 
   def search
-    @diaries = @search_form.search.include(:user).page(params[:page])
+    @diaries = @search_form.search.includes(:user).page(params[:page])
   end
 
   private

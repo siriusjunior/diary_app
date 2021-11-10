@@ -1,3 +1,7 @@
 = form_with model: search_form, url: search_diaries_path, scope: :q, class: 'form-inline my-2 my-lg-0 mr-auto', method: :get, local: true do |f|
-    = f.search_field :body, class: 'form-control mr-sm-2', placeholder: 'ダイアリー検索'
-    = f.submit 'Search', class: 'btn btn-outline-success my-2 my-sm-0'
+    = f.search_field :body, class: 'search__form search__form_mg-r form-control', placeholder: 'ダイアリー検索'
+    = f.submit '検索', class: 'header-btn my-2 my-sm-0'
+
+/ form.form-inline.my-2.my-lg-0.mr-auto
+/         input.search__form.search__form_mg-r. placeholder="ダイアリーを検索" type="search" /
+/         button.header-btn.my-2.my-sm-0 type="submit"  検索
