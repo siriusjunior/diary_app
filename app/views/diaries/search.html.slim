@@ -1,5 +1,5 @@
 .wrapper.py-5
     h2.text-center.mb-5 
         |ヒットしたダイアリー: #{@diaries.total_count}件
-    = render @diaries
-    = paginate @diaries
+    #diaries
+        = render 'diaries'
