@@ -8,10 +8,10 @@ class ApplicationController < ActionController::Base
         end
 
         def set_search_diaries_form
-            @search_form = SearchPostsForm.new(search_post_params)
+            @search_form = SearchDiariesForm.new(search_diary_params)
         end
 
-        def search_post_params
+        def search_diary_params
             params.fetch(:q, {}).permit(:body)
         end
 end

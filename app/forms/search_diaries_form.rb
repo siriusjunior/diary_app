@@ -1,4 +1,4 @@
-class SearchPostsForm
+class SearchDiariesForm
     include ActiveModel::Model
     include ActiveModel::Attributes
 
