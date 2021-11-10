@@ -1,0 +1,5 @@
+.wrapper.py-5
+    h2.text-center.mb-5 
+        |検索結果: #{@diaries.total_count}件ヒット
+    = render @diaries
+    = paginate @diaries
