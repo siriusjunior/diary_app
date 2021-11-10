@@ -58,6 +58,10 @@ class DiariesController < ApplicationController
     end
   end
 
+  def search
+    @diaries = @search_form.search.include(:user).page(params[:page])
+  end
+
   private
 
     def diary_params
