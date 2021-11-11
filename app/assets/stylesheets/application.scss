@@ -421,6 +421,10 @@ form {
     &__thumbnails {
         width: 80%;
     }
+    &__diaries-link {
+        color: $black;
+        font-size: .8rem;
+    }
 }
 .like-comment {
     &__fill {

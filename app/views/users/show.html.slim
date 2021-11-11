@@ -43,5 +43,6 @@ h2.text-center.py-5
     h2.text-center
         = @user.username 
         |さんの最新ダイアリー
-    .text-right
+    .text-right.mb-4.userprofile__diaries-link
         |(一覧ページへ)
+    = render @diaries

@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @thumbnail_diaries = @user.diaries.thumbnail
+    @diaries = @user.diaries.recent(3)
   end
 
   def activate
