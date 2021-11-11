@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     %i[index new create show]
     member do
       get :activate
+      get :diaries
     end
   end
   patch 'diary_reset', to: 'users#reset_diary_date'

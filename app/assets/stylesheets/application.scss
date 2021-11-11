@@ -426,6 +426,13 @@ form {
         font-size: .8rem;
     }
 }
+.diary-thumbnail {
+    &:hover {
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+        transform: translateY(-0.2em);
+        transition: .2s;
+    }
+}
 .like-comment {
     &__fill {
         width: 50px;

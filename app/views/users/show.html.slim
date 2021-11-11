@@ -35,8 +35,9 @@ h2.text-center.py-5
                 .userprofile__label
                 .userprofile__contents.userprofile__thumbnails.d-flex.align-items-center
                     = render partial: 'diaries/thumbnail_diary', collection: @thumbnail_diaries
-                    span.userprofile__link
-                        |(ダイアリーを見る)
+                    = link_to diaries_user_path(@user), class: 'userprofile__link' do
+                        span
+                            |(ダイアリーを見る)
             .userprofile__link.w-100.text-right
                 |(プロフィールを編集する)
 .pt-5.diary__wrapper.diary_center
@@ -44,5 +45,7 @@ h2.text-center.py-5
         = @user.username 
         |さんの最新ダイアリー
     .text-right.mb-4.userprofile__diaries-link
-        |(一覧ページへ)
+        = link_to diaries_user_path(@user), class: 'userprofile__link' do
+            span
+                |(一覧ページへ)
     = render @diaries

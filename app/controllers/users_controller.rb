@@ -49,6 +49,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def diaries
+    @user = User.find(params[:id])
+    @diaries = @user.diaries.includes(:user).page(params[:page]).per(5).order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
     private
       
       def user_params
