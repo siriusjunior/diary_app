@@ -32,6 +32,8 @@ class Diary < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
 
+  scope :body_contain, ->(word){ where('diaries.body LIKE ?', "%#{word}%") }
+
   def user_diary_date
     self.user.diary_date
   end

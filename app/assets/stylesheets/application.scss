@@ -68,10 +68,10 @@ form {
 .btn {
     &_green {
         background-color: #519233;
-        color: white;
+        color: #fff;
         &:hover {
             background-color: #62a344;
-            color: white;
+            color: #fff;
             border-color: #519233;
         }
     }
@@ -81,7 +81,7 @@ form {
         color: #fff;
         &:hover {
             background-color: rgb(175, 175, 175);
-            color: white;
+            color: #fff;
         }
     }
 }
@@ -119,7 +119,7 @@ form {
         border-radius: 30px;
         border-width: 0;
         background-color: #519233;
-        border-color: white;
+        border-color: #fff;
         color: white!important;
         text-align: center;
         width: 90px;
@@ -133,7 +133,7 @@ form {
         }
     }
     &__fa{
-        color: white;
+        color: #fff;
         &_mg-r-20 {
             margin-right: 20px;
         }
@@ -146,7 +146,7 @@ form {
 .search {
     &__form {
         background-color: #519233;
-        color: white;
+        color: #fff;
         height: 40px;
         border: none;
         padding-left: 20px;

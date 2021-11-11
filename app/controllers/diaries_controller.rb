@@ -58,10 +58,22 @@ class DiariesController < ApplicationController
     end
   end
 
+  def search
+    if @search_form.body.present?
+      @diaries = @search_form.search.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+      # flash.now[:info] = 'ダイアリーを検索しました'
+    else
+      redirect_to request.referer, danger: '検索ワードを入力してください'
+    end
+  end
+
   private
 
     def diary_params
       params.require(:diary).permit(:image, :image_cache, :check, :remove_image, :body, :comment_authorization, :date_sequence)
     end
 
+    def search_diary_params
+      params.fetch(:q, {}).permit(:body)
+    end
 end

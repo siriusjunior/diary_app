@@ -4,9 +4,7 @@ header.navbar.navbar-expand-lg.navbar-light.header.header__bg
         button.navbar-toggler aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarTogglerDemo02" data-toggle="collapse" type="button"
         / span.navbar-toggler-icon
         / #navbarTogglerDemo02.collapse.navbar-collapse
-        form.form-inline.my-2.my-lg-0.mr-auto
-            input.search__form.search__form_mg-r. placeholder="ダイアリーを検索" type="search" /
-            button.header-btn.my-2.my-sm-0 type="submit"  検索
+        = render 'diaries/search_form', search_form: @search_form
         ul.navbar-nav.mt-2.mt-lg-0
             li.nav-item
             a.nav-link href="#"
