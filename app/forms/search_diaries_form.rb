@@ -1,8 +1,9 @@
 class SearchDiariesForm
     include ActiveModel::Model
     include ActiveModel::Attributes
-
+    include ActiveModel::Validations
     attribute :body, :string
+    validates :body, presence: true
 
     def search
         scope = Diary.distinct

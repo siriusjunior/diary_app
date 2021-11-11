@@ -1,5 +1,11 @@
 .wrapper.py-5
-    h2.text-center.mb-5 
-        |ヒットしたダイアリー: #{@diaries.total_count}件
-    #diaries
-        = render 'diaries'
+    - if @search_form.body.present?
+        - if @diaries.present?
+            h2.text-center.mb-5 
+                |「#{@search_form.body}」でヒットしたダイアリー: #{@diaries.total_count}件
+            #diaries
+                = render 'diaries'
+        - else
+            h2.text-center.mb-5 
+                |「#{@search_form.body}」でヒットしたダイアリー: 0件
+    - else 
