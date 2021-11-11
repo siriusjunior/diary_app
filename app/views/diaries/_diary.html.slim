@@ -1,4 +1,4 @@
-= link_to(diary_path(diary), class: 'card mb-5 diary diary_center diary__link') do
+= link_to(diary_path(diary), class: 'card mb-4 diary diary_center diary__link') do
     .card-header.d-flex.justify-content-between.align-items-center
         .diary__profile
             = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
@@ -33,7 +33,7 @@
         - if current_user
             - if current_user && !current_user.own?(diary)
                 object
-                    = render 'like_area', diary: diary
+                    = render 'diaries/like_area', diary: diary
             / ダイアリー所有者には非表示
             - else current_user && current_user.own?(diary)
         / ログインしていないユーザーにもいいね表示

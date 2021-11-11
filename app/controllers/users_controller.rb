@@ -25,6 +25,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @thumbnail_diaries = @user.diaries.thumbnail
+    @diaries = @user.diaries.recent(3)
   end
 
   def activate
@@ -44,6 +46,15 @@ class UsersController < ApplicationController
       flash.now[:info] = 'ダイアリー日数がリセットされました'
       format.js
       format.html
+    end
+  end
+
+  def diaries
+    @user = User.find(params[:id])
+    @diaries = @user.diaries.includes(:user).page(params[:page]).per(5).order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

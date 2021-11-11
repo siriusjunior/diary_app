@@ -25,19 +25,27 @@ h2.text-center.py-5
                     |登録日
                 .userprofile__contents
                     = @user.created_at.strftime('%Y/%m/%d')
-            .userprofile__section.d-flex.mb-1
+            .userprofile__section.d-flex.mb-2
                 .userprofile__label
                     |投稿数
                 .userprofile__contents.d-flex 
                     span
                         = @user.diaries.count
-                    span.userprofile__link
-                        |(ダイアリーを見る)
+            .userprofile__section.d-flex.mb-2
+                .userprofile__label
+                .userprofile__contents.userprofile__thumbnails.d-flex.align-items-center
+                    = render partial: 'diaries/thumbnail_diary', collection: @thumbnail_diaries
+                    = link_to diaries_user_path(@user), class: 'userprofile__link' do
+                        span
+                            |(ダイアリーを見る)
             .userprofile__link.w-100.text-right
                 |(プロフィールを編集する)
 .pt-5.diary__wrapper.diary_center
     h2.text-center
         = @user.username 
         |さんの最新ダイアリー
-    .text-right
-        |(一覧ページへ)
+    .text-right.mb-4.userprofile__diaries-link
+        = link_to diaries_user_path(@user), class: 'userprofile__link' do
+            span
+                |(一覧ページへ)
+    = render @diaries
