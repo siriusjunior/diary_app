@@ -25,12 +25,16 @@ h2.text-center.py-5
                     |登録日
                 .userprofile__contents
                     = @user.created_at.strftime('%Y/%m/%d')
-            .userprofile__section.d-flex.mb-1
+            .userprofile__section.d-flex.mb-2
                 .userprofile__label
                     |投稿数
                 .userprofile__contents.d-flex 
                     span
                         = @user.diaries.count
+            .userprofile__section.d-flex.mb-2
+                .userprofile__label
+                .userprofile__contents.userprofile__thumbnails.d-flex.align-items-center
+                    = render partial: 'diaries/thumbnail_diary', collection: @thumbnail_diaries
                     span.userprofile__link
                         |(ダイアリーを見る)
             .userprofile__link.w-100.text-right

@@ -33,6 +33,7 @@ class Diary < ApplicationRecord
   has_many :like_users, through: :likes, source: :user
 
   scope :body_contain, ->(word){ where('diaries.body LIKE ?', "%#{word}%") }
+  scope :thumbnail, -> { where.not(image: nil).order(created_at: :desc).limit(10) }
 
   def user_diary_date
     self.user.diary_date

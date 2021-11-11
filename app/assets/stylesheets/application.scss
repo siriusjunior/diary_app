@@ -418,6 +418,9 @@ form {
         margin: 0 0 0 auto;
         font-size: .8rem;
     }
+    &__thumbnails {
+        width: 80%;
+    }
 }
 .like-comment {
     &__fill {
