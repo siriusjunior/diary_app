@@ -4,7 +4,8 @@ h2.text-center.py-5
 .card.mb-5.diary.diary_center
     .card-header.d-flex.userprofile
         .userprofile__icons.d-flex.flex-column.align-items-center
-            = image_tag 'profile-placeholder.png', size: '60x60', class: 'rounded-circle'
+            = image_tag @user.avatar.url, size: '60x60', class: 'rounded-circle'
+            / = image_tag 'profile-placeholder.png', size: '60x60', class: 'rounded-circle'
             span.mb-1.userprofile__username
                 = @user.username
             a.mb-2 href="#"
@@ -15,11 +16,11 @@ h2.text-center.py-5
         .userprofile__info.ml-3
             .userprofile__label-t.mb-2
                 |ユーザー情報
-            .userprofile__section.d-flex.mb-2 
+            .userprofile__section.d-flex.mb-4 
                 .userprofile__label
-                    |自己紹介
+                    |プロフィール
                 .userprofile__contents 
-                    |ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト
+                    = @user.introduction
             .userprofile__section.d-flex.mb-1
                 .userprofile__label
                     |登録日
