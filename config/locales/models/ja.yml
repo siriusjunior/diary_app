@@ -10,6 +10,8 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認
+        introduction: プロフィール
+        avatar: プロフィール画像
       diary:
         body: ダイアリー本文
         check: チェック
