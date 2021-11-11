@@ -426,6 +426,16 @@ form {
         font-size: .8rem;
     }
 }
+.account-edit {
+    &__uploader {
+        flex-grow: 1;
+    }
+    &__label {
+        font-weight: bold;
+        color: $black;
+        font-size: .9rem;
+    }
+}
 .diary-thumbnail {
     &:hover {
         box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
@@ -550,6 +560,9 @@ form {
 }
 .d-none {
     display: none!important;
+}
+.right {
+    margin: 0 0 0 auto;
 }
 
 @mixin box_sizing {

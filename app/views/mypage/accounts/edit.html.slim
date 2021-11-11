@@ -1,14 +1,17 @@
 = form_with model: @user, url: mypage_account_path, method: :patch, local: true do |f|
     = render 'shared/error_messages', object: f.object
-    .form-group
-        = f.label :avatar
-        = f.file_field :avatar, onchange: 'previewFileWithId(preview)', class: 'form-control', accept: 'image/*'
-        = f.hidden_field :avatar_cache
-        = image_tag @user.avatar.url, class: 'rounded-circle', id: 'preview', size: '100x100'
-    .form-group
-        = f.label :introduction
-        = f.text_field :introduction, class: 'form-control'
-    .form-group
-        = f.label :username
+    .d-flex.justify-content-between.flex-row-reverse
+        .account-edit__uploader.d-flex.flex-column
+            = f.label :avatar, 'プロフィール画像', class: 'account-edit__label mb-3'
+            = f.file_field :avatar, onchange: 'previewFileWithId(preview)', accept: 'image/*'
+            = f.hidden_field :avatar_cache
+        .account-edit__avatar.w-25
+            = image_tag @user.avatar.url, class: 'rounded-circle', id: 'preview', size: '100x100'
+    .form-group.w-75.right.mb-5
+        = f.label :username, class: 'account-edit__label'
         = f.text_field :username, class: 'form-control'
-    = f.submit class: 'btn btn-primary btn-raised'
+    .form-group.w-75.right.mb-5
+        = f.label :introduction, 'プロフィール', class: 'account-edit__label'
+        = f.text_area :introduction, class: 'form-control', rows: '5'
+    .form-group.w-75.right.mb-3.text-right
+        = f.submit class: 'btn btn-primary btn-raised'
