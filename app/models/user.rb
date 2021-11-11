@@ -37,6 +37,7 @@ class User < ApplicationRecord
   validates :password, confirmation: true, unless: :skip_password
   validates :password_confirmation, presence: true, unless: :skip_password
   validates :diary_date, presence: true
+  validates :introduction, length: { maximum: 150 }
   
   has_many :diaries, dependent: :destroy
   has_many :comments, dependent: :destroy
