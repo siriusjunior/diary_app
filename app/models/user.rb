@@ -38,6 +38,7 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, unless: :skip_password
   validates :diary_date, presence: true
   validates :introduction, length: { maximum: 150 }
+  mount_uploader :avatar, AvatarUploader
   
   has_many :diaries, dependent: :destroy
   has_many :comments, dependent: :destroy
