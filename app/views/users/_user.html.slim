@@ -2,8 +2,9 @@
     object.card-header.d-flex.userprofile
         .userprofile__icons.d-flex.flex-column.align-items-center
             = image_tag user.avatar.url, size: '60x60', class: 'rounded-circle mb-1'
-            span.mb-1.userprofile__username
-                = user.username
+            object
+                = link_to user_path(user), class: 'mb-1 userprofile__username d-block' do
+                    = user.username
             object.mb-2
                 a href="#"
                     = icon 'far', 'comments', class: 'fa-lg chat-btn'
