@@ -3,3 +3,5 @@
         |#{@user.username}さんのダイアリーリスト
     #diaries
         = render 'diaries'
+    - if @diaries.count == 0
+        i.follow__info まだ投稿されたダイアリーはありません

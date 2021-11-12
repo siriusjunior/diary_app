@@ -2,6 +2,5 @@
     h2.text-center.mb-5 #{@user.username}さんのフォロワー
     #users
         = render 'users'
-    - if @users == 0
-        span 
-            フォロワーはいません
+    - if @users.count == 0
+        i.follow__info フォロワーはいません
