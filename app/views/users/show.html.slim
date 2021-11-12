@@ -6,8 +6,11 @@ h2.text-center.py-5
         .userprofile__icons.d-flex.flex-column.align-items-center
             = image_tag @user.avatar.url, size: '60x60', class: 'rounded-circle'
             / = image_tag 'profile-placeholder.png', size: '60x60', class: 'rounded-circle'
-            span.mb-1.userprofile__username
+            span.userprofile__username.mb-1
                 = @user.username
+            .userprofile__follow-info.d-flex.flex-column.align-items-center.mb-2
+                .span 10フォロー
+                .span 21フォロワー
             a.mb-2 href="#"
                 = icon 'far', 'comments', class: 'fa-lg chat-btn'
             = render 'users/follow_area', user: @user

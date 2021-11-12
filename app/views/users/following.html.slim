@@ -1,0 +1,7 @@
+.wrapper.py-5
+    h2.text-center.mb-5 #{@user.username}さんのフォローユーザー
+    #users
+        = render 'users'
+    - if @users == 0
+        span 
+            フォロユーザーはいません

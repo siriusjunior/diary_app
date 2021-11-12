@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     member do
       get :activate
       get :diaries
+      get :following, :followers
     end
   end
 
