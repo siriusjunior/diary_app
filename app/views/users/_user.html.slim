@@ -1,35 +1,40 @@
 = link_to(user_path(user), class: 'card mb-5 diary diary_center diary__link') do
     object.card-header.d-flex.userprofile
         .userprofile__icons.d-flex.flex-column.align-items-center
-            = image_tag 'profile-placeholder.png', size: '60x60', class: 'rounded-circle mb-1'
-            span.mb-1.userprofile__username
-                = user.username
+            = image_tag user.avatar.url, size: '60x60', class: 'rounded-circle mb-1'
+            object
+                = link_to user_path(user), class: 'mb-1 userprofile__username d-block' do
+                    = user.username
             object.mb-2
                 a href="#"
                     = icon 'far', 'comments', class: 'fa-lg chat-btn'
             = render 'users/follow_area', user: user
-            .btn.btn-raised.block-btn.mt-1
-                |ブロック
+            / .btn.btn-raised.block-btn.mt-1
+            /     |ブロック
         .userprofile__info.ml-3
             .userprofile__label-t.mb-2
                 |ユーザー情報
-            .userprofile__section.d-flex.mb-2 
+            .userprofile__section.d-flex.mb-3 
                 .userprofile__label
                     |自己紹介
                 .userprofile__contents 
-                    |ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト頑張ります。ダミーテキスト
+                    = user.introduction
             .userprofile__section.d-flex.mb-1
                 .userprofile__label
                     |登録日
                 .userprofile__contents
                     = user.created_at.strftime('%Y/%m/%d')
-            .userprofile__section.d-flex.mb-1
+            .userprofile__section.d-flex.mb-2
                 .userprofile__label
                     |投稿数
                 .userprofile__contents.d-flex 
-                    span
+                    span.d-flex.justify-content-between.w-100
                         = user.diaries.count
-                    span.userprofile__link
-                        |(ダイアリーを見る)
-            .userprofile__link.w-100.text-right
-                |(プロフィールを編集する)
+                        object
+                            = link_to diaries_user_path(user), class:'userprofile__link' do
+                                span
+                                    |(ダイアリーを見る)
+            - if current_user == user
+                = link_to edit_mypage_account_path, class: 'userprofile__link w-100 text-right' do
+                    span.text-right.d-block
+                        |(プロフィールを編集する)

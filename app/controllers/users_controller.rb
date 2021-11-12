@@ -58,9 +58,27 @@ class UsersController < ApplicationController
     end
   end
 
-    private
-      
-      def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation, :username)
-      end
+  def following
+    @user  = User.find(params[:id])
+    @users = @user.following.includes(:diaries).page(params[:page]).per(5).order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
+  def followers
+    @user  = User.find(params[:id])
+    @users = @user.followers.includes(:diaries).page(params[:page]).per(5).order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  private
+    
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation, :username)
+    end
 end

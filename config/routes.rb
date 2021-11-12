@@ -15,8 +15,14 @@ Rails.application.routes.draw do
     member do
       get :activate
       get :diaries
+      get :following, :followers
     end
   end
+
+  namespace :mypage do
+    resource :account, only: %i[edit update]
+  end
+
   patch 'diary_reset', to: 'users#reset_diary_date'
   resources :password_resets, only: %i[new create edit update]
   resources :diaries, shallow: true  do

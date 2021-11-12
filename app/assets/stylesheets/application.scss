@@ -388,10 +388,17 @@ form {
 .userprofile {
     width: 100%;
     color: $black;
-    // &__username {
-    //     font-weight: bold;
-    //     -webkit-font-smoothing: antialiased;
-    // }
+    &__username {
+        font-size: .9rem;
+        -webkit-font-smoothing: antialiased;
+    }
+    &__follow-info {
+        font-size: .8rem;
+        font-weight: bold;
+        color: #888;
+        line-height: 16px;
+        -webkit-font-smoothing: antialiased;
+    }
     &__label {
         width: 20%;
         font-weight: bold;
@@ -424,6 +431,24 @@ form {
     &__diaries-link {
         color: $black;
         font-size: .8rem;
+    }
+}
+.account-edit {
+    &__uploader {
+        flex-grow: 1;
+    }
+    &__label {
+        font-weight: bold;
+        color: $black;
+        font-size: .9rem;
+    }
+}
+.follow {
+    &__info {
+        display: block;
+        text-align: center;
+        color: #a3a3a3;
+        font-size: 1.2rem;
     }
 }
 .diary-thumbnail {
@@ -550,6 +575,9 @@ form {
 }
 .d-none {
     display: none!important;
+}
+.right {
+    margin: 0 0 0 auto;
 }
 
 @mixin box_sizing {

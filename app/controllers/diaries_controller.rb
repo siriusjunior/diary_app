@@ -64,6 +64,7 @@ class DiariesController < ApplicationController
       # flash.now[:info] = 'ダイアリーを検索しました'
     else
       redirect_to request.referer, danger: '検索ワードを入力してください'
+      # redirect_to users_path, danger: '検索ワードを入力してください'
     end
   end
 

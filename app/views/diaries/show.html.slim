@@ -1,7 +1,7 @@
 .card.mb-5.diary.diary_center.mt-5
     .card-header.d-flex.justify-content-between.align-items-center
         .diary__profile
-            = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
+            = image_tag @diary.user.avatar.url, size: '40x40', class: 'rounded-circle mr-2'
             = link_to @diary.user.username, @diary.user
         - if current_user&.own?(@diary)
             .diary__user-links
