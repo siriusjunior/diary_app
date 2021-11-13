@@ -18,7 +18,9 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  
+  #ユーザーにタグを追加・削除する
+  post "users/:id/tag" => "users#add_tag"
+  delete "users/:id/tag" => "users#remove_tag"
   #tagsリソースにネストされたusersリソースを定義、タグで絞込みuser表示
   resources :tags do
     resources :users, only: [:index]
