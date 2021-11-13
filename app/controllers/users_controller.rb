@@ -2,6 +2,9 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.includes(:diaries).page(params[:page]).per(10).order(created_at: :desc)
+    if params[:tag_id]
+      @users = @users.joins(:tag_links).where("tag_links.tag_id" => params[:tag_id])
+    end
     respond_to do |format|
       format.html
       format.js
