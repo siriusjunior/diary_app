@@ -12,6 +12,6 @@
 #  index_tags_on_name  (name) UNIQUE
 #
 class Tag < ApplicationRecord
-    has_many :tag_links, dependen: :destroy
+    has_many :tag_links, dependent: :destroy
     has_many :users, through: :tag_links
 end

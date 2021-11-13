@@ -44,10 +44,8 @@ class Diary < ApplicationRecord
     self.user.increment!(:diary_date)
   end
   
-  private
+  def register_date_sequence
+    self.date_sequence = user_diary_date
+  end
   
-    def register_date_sequence
-      self.date_sequence = user_diary_date
-    end
-
 end
