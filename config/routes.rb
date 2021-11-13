@@ -18,6 +18,11 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+  
+  #tagsリソースにネストされたusersリソースを定義、タグで絞込みuser表示
+  resources :tags do
+    resources :users, only: [:index]
+  end
 
   namespace :mypage do
     resource :account, only: %i[edit update]
