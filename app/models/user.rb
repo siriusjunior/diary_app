@@ -107,4 +107,27 @@ class User < ApplicationRecord
     Diary.where(user_id: following_ids << id)
   end
 
+  def add_tag(label)
+    self.class.transaction do
+      tag = Tag.find_by(name: label)
+      tag ||= Tag.create!(name: label)
+      unless tag_links.where(tag_id: tag.id).exists?
+        #クラス内なのでuser_idも反映
+        tag_links.create!(tag_id: tag.id)
+      end
+    end
+  end
+  
+  def remove_tag(label)
+    self.class.transaction do
+      if tag = Tag.find_by(name: label)
+        #クラス内なのでuser_idも反映
+        tag_links.find_by(tag_id: tag.id).destroy
+        if tag.tag_links.empty?
+          tag.destroy
+        end
+      end
+    end
+  end
+
 end

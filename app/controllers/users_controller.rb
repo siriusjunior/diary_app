@@ -79,6 +79,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_tag
+    user = User.find(params[:id])
+    user.add_tag(params[:label])
+    render plain: 'ok'
+  end
+  
+  def remove_tag
+    user = User.find(params[:id])
+    user.remove_tag(params[:label])
+    render plain: 'ok'
+  end
+
   private
     
     def user_params
