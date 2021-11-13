@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_11_073441) do
+ActiveRecord::Schema.define(version: 2021_11_13_024157) do
 
   create_table "comment_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -36,28 +36,12 @@ ActiveRecord::Schema.define(version: 2021_11_11_073441) do
     t.text "body", null: false
     t.text "check"
     t.string "image"
-    t.integer "date_sequence", default: 1, null: false
+    t.integer "date_sequence", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "comment_authorization", default: true, null: false
     t.index ["user_id"], name: "index_diaries_on_user_id"
-  end
-
-  create_table "diary_date_counters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "diary_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["diary_id"], name: "index_diary_date_counters_on_diary_id"
-    t.index ["user_id"], name: "index_diary_date_counters_on_user_id"
-  end
-
-  create_table "diary_resets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_diary_resets_on_user_id"
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -71,10 +55,30 @@ ActiveRecord::Schema.define(version: 2021_11_11_073441) do
   end
 
   create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_id"
+    t.integer "follower_id", null: false
+    t.integer "followed_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "tag_links", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_tag_links_on_tag_id"
+    t.index ["user_id", "tag_id"], name: "index_tag_links_on_user_id_and_tag_id", unique: true
+    t.index ["user_id"], name: "index_tag_links_on_user_id"
+  end
+
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -107,9 +111,6 @@ ActiveRecord::Schema.define(version: 2021_11_11_073441) do
   add_foreign_key "comments", "diaries"
   add_foreign_key "comments", "users"
   add_foreign_key "diaries", "users"
-  add_foreign_key "diary_date_counters", "diaries"
-  add_foreign_key "diary_date_counters", "users"
-  add_foreign_key "diary_resets", "users"
   add_foreign_key "likes", "diaries"
   add_foreign_key "likes", "users"
 end
