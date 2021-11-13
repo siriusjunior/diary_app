@@ -6,7 +6,9 @@ class Mypage::AccountsController < Mypage::BaseController
   def update
     @user = User.find(current_user.id)
     @user.skip_password = true
+    labels = params[:user][:label].split(nil)
     if @user.update(account_params)
+      user.add_tag(labels)
       redirect_to user_path(@user), info: 'プロフィールを更新しました'
     else
       flash.now[:danger] = 'プロフィールの更新に失敗しました'
@@ -17,6 +19,6 @@ class Mypage::AccountsController < Mypage::BaseController
   private
   
     def account_params
-      params.require(:user).permit(:username, :introduction, :avatar, :avatar_cache)
+      params.require(:user).permit(:username, :introduction, :avatar, :avatar_cache, :label)
     end
 end

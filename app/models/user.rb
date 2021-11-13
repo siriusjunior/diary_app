@@ -57,7 +57,7 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :tag_links, dependent: :destroy
-  has_many :tags, -> { order(:value) }, through: :tag_links
+  has_many :tags, -> { order(:name) }, through: :tag_links
 
   def own?(object)
     id == object.user_id
@@ -107,27 +107,40 @@ class User < ApplicationRecord
     Diary.where(user_id: following_ids << id)
   end
 
-  def add_tag(label)
+  def add_tag(labels)
+    # 文字列labelsが渡される
+    current_labels = self.tags.pluck(:name) unless self.tags.nil?
+    # 登録されているラベルのうち不要ラベル
+    old_labels = current_labels - labels
+    # すでに登録されているラベルは除いた新しい登録ラベルのみ
+    new_labels = labels - current_labels
+    # 新規ラベルを登録
     self.class.transaction do
-      tag = Tag.find_by(name: label)
-      tag ||= Tag.create!(name: label)
-      unless tag_links.where(tag_id: tag.id).exists?
-        #クラス内なのでuser_idも反映
-        tag_links.create!(tag_id: tag.id)
+      new_labels.each do |new_label|
+        tag = Tag.find_by(name: new_label)
+        tag ||= Tag.create!(name: new_label)
+        # ユーザーのtag_linkを必要に応じ生成
+        unless tag_links.where(tag_id: tag.id).exists?
+          #クラス内でuser_idを反映
+          tag_links.create!(tag_id: tag.id)
+        end
       end
     end
-  end
-  
-  def remove_tag(label)
+    # 登録外のラベルを削除
     self.class.transaction do
-      if tag = Tag.find_by(name: label)
-        #クラス内なのでuser_idも反映
-        tag_links.find_by(tag_id: tag.id).destroy
-        if tag.tag_links.empty?
-          tag.destroy
+      old_labels.each do |old_label|
+        if tag = Tag.find_by(name: old_label)
+          #クラス内なのでuser_idも反映
+          tag_links.find_by(tag_id: tag.id).destroy
+          # tagに紐づくtag_linkがなくなればタグを削除
+          if tag.tag_links.empty?
+            tag.destroy
+          end
         end
       end
     end
   end
+  
+
 
 end
