@@ -15,4 +15,6 @@
 #  index_tag_links_on_user_id_and_tag_id  (user_id,tag_id) UNIQUE
 #
 class TagLink < ApplicationRecord
+    belongs_to :user
+    belongs_to :tag
 end
