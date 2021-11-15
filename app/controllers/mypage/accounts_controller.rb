@@ -1,12 +1,13 @@
 class Mypage::AccountsController < Mypage::BaseController
   def edit
     @user = User.find(current_user.id)
+    @labels = @user.tags.pluck(:name).join(',')
   end
 
   def update
     @user = User.find(current_user.id)
     @user.skip_password = true
-    labels = params[:user][:label].split(nil)
+    labels = params[:user][:label].split(',')
     if @user.update(account_params)
       @user.add_tag(labels)
       redirect_to user_path(@user), info: 'プロフィールを更新しました'

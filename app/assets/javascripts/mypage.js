@@ -19,14 +19,42 @@ function previewFileWithId(selector) {
     }
 }
 
+// タグのインクリメンタルサーチ
 $(function (){
-    // タグのインクリメンタルサーチ
     $('#search-form-input').on('keyup', function(){
+        // 入力時の動作
+        // 検索フォームのカンマ入りワード
         var input = $("#search-form-input").val();
+        // カンマを省いて入力フォーム配列化
+        var arr = input.split(',');
+        // 入力フォームの配列の重複除去
+        var arr = arr.filter(function (x, i, self) {
+            return self.indexOf(x) === i;
+        });
+        // 重複除去配列は配列のままなのでカンマ区切りの文字列にして反映
+        var ArrayStr = arr.join(',')
+        $("#search-form-input").val( ArrayStr );
+        // if (arr !== UniqArr){重複タグを通知するにはここを利用}
+        if (arr.length > 5){
+            $("#search-form-input").addClass("warn");
+            $("#search-form-input").removeClass("info");
+            $('#search-form__warn').show();
+            $('#profile-edit-btn').attr({'disabled':'disabled'});
+            $('#search-form__result').hide();
+        }else{
+            $("#search-form-input").addClass("info");
+            $("#search-form-input").removeClass("warn");
+            $('#search-form__warn').hide();
+            $('#profile-edit-btn').removeAttr('disabled');
+            $('#search-form__result').show();
+        }
+        // 配列の最後を検索語とする
+        var keyword = arr[arr.length-1];
+        var serArr = arr.filter(i => keyword.indexOf(i))
         $.ajax({
             type: 'GET',                // HTTPメソッドはGETで
             url:  '/tags',             // /usersのURLに (これによりusersコントローラのindexアクションが起動)
-            data: { keyword: input },    // keyword: inputを送信する
+            data: { keyword: keyword, arr: serArr },    // keyword: inputとフォーム配列を送信する,
             dataType: 'json'            // サーバから値を返す際はjsonである
         })
         .done(function(tags){               // usersにjson形式のuser変数が代入される。複数形なので配列型で入ってくる
@@ -42,24 +70,50 @@ $(function (){
                 }
                 else {
                     $('#search-form__result').empty();
-                    appendErrMsgToHTML();   // ユーザーが見つからなければ「見つからない」を返す。
+                    appendNoTagMsgToHTML();   // ユーザーが見つからなければ「見つからない」を返す。
                 }                
             }
         })
         .fail(function() {
             $('#search-form__result').empty();
-            $('#search-form__result').append('<li>追加されました</li>');// ユーザーが見つからなければ「見つからない」を返す。
-            // appendErrMsgToHTML();
+            $('#search-form__result').append('<li>タグ検索に失敗しました</li>');// ユーザーが見つからなければ「見つからない」を返す。
+            appendErrMsgToHTML();
         });
     });
-
     var search_list = $("#search-form__result");
     function appendTag(tag){
-        var html = `<li><span>${tag.name}</span></li>`;
+        var html = `<li class="pl-3" id="suggested-tag" data-tag-id="${tag.id}" data-tag-name="${tag.name}">${tag.name}</li>`;
+                    search_list.append(html);
+    }
+    function appendNoTagMsgToHTML(){
+        var html = `<li><span><i>このタグは登録されていません</i></span></li>`;
                     search_list.append(html);
     }
     function appendErrMsgToHTML(){
-        var html = `<li><span><i>このタグは登録されていません</i></span></li>`;
+        var html = `<li><span><i>タグ検索に失敗しました</i></span></li>`;
                     search_list.append(html);
+    }
+});
+
+$(document).on('click',function(e) {
+    if(!$(e.target).closest('#suggested-tag').length) {
+      // ターゲット要素の外側をクリックした時の操作
+    $('#search-form__result').empty();
+    } else {
+    // ターゲット要素をクリックした時の操作
+    //データ取得
+    const tagName = $(e.target).closest('#suggested-tag').attr("data-tag-name");
+    // const GetArray = $("#hidden-labels").val().split(',');
+    var input = $("#search-form-input").val();
+        var arr = input.split(',');
+        // var keyword = arr[arr.length-1];
+        arr[arr.length-1] = tagName;
+        // クリック追加動作に重複配列除去
+        var arr = arr.filter(function (x, i, self) {
+            return self.indexOf(x) === i;
+        });
+    var ArrayStr = arr.join(',')
+    $("#search-form-input").val( ArrayStr );
+    $('#search-form__result').empty();
     }
 });

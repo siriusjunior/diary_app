@@ -466,6 +466,12 @@ form {
         font-size: .6rem;
         color: #888;
     }
+    &__warn {
+        -webkit-font-smoothing: antialiased;
+        display: none;
+        font-size: .8rem;
+        color: #f5647c;
+    }
 }
 .follow {
     &__info {
@@ -602,6 +608,12 @@ form {
 }
 .right {
     margin: 0 0 0 auto;
+}
+.warn {
+    background-color: #fcd8de;
+}
+.info {
+    background-color: #d4f3ff;;
 }
 
 @mixin box_sizing {
