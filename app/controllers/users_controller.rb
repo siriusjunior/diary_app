@@ -30,6 +30,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @thumbnail_diaries = @user.diaries.thumbnail
     @diaries = @user.diaries.recent(3)
+    @tags = @user.tags
   end
 
   def activate

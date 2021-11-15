@@ -592,6 +592,17 @@ form {
         border: 1px solid #52b2f1;
     }
 }
+.tag {
+    &__label {
+        font-size: .7rem;
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+        color: #fff;
+        background-color: #6dacff; 
+        border-radius: 4px;
+        letter-spacing: 1px;
+    }
+}
 
 .w-100{
     width: 100%;
