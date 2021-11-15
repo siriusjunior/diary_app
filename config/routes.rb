@@ -26,6 +26,14 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
   end
 
+  # resources :tags do
+  #   collection do
+  #     get 'search'
+  #   end
+  # end
+
+  resources :tags, only: %i[index], on: :collection, defaults: { format: 'json' } 
+
   namespace :mypage do
     resource :account, only: %i[edit update]
   end

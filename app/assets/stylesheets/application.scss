@@ -443,6 +443,30 @@ form {
         font-size: .9rem;
     }
 }
+.search-form {
+    background-color: #555555;
+    color: #fff;
+    &_style {
+        list-style-type: none;
+    }
+    &__wrapper {
+        padding: 0;
+        & li {
+            padding: 3px 0;
+            &:hover {
+                background-color: #888;
+                cursor: pointer;
+            }
+            & span {
+                margin-left: 1rem;
+            }
+        }
+    }
+    &__info {
+        font-size: .6rem;
+        color: #888;
+    }
+}
 .follow {
     &__info {
         display: block;

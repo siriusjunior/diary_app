@@ -14,7 +14,18 @@
         = f.label :introduction, 'プロフィール', class: 'account-edit__label'
         = f.text_area :introduction, class: 'form-control', rows: '5'
     .form-group.w-75.right.mb-3
-        = f.label :label, 'ラベル', class: 'account-edit__label'
-        = f.text_field :label, class: 'form-control'
+        = f.label :label, 'タグ', class: 'account-edit__label'
+        span.d-block.search-form__info.pl-3 ※スペースで区切る
+        = f.text_field :label, class: 'form-control tag_form', id: 'search-form-input', autocomplete: 'off'
+        .search-form.w-100 
+            ul.search-form_style.search-form__wrapper#search-form__result
+                / li 
+                /     span 温泉
+                / li 
+                /     span 旅館
+                / li 
+                /     span キャンプ
+                / li 
+                /     span 食事
     .form-group.w-75.right.mb-3.text-right
         = f.submit class: 'btn btn-primary btn-raised'

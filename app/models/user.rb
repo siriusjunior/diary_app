@@ -108,11 +108,11 @@ class User < ApplicationRecord
   end
 
   def add_tag(labels)
-    # 文字列labelsが渡される
+    # 文字列labelsが渡される(ex:labels=["A","B","C","D","E","F","G"], current_labels=["A","B","C","D","E"])
     current_labels = self.tags.pluck(:name) unless self.tags.nil?
-    # 登録されているラベルのうち不要ラベル
+    # 登録されているラベルのうち不要lable(ex:old_labels=["D","E"])
     old_labels = current_labels - labels
-    # すでに登録されているラベルは除いた新しい登録ラベルのみ
+    # すでに登録されているラベルを除いた新しい登録ラベル(ex:new_labels=["F","G"])
     new_labels = labels - current_labels
     # 新規ラベルを登録
     self.class.transaction do
