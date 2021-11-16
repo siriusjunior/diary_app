@@ -18,7 +18,8 @@
         = f.label :label, 'タグ', class: 'account-edit__label'
         span.d-block.search-form__info.pl-3 ※カンマで区切る
         = f.text_field :label, class: 'form-control tag_form', id: 'search-form-input', value: @labels, autocomplete: 'off'
-        i.span.pl-3.search-form__warn#search-form__warn ※タグ登録は5個までです
+        i.span.pl-3.search-form__warn#search-form__warn_count ※タグ登録は5個までです
+        i.span.pl-3.search-form__warn#search-form__warn_length ※タグの文字数は最大5文字です
         .search-form.w-100 
             ul.search-form_style.search-form__wrapper#search-form__result
                 / li.pl-3 

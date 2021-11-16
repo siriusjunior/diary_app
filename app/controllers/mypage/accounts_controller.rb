@@ -9,7 +9,7 @@ class Mypage::AccountsController < Mypage::BaseController
     @user.skip_password = true
     labels = params[:user][:label].split(',')
     if @user.update(account_params)
-      @user.add_tag(labels)
+      @user.add_tag(labels) 
       redirect_to user_path(@user), info: 'プロフィールを更新しました'
     else
       flash.now[:danger] = 'プロフィールの更新に失敗しました'

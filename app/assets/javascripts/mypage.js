@@ -23,6 +23,8 @@ function previewFileWithId(selector) {
 $(function (){
     $('#search-form-input').on('keyup', function(){
         // 入力時の動作
+        // エラー時のフォーム着色とボタンの属性値変更の判断
+        var ErrFlg = false;
         // 検索フォームのカンマ入りワード
         var input = $("#search-form-input").val();
         // カンマを省いて入力フォーム配列化
@@ -31,25 +33,42 @@ $(function (){
         var arr = arr.filter(function (x, i, self) {
             return self.indexOf(x) === i;
         });
+        $.each(arr, function(key, value){
+            //appleの場合はカウントアップさせる
+            if( value.length > 5 ){
+                $('#search-form__warn_length').show();
+                $('#search-form__result').hide();
+                ErrFlg = true;
+            }else{
+                $('#search-form__warn_length').hide();
+                $('#search-form__result').show();
+            }
+        });
         // 重複除去配列は配列のままなのでカンマ区切りの文字列にして反映
         var ArrayStr = arr.join(',')
         $("#search-form-input").val( ArrayStr );
         // if (arr !== UniqArr){重複タグを通知するにはここを利用}
         if (arr.length > 5){
-            $("#search-form-input").addClass("warn");
-            $("#search-form-input").removeClass("info");
-            $('#search-form__warn').show();
-            $('#profile-edit-btn').attr({'disabled':'disabled'});
+            $('#search-form__warn_count').show();
             $('#search-form__result').hide();
+            ErrFlg = true
         }else{
-            $("#search-form-input").addClass("info");
-            $("#search-form-input").removeClass("warn");
-            $('#search-form__warn').hide();
-            $('#profile-edit-btn').removeAttr('disabled');
+            $('#search-form__warn_count').hide();
             $('#search-form__result').show();
         }
+        // フォーム項目にエラーがあればエラーインターフェイス処理
+        // if(ErrFlg === true){
+        //     $('#profile-edit-btn').attr({'disabled':'disabled'});
+        //     $("#search-form-input").addClass("warn");
+        //     $("#search-form-input").removeClass("info");
+        // }else if(ErrFlg === false){
+        //     $("#search-form-input").addClass("info");
+        //     $("#search-form-input").removeClass("warn");
+        //     $('#profile-edit-btn').removeAttr('disabled');
+        // }
         // 配列の最後を検索語とする
         var keyword = arr[arr.length-1];
+        // 検索語句を探す際の重複除去した配列作成
         var serArr = arr.filter(i => keyword.indexOf(i))
         $.ajax({
             type: 'GET',                // HTTPメソッドはGETで
