@@ -26,7 +26,7 @@ class AccountForm
             # 配列に戻す
             labels = set_label_list
             user.add_tag!(labels)
-            user.update!(avatar: avatar, username: username, introduction: introduction)
+            user.update!(avatar: avatar, avatar_cache: avatar_cache, username: username, introduction: introduction)
         end
         rescue ActiveRecord::RecordInvalid
         false
@@ -43,6 +43,7 @@ class AccountForm
         def default_attributes
             {
                 avatar: user.avatar,
+                avatar_cache: user.avatar_cache,
                 username: user.username,
                 introduction: user.introduction,
                 labels: user.tags.pluck(:name).join(",")

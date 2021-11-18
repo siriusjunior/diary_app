@@ -1,6 +1,7 @@
 class Mypage::AccountsController < Mypage::BaseController
   def edit
     @user = User.find(current_user.id)
+    @user.avatar.cache! unless @user.avatar.blank?
     @account_form = AccountForm.new(user: @user)
     @labels = @user.tags.pluck(:name).join(',')
   end

@@ -101,6 +101,7 @@ $(function (){
         .fail(function() {
             $('#search-form__result').empty();
             appendErrMsgToHTML();
+            $('#profile-edit-btn').attr({'disabled':'disabled'});
         });
     });
     var search_list = $("#search-form__result");
