@@ -1,6 +1,6 @@
 class AccountForm
     include ActiveModel::Model
-    attr_accessor :avatar, :username, :introduction, :labels, :avatar_cache
+    attr_accessor :avatar, :avatar_cache, :username, :introduction, :labels
 
     validates :username, presence: true
     validates :introduction, length: { maximum: 150 }

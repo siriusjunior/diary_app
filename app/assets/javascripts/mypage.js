@@ -38,6 +38,7 @@ $(function (){
                 $('#search-form__warn_length').show();
                 $('#search-form__result').hide();
                 ErrFlg = true;
+                return false;
             }else{
                 $('#search-form__warn_length').hide();
                 $('#search-form__result').show();
@@ -71,7 +72,7 @@ $(function (){
         //     $('#search-form__result').empty();
         //     $('#search-form__result').append('<li>フォームに登録済みです</li>');
         // }
-        
+
         // 検索語句を探す際の重複除去した配列作成
         var serArr = arr.filter(i => keyword.indexOf(i))
         $.ajax({
