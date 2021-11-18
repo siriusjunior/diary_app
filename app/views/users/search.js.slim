@@ -1,0 +1,5 @@
+| $('#users').empty();
+| $('#users').html("#{ j (render :partial => 'users')}");
+| $('.tag_current').removeClass("tag_current");
+| $('#tag-#{@tag.id}').addClass("tag_current");
+| $('html,body').animate({scrollTop:0}, .001, "swing");

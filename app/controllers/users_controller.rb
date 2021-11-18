@@ -2,13 +2,23 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.includes(:diaries).page(params[:page]).per(10).order(created_at: :desc)
-    if params[:tag_id]
-      @users = @users.joins(:tag_links).where("tag_links.tag_id" => params[:tag_id])
-    end
     respond_to do |format|
       format.html
       format.js
     end
+    @tags = Tag.joins(:tag_links).group(:tag_id).order('count(user_id) desc')
+  end
+
+  def search
+    @users = User.joins(:tag_links).where("tag_links.tag_id" => params[:id]).page(params[:page]).per(5).order(created_at: :desc)
+    @tags = Tag.joins(:tag_links).group(:tag_id).order('count(user_id) desc')
+    @tag = Tag.find(params[:id])
+    # render :indexで@tagsが必要
+    respond_to do |format|
+      format.html { render :index}
+      format.js
+    end
+    # @users = User.joins(:tag_links).where("tag_links.tag_id" => params[:labels])
   end
 
   def new

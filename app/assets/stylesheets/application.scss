@@ -602,6 +602,18 @@ form {
         border-radius: 4px;
         letter-spacing: 1px;
     }
+    &__wrapper {
+        max-width: 710px;
+        margin: 0 auto;
+    }
+    &_current {
+        background-color: #2062b8;
+        color: #fff;
+        &:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+    }
 }
 
 .w-100{

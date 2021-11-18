@@ -17,6 +17,9 @@ Rails.application.routes.draw do
       get :diaries
       get :following, :followers
     end
+    collection do
+      get 'search'
+    end
   end
   #ユーザーにタグを追加・削除する
   post "users/:id/tag" => "users#add_tag"

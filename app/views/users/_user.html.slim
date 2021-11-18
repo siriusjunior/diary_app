@@ -30,10 +30,16 @@
                 .userprofile__contents.d-flex 
                     span.d-flex.justify-content-between.w-100
                         = user.diaries.count
-                        object
-                            = link_to diaries_user_path(user), class:'userprofile__link' do
-                                span
-                                    |(ダイアリーを見る)
+            .userprofile__section.d-flex.mb-2
+                .userprofile__label
+                    |登録タグ
+                .userprofile__contents.d-flex
+                    = render partial: "tag_link", collection: user.tags
+            .userprofile__section.d-flex.mb-2
+                object.right
+                    = link_to diaries_user_path(user), class:'userprofile__link' do
+                        span
+                            |(ダイアリーを見る)
             - if current_user == user
                 = link_to edit_mypage_account_path, class: 'userprofile__link w-100 text-right' do
                     span.text-right.d-block

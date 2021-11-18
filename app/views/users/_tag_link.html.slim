@@ -1,0 +1,3 @@
+object
+    = link_to search_users_path(id: tag_link), class: 'tag tag__label p-1 mr-2', id: "tag-#{tag_link.id}", remote: true do
+        = tag_link.name
