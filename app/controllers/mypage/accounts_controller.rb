@@ -21,6 +21,6 @@ class Mypage::AccountsController < Mypage::BaseController
   private
   
     def account_params
-      params.require(:user).permit(:username, :introduction, :avatar, :avatar_cache, :label)
+      params.require(:user).permit(:username, :introduction, :avatar, :avatar_cache, :labels)
     end
 end

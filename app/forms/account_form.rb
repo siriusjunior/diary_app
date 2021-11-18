@@ -1,6 +1,6 @@
 class AccountForm
     include ActiveModel::Model
-    attr_accessor :avatar, :username, :introduction, :label, :avatar_cache
+    attr_accessor :avatar, :username, :introduction, :labels, :avatar_cache
 
     validates :username, presence: true
     validates :introduction, length: { maximum: 150 }
@@ -9,7 +9,7 @@ class AccountForm
     def label_length
         tag_list = set_label_list
         if tag_list
-            tag_list.each { |tag| if tag.length > 5 then errors.add(:label, "タグの最大文字数は5文字です") end }
+            tag_list.each { |tag| if tag.length > 5 then errors.add(:labels, "の最大文字数は5文字です") end }
         end
     end
 
@@ -45,11 +45,11 @@ class AccountForm
                 avatar: user.avatar,
                 username: user.username,
                 introduction: user.introduction,
-                label: user.tags.pluck(:name).join(",")
+                labels: user.tags.pluck(:name).join(",")
             }  
         end
 
         def set_label_list
-            label.split(",")
+            labels.split(",")
         end
 end

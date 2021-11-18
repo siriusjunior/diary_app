@@ -15,9 +15,9 @@
         = f.text_area :introduction, class: 'form-control', rows: '5'
     .form-group.w-75.right.mb-3
         / = hidden_field_tag :label, @labels, id: 'hidden-labels'
-        = f.label :label, 'タグ', class: 'account-edit__label'
+        = f.label :labels, 'タグ', class: 'account-edit__label'
         span.d-block.search-form__info.pl-3 ※カンマで区切る
-        = f.text_field :label, class: 'form-control tag_form', id: 'search-form-input', autocomplete: 'off'
+        = f.text_field :labels, class: 'form-control tag_form', id: 'search-form-input', autocomplete: 'off'
         i.span.pl-3.search-form__warn#search-form__warn_count ※タグ登録は5個までです
         i.span.pl-3.search-form__warn#search-form__warn_length ※タグの文字数は最大5文字です
         .search-form.w-100 

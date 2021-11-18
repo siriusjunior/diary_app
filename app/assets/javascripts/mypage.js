@@ -34,7 +34,6 @@ $(function (){
             return self.indexOf(x) === i;
         });
         $.each(arr, function(key, value){
-            //appleの場合はカウントアップさせる
             if( value.length > 5 ){
                 $('#search-form__warn_length').show();
                 $('#search-form__result').hide();
@@ -57,17 +56,22 @@ $(function (){
             $('#search-form__result').show();
         }
         // フォーム項目にエラーがあればエラーインターフェイス処理
-        // if(ErrFlg === true){
-        //     $('#profile-edit-btn').attr({'disabled':'disabled'});
-        //     $("#search-form-input").addClass("warn");
-        //     $("#search-form-input").removeClass("info");
-        // }else if(ErrFlg === false){
-        //     $("#search-form-input").addClass("info");
-        //     $("#search-form-input").removeClass("warn");
-        //     $('#profile-edit-btn').removeAttr('disabled');
-        // }
+        if(ErrFlg === true){
+            $('#profile-edit-btn').attr({'disabled':'disabled'});
+            $("#search-form-input").addClass("warn");
+            $("#search-form-input").removeClass("info");
+        }else if(ErrFlg === false){
+            $("#search-form-input").addClass("info");
+            $("#search-form-input").removeClass("warn");
+            $('#profile-edit-btn').removeAttr('disabled');
+        }
         // 配列の最後を検索語とする
         var keyword = arr[arr.length-1];
+        // if ($.inArray(keyword, arr)){ 呼びの登録したタグを通知、機能性未確認
+        //     $('#search-form__result').empty();
+        //     $('#search-form__result').append('<li>フォームに登録済みです</li>');
+        // }
+        
         // 検索語句を探す際の重複除去した配列作成
         var serArr = arr.filter(i => keyword.indexOf(i))
         $.ajax({

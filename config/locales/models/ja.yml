@@ -19,6 +19,13 @@ ja:
         image: アップロード画像
       comment:
         body: コメント
+  activemodel:
+    attributes:
+      account_form:
+        avatar: アバター
+        username: ユーザー名
+        introduction: プロフィール
+        labels: タグ
 
     # attributes:
     #   created_at: 作成日時
