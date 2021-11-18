@@ -12,7 +12,7 @@
 #  index_tags_on_name  (name) UNIQUE
 #
 class Tag < ApplicationRecord
-    validates :name, presence: true, length: { maximum: 5 }
+    validate :name
     has_many :tag_links, dependent: :destroy
     has_many :users, through: :tag_links
 end

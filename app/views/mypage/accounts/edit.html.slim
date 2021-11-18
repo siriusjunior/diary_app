@@ -1,4 +1,4 @@
-= form_with model: @user, url: mypage_account_path, method: :patch, local: true do |f|
+= form_with model: @account_form, url: mypage_account_path, method: :patch, local: true do |f|
     = render 'shared/error_messages', object: f.object
     .d-flex.justify-content-between.flex-row-reverse
         .account-edit__uploader.d-flex.flex-column
@@ -14,10 +14,10 @@
         = f.label :introduction, 'プロフィール', class: 'account-edit__label'
         = f.text_area :introduction, class: 'form-control', rows: '5'
     .form-group.w-75.right.mb-3
-        = hidden_field_tag :label, @labels, id: 'hidden-labels'
+        / = hidden_field_tag :label, @labels, id: 'hidden-labels'
         = f.label :label, 'タグ', class: 'account-edit__label'
         span.d-block.search-form__info.pl-3 ※カンマで区切る
-        = f.text_field :label, class: 'form-control tag_form', id: 'search-form-input', value: @labels, autocomplete: 'off'
+        = f.text_field :label, class: 'form-control tag_form', id: 'search-form-input', autocomplete: 'off'
         i.span.pl-3.search-form__warn#search-form__warn_count ※タグ登録は5個までです
         i.span.pl-3.search-form__warn#search-form__warn_length ※タグの文字数は最大5文字です
         .search-form.w-100 

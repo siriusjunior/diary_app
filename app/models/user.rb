@@ -107,8 +107,8 @@ class User < ApplicationRecord
     Diary.where(user_id: following_ids << id)
   end
 
-  def add_tag(labels)
-    # 文字列labelsが渡される(ex:labels=["A","B","C","D","E","F","G"], current_labels=["A","B","C","D","E"])
+  def add_tag!(labels)
+    # 文字列labelsが渡される(ex:labels=["A","B","C","F","G"], current_labels=["A","B","C","D","E"])
     current_labels = self.tags.pluck(:name) unless self.tags.nil?
     # 登録されているラベルのうち不要lable(ex:old_labels=["D","E"])
     old_labels = current_labels - labels
