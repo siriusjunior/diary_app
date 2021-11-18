@@ -100,7 +100,6 @@ $(function (){
         })
         .fail(function() {
             $('#search-form__result').empty();
-            $('#search-form__result').append('<li>タグ検索に失敗しました</li>');// ユーザーが見つからなければ「見つからない」を返す。
             appendErrMsgToHTML();
         });
     });
