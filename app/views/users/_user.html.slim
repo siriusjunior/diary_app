@@ -33,7 +33,7 @@
             .userprofile__section.d-flex.mb-2
                 .userprofile__label
                     |登録タグ
-                .userprofile__contents.d-flex
+                .d-flex.flex-wrap.w-60
                     = render partial: "tag_link", collection: user.tags
             .userprofile__section.d-flex.mb-2
                 object.right

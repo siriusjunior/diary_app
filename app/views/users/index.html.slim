@@ -1,6 +1,6 @@
 .wrapper.py-5
     h2.text-center.mb-3 ユーザーリスト
-    #tags.tag__wrapper.mb-5
+    #tags.tag__wrapper.mb-5.d-flex.flex-wrap
         = render partial: "tag_link", collection: @tags
     #users
         = render 'users'

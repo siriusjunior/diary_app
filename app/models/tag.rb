@@ -15,8 +15,4 @@ class Tag < ApplicationRecord
     validate :name
     has_many :tag_links, dependent: :destroy
     has_many :users, through: :tag_links
-
-    def user_count
-        tag_links.group(:tag_id).count("tag_links.user_id")
-    end
 end

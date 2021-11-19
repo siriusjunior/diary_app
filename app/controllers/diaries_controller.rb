@@ -3,8 +3,15 @@ class DiariesController < ApplicationController
   before_action :require_login, only: %i[new create update destroy]
   def index
     @diaries = if current_user
-      current_user.feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+      if current_user.feed.any?
+        # ログインユーザーでフィードデータがある場合
+        current_user.feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+      else
+        # ログインユーザーでフィードデータがない場合
+        Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+      end
     else
+      # ログインユーザーでない場合
       Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
     end
   end
