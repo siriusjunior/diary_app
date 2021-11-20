@@ -25,4 +25,12 @@ class Like < ApplicationRecord
   has_one :activity, as: :subject, dependent: :destroy
 
   validates :user_id, uniqueness: { scope: :diary_id }
+
+  after_create_commit :create_activities
+
+  private
+
+    def create_activities
+      Activity.create(subject: self, user: diary.user, action_type: :liked_to_own_diary)
+    end
 end

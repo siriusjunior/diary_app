@@ -27,4 +27,12 @@ class Comment < ApplicationRecord
   has_one :activity, as: :subject, dependent: :destroy
 
   validates :body, presence: true, length: { maximum: 300 }
+
+  after_create_commit :create_activities
+
+  private
+
+    def create_activities
+      Activity.create(subject: self, user: diary.user, action_type: :commented_to_own_diary)
+    end
 end
