@@ -42,6 +42,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes
   has_many :like_diaries, through: :likes, source: :diary
+  has_many :comment_likes
+  has_many :like_comments, through: :comment_likes, source: :comment
   has_many :active_relationships, class_name: 'Relationship',
     foreign_key: 'follower_id',
     dependent: :destroy
@@ -69,6 +71,18 @@ class User < ApplicationRecord
 
   def like?(diary)
     like_diaries.include?(diary)
+  end
+
+  def comment_like(comment)
+    like_comments << comment
+  end
+
+  def comment_unlike(comment)
+    like_comments.destroy(comment)
+  end
+  
+  def comment_like?(comment)
+    like_comments.include?(comment)
   end
 
   def follow(other_user)

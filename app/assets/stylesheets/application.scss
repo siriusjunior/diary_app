@@ -419,6 +419,26 @@ form {
         font-size: .8rem;
     }
 }
+.like-comment {
+    &__fill {
+        width: 50px;
+    }
+}
+.like-comment-icon {
+    color: #d1d0d0;
+    font-size: .9rem;
+    &_fill {
+        color: #407DE9;
+    }
+    &__count {
+        color: #818181;
+        -webkit-font-smoothing: antialiased;
+    }
+}
+.unlike-comment-icon {
+    color: #d1d0d0;
+    font-size: 1.0rem;
+}
 .pagination {
     justify-content: center;
     margin-top: 40px;

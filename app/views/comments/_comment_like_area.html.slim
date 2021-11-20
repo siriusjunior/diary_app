@@ -1,0 +1,6 @@
+div id="comment_like_area-#{comment.id}"
+    - if current_user.comment_like?(comment)
+        / diaries/showコンテキストにつき注意
+        = render 'comments/unlike', comment: comment 
+    - else 
+        = render 'comments/like', comment: comment

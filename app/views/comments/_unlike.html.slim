@@ -1,0 +1,4 @@
+= link_to comment_like_path(current_user.comment_likes.find_by(comment_id: comment.id)), method: :delete, remote: true do
+    = icon 'fas', 'thumbs-up', class: 'like-comment-icon  like-comment-icon_fill'
+span.ml-1.like-comment-icon__count
+    = comment.comment_likes.count

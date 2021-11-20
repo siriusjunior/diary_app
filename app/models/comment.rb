@@ -22,5 +22,8 @@
 class Comment < ApplicationRecord
   belongs_to :diary
   belongs_to :user
+  has_many :comment_likes, dependent: :destroy
+  has_many :comment_like_users, through: :comment_likes, source: :user
+
   validates :body, presence: true, length: { maximum: 300 }
 end

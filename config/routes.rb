@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
+  get 'user_sessions/store_location'
   
   resources :users do
     %i[index new create show]
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
+  resources :comment_likes, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
 
   if Rails.env.development?

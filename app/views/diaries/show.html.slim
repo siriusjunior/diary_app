@@ -26,9 +26,18 @@
                     = @diary.check
     .diary__footer.pb-4.pr-4.d-flex.justify-content-end.align-items-center
         / いいねボタン
-        - if current_user && !current_user.own?(@diary)
-            object
-                = render 'like_area', diary: @diary
+        - if current_user
+            - if current_user && !current_user.own?(@diary)
+                object
+                    = render 'like_area', diary: @diary
+            / ダイアリー所有者には非表示
+            - else current_user && current_user.own?(@diary)
+        / ログインしていないユーザーにもいいね表示
+        - else
+            object#unlike-icon
+                = icon 'far', 'heart', class: 'fa-lg unlike-icon'
+                span.unlike-icon.ml-1
+                    = @diary.likes.count
         - if @diary.image.present?
             = link_to @diary.image.url, class: 'diary__image ml-3', "data-lightbox" => "image-#{@diary.id}" do
                 = image_tag @diary.image.url, height: '40', width: '40'
