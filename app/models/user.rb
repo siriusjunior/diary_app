@@ -58,6 +58,7 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :tag_links, dependent: :destroy
   has_many :tags, -> { order(:name) }, through: :tag_links
+  has_one :activities, dependent: :destroy
 
   def own?(object)
     id == object.user_id

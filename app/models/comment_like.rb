@@ -22,6 +22,7 @@
 class CommentLike < ApplicationRecord
   belongs_to :user
   belongs_to :comment
+  has_one :activity, as: :subject, dependent: :destroy
 
   validates :user_id, uniqueness: { scope: :comment_id }
 end
