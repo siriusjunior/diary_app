@@ -619,12 +619,13 @@ form {
 }
 #header-activities {
     width: 400px;
+    top: 30px;
     .dropdown-item {
-    max-width: initial;
-    font-size: 12px;
+        font-size: 12px;
+        max-width: 100%;
     }
     .read {
-    background: #f1f1f1;
+        background: #f1f1f1;
     }
 }
 
