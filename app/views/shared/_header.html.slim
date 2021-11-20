@@ -5,14 +5,17 @@ header.navbar.navbar-expand-lg.navbar-light.header.header__bg
         / span.navbar-toggler-icon
         / #navbarTogglerDemo02.collapse.navbar-collapse
         = render 'diaries/search_form', search_form: @search_form
-        ul.navbar-nav.mt-2.mt-lg-0
-            li.nav-item
-            a.nav-link href="#"
-                = icon 'fa', 'thumbtack', class: 'fa-lg header__fa header__fa_mg-r-10'
-            li.nav-item
+        ul.navbar-nav.mt-2.mt-lg-0.d-flex.align-items-center
             a.nav-link href="#"
                 = icon 'fa', 'comments', class: 'fa-lg header__fa header__fa_mg-r-20'
+            object
+                = link_to edit_mypage_account_path do
+                    = icon 'fa', 'id-card', class: 'fa-lg header__fa header__fa_mg-r-20'
+            object
+                = link_to users_path do
+                    = icon 'fa', 'user-friends', class: 'fa-lg header__fa header__fa_mg-r-20'
+            a.nav-link.mr-3 href="#"
+                = icon 'fa', 'thumbtack', class: 'fa-lg header__fa header__fa_mg-r-10'
             li.nav-item
             = link_to '投稿する', new_diary_path, class: 'nav-link header-btn header-btn_mg-r'
-            li.nav-item
-            = link_to 'ログアウト', logout_path, class: 'nav-link header-btn', method: :delete
+            = link_to 'ログアウト', logout_path, class: 'nav-link header-btn', method: :delete, data: { confirm: 'ログアウトします。よろしいですか？' } 
