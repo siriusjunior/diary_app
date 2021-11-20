@@ -26,7 +26,7 @@ class Activity < ApplicationRecord
 
   scope :recent, ->(count){ order(created_at: :desc).limit(count) }
 
-  enum action_type: { commented_to_own_post: 0, liked_to_own_post: 1, followed_me: 2 }
+  enum action_type: { commented_to_own_diary: 0, liked_to_own_diary: 1, followed_me: 2, liked_to_own_comment: 4 }
   enum read: { unread: false, read: true }
 
   def redirect_path

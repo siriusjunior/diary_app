@@ -621,6 +621,7 @@ form {
     width: 400px;
     top: 30px;
     .dropdown-item {
+        padding: .9rem;
         font-size: 12px;
         max-width: 100%;
     }
@@ -628,7 +629,11 @@ form {
         background: #f1f1f1;
     }
 }
-
+.navbar-badge {
+    position: absolute;
+    bottom: 15px;
+    left: 13px;
+}
 .w-100{
     width: 100%;
 }
