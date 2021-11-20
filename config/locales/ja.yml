@@ -3,4 +3,4 @@ ja:
     formats:
       default: ! '%Y/%m/%d'
       long: ! '%Y年%m月%d日'
-      short: ! '%m/%d'
+      short: "%m/%d %H:%M"
