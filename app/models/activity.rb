@@ -25,4 +25,19 @@ class Activity < ApplicationRecord
   belongs_to :user
 
   scope :recent, ->(count){ order (created_at: :desc).limit(count) }
+
+  enum read: { unread: false, read: true }
+
+  def redirect_path
+    case action_type.to_sym
+    when :commented_to_own_post
+      post_path(subject.post, anchor: "comment-#{ subject.id }")
+    when :liked_to_own_post
+      post_path(subject.post)
+    when :followed_me
+      user_path(subject.follower)
+    when :liked_to_own_comment
+      user_path(subject.user)
+    end
+  end
 end
