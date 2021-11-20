@@ -24,7 +24,7 @@ class Activity < ApplicationRecord
   belongs_to :subject, polymorphic: true
   belongs_to :user
 
-  scope :recent, ->(count){ order (created_at: :desc).limit(count) }
+  scope :recent, ->(count){ order(created_at: :desc).limit(count) }
 
   enum read: { unread: false, read: true }
 
