@@ -1,0 +1,5 @@
+/ .tag.tag__label.p-1.mr-1 
+/     = tag_name.name
+object
+    = link_to search_users_path(id: tag_name), class: 'tag tag__label p-1 mr-2', id: "tag-#{tag_name.id}", local: true do
+        = tag_name.name

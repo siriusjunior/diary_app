@@ -3,8 +3,15 @@ class DiariesController < ApplicationController
   before_action :require_login, only: %i[new create update destroy]
   def index
     @diaries = if current_user
-      current_user.feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+      if current_user.feed.any?
+        # ログインユーザーでフィードデータがある場合
+        current_user.feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+      else
+        # ログインユーザーでフィードデータがない場合
+        Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+      end
     else
+      # ログインユーザーでない場合
       Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
     end
   end
@@ -15,6 +22,7 @@ class DiariesController < ApplicationController
 
   def create
     @diary = current_user.diaries.build(diary_params)
+    @diary.register_date_sequence
     if @diary.save
       redirect_to diaries_path, success: "ダイアリー#{@diary.date_sequence}日目を投稿しました"
       @diary.increment_diary_date

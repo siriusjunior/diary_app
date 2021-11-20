@@ -6,7 +6,7 @@
 #  body                  :text(65535)      not null
 #  check                 :text(65535)
 #  comment_authorization :boolean          default(TRUE), not null
-#  date_sequence         :integer          default(1), not null
+#  date_sequence         :integer          not null
 #  image                 :string(255)
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
@@ -44,10 +44,8 @@ class Diary < ApplicationRecord
     self.user.increment!(:diary_date)
   end
   
-  private
+  def register_date_sequence
+    self.date_sequence = user_diary_date
+  end
   
-    def register_date_sequence
-      self.date_sequence = user_diary_date
-    end
-
 end

@@ -50,6 +50,7 @@ gem 'letter_opener'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'jquery-ui-rails'  # Tag-itで使用
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

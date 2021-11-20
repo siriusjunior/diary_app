@@ -17,7 +17,25 @@ Rails.application.routes.draw do
       get :diaries
       get :following, :followers
     end
+    collection do
+      get 'search'
+    end
   end
+  #ユーザーにタグを追加・削除する
+  post "users/:id/tag" => "users#add_tag"
+  delete "users/:id/tag" => "users#remove_tag"
+  #tagsリソースにネストされたusersリソースを定義、タグで絞込みuser表示
+  resources :tags do
+    resources :users, only: [:index]
+  end
+
+  # resources :tags do
+  #   collection do
+  #     get 'search'
+  #   end
+  # end
+
+  resources :tags, only: %i[index], on: :collection, defaults: { format: 'json' } 
 
   namespace :mypage do
     resource :account, only: %i[edit update]

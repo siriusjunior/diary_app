@@ -6,6 +6,19 @@ class UsersController < ApplicationController
       format.html
       format.js
     end
+    @tags = Tag.joins(:tag_links).group(:tag_id).order('count(user_id) desc')
+  end
+
+  def search
+    @users = User.joins(:tag_links).where("tag_links.tag_id" => params[:id]).page(params[:page]).per(5).order(created_at: :desc)
+    @tags = Tag.joins(:tag_links).group(:tag_id).order('count(user_id) desc')
+    @tag = Tag.find(params[:id])
+    # render :indexで@tagsが必要
+    respond_to do |format|
+      format.html { render :index}
+      format.js
+    end
+    # @users = User.joins(:tag_links).where("tag_links.tag_id" => params[:labels])
   end
 
   def new
@@ -27,6 +40,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @thumbnail_diaries = @user.diaries.thumbnail
     @diaries = @user.diaries.recent(3)
+    @tags = @user.tags
   end
 
   def activate
