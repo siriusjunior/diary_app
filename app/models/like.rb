@@ -31,6 +31,9 @@ class Like < ApplicationRecord
   private
 
     def create_activities
-      Activity.create(subject: self, user: diary.user, action_type: :liked_to_own_diary)
+      # いいねがダイアリーユーザーと等しいときは除外
+      if !user = diary.user
+        Activity.create(subject: self, user: diary.user, action_type: :liked_to_own_diary)
+      end
     end
 end
