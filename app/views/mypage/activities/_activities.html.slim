@@ -1,0 +1,3 @@
+- @activities.each do |activity|
+    = render "shared/#{ activity.action_type }", activity: activity
+= paginate @activities, remote: true
