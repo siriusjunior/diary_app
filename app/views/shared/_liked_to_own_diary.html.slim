@@ -6,5 +6,5 @@
     object
         = link_to 'ダイアリー', diary_path(activity.subject.diary)
     | にいいねしました
-    .right
+    .right.text-right
         = l activity.created_at, format: :short

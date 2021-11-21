@@ -27,11 +27,6 @@ Rails.application.routes.draw do
 
   resources :tags, only: %i[index], on: :collection, defaults: { format: 'json' } 
 
-  namespace :mypage do
-    resource :account, only: %i[edit update]
-    resources :activities, only: %i[index]
-  end
-
   patch 'diary_reset', to: 'users#reset_diary_date'
   resources :password_resets, only: %i[new create edit update]
   resources :diaries, shallow: true  do
@@ -48,6 +43,11 @@ Rails.application.routes.draw do
   resources :relationships, only: %i[create destroy]
   resources :activities, only: [] do
     patch :read, on: :member
+  end
+
+  namespace :mypage do
+    resource :account, only: %i[edit update]
+    resources :activities, only: %i[index]
   end
 
   if Rails.env.development?

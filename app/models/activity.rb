@@ -21,6 +21,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Activity < ApplicationRecord
+  include Rails.application.routes.url_helpers
   belongs_to :subject, polymorphic: true
   belongs_to :user
 
@@ -31,14 +32,14 @@ class Activity < ApplicationRecord
 
   def redirect_path
     case action_type.to_sym
-    when :commented_to_own_post
-      post_path(subject.post, anchor: "comment-#{ subject.id }")
-    when :liked_to_own_post
-      post_path(subject.post)
-    when :followed_me
-      user_path(subject.follower)
-    when :liked_to_own_comment
-      user_path(subject.user)
+      when :commented_to_own_diary
+        diary_path(subject.diary, anchor: "comment-#{ subject.id }")
+      when :liked_to_own_diary
+        diary_path(subject.diary)
+      when :followed_me
+        user_path(subject.follower)
+      when :liked_to_own_comment
+        diary_path(subject.comment.diary, anchor: "comment-#{ subject.comment.id }")
     end
   end
 end

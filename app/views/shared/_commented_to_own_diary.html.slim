@@ -9,5 +9,5 @@
     object
         = link_to 'コメント', diary_path(activity.subject.diary, anchor: "comment-#{activity.subject.id}")
     | しました
-    .right
+    .right.text-right
         = l activity.created_at, format: :short
