@@ -33,9 +33,10 @@ class Comment < ApplicationRecord
   private
 
     def create_activities
-      # コメントがダイアリーユーザーと等しいときは除外
-      if !user = diary.user
-        Activity.create(subject: self, user: diary.user, action_type: :commented_to_own_diary)
-      end
+      Activity.create(subject: self, user: diary.user, action_type: :commented_to_own_diary)
+      # 要調整/コメントがダイアリーユーザーと等しいときは除外
+      # if !user = diary.user
+      #   Activity.create(subject: self, user: diary.user, action_type: :commented_to_own_diary)
+      # end
     end
 end
