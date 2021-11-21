@@ -621,6 +621,7 @@ form {
     width: 400px;
     top: 30px;
     .dropdown-item {
+        -webkit-font-smoothing: antialiased;
         padding: .9rem;
         font-size: 12px;
         max-width: 100%;
