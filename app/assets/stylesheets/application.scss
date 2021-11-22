@@ -617,7 +617,24 @@ form {
         }
     }
 }
-
+#header-activities {
+    width: 400px;
+    top: 30px;
+    .dropdown-item {
+        -webkit-font-smoothing: antialiased;
+        padding: .9rem;
+        font-size: 12px;
+        max-width: 100%;
+    }
+    .read {
+        background: #f1f1f1;
+    }
+}
+.navbar-badge {
+    position: absolute;
+    bottom: 15px;
+    left: 13px;
+}
 .w-100{
     width: 100%;
 }

@@ -24,6 +24,18 @@ class Comment < ApplicationRecord
   belongs_to :user
   has_many :comment_likes, dependent: :destroy
   has_many :comment_like_users, through: :comment_likes, source: :user
+  has_one :activity, as: :subject, dependent: :destroy
 
   validates :body, presence: true, length: { maximum: 300 }
+
+  after_create_commit :create_activities
+
+  private
+
+    def create_activities
+      # コメントがダイアリーユーザーと等しいときは除外
+      if user_id != diary.user_id
+        Activity.create(subject: self, user: diary.user, action_type: :commented_to_own_diary)
+      end
+    end
 end

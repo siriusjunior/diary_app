@@ -21,13 +21,13 @@ class CommentsController < ApplicationController
         @comment.update(comment_update_params)
     end
 
-    def show
-        @comment = current_user.comments.find(params[:id])
-        respond_to do |format|
-            format.html
-            format.js
-        end
-    end
+    # def show
+    #     @comment = current_user.comments.find(params[:id])
+    #     respond_to do |format|
+    #         format.html
+    #         format.js
+    #     end
+    # end
 
     def destroy
         @comment = current_user.comments.find(params[:id])

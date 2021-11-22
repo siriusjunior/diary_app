@@ -22,6 +22,18 @@
 class CommentLike < ApplicationRecord
   belongs_to :user
   belongs_to :comment
+  has_one :activity, as: :subject, dependent: :destroy
 
   validates :user_id, uniqueness: { scope: :comment_id }
+
+  after_create_commit :create_activities
+
+  private
+
+    def create_activities
+      # コメントいいねがコメントユーザーと等しいときは除外
+      if user_id != comment.user_id
+        Activity.create(subject: self, user: comment.user, action_type: :liked_to_own_comment)
+      end
+    end
 end

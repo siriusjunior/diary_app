@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   root 'diaries#index'
-  # constraints -> request { request.session[:user_id].present? } do
-  #   #ログイン時のルート
-  #   root 'diaries#index'
-  # end
 
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
@@ -29,17 +25,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
   end
 
-  # resources :tags do
-  #   collection do
-  #     get 'search'
-  #   end
-  # end
-
   resources :tags, only: %i[index], on: :collection, defaults: { format: 'json' } 
-
-  namespace :mypage do
-    resource :account, only: %i[edit update]
-  end
 
   patch 'diary_reset', to: 'users#reset_diary_date'
   resources :password_resets, only: %i[new create edit update]
@@ -55,6 +41,14 @@ Rails.application.routes.draw do
   resources :likes, only: %i[create destroy]
   resources :comment_likes, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
+  resources :activities, only: [] do
+    patch :read, on: :member
+  end
+
+  namespace :mypage do
+    resource :account, only: %i[edit update]
+    resources :activities, only: %i[index]
+  end
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

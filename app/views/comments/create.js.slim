@@ -1,6 +1,8 @@
 - if @comment.errors.present?
+    | $("#error_messages").remove();
     | $('.comments-box').prepend("#{j render('shared/error_messages', object: @comment)}");
 - else
+    | $("#error_messages").remove();
     | $('.comments-box').prepend("#{j render('comments/comment', comment: @comment)}");
     | $('#comment-count').html("#{ @comment.diary.comments.count }件のコメント");
     | $('#comment-edit-form').addClass('d-none').removeClass('d-block');
