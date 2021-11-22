@@ -12,6 +12,10 @@
 #  diary_date                          :integer          default(1), not null
 #  email                               :string(255)      not null
 #  introduction                        :text(65535)
+#  notification_on_comment             :boolean          default(TRUE)
+#  notification_on_comment_like        :boolean          default(TRUE)
+#  notification_on_follow              :boolean          default(TRUE)
+#  notification_on_like                :boolean          default(TRUE)
 #  remember_me_token                   :string(255)
 #  remember_me_token_expires_at        :datetime
 #  reset_password_email_sent_at        :datetime

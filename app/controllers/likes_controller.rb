@@ -3,7 +3,11 @@ class LikesController < ApplicationController
 
     def create
         @diary = Diary.find(params[:diary_id])
-        UserMailer.with(user_from: current_user, user_to: @diary.user, diary: @diary).like_diary.deliver_later if current_user.like(@diary)
+        current_user.like(@diary)
+        # いいねuser_idがダイアリーuser_idと等しいときは除外
+        if  current_user.id != @diary.user_id && @diary.user.notification_on_like?
+            UserMailer.with(user_from: current_user, user_to: @diary.user, diary: @diary).like_diary.deliver_later
+        end
     end
 
     def destroy

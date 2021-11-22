@@ -666,6 +666,9 @@ form {
 .info {
     background-color: #d4f3ff;;
 }
+.smooth {
+    -webkit-font-smoothing: antialiased;
+}
 
 @mixin box_sizing {
     -moz-box-sizing:    border-box;

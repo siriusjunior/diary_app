@@ -12,6 +12,10 @@ ja:
         password_confirmation: パスワード確認
         introduction: プロフィール
         avatar: プロフィール画像
+        notification_on_comment: 'コメントの通知メール'
+        notification_on_like: 'いいねの通知メール'
+        notification_on_follow: 'フォローの通知メール'
+        notification_on_comment_like: 'コメントにいいねの通知メール'
       diary:
         body: ダイアリー本文
         check: チェック

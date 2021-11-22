@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_013148) do
+ActiveRecord::Schema.define(version: 2021_11_22_093509) do
 
   create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "subject_type"
@@ -112,6 +112,10 @@ ActiveRecord::Schema.define(version: 2021_11_20_013148) do
     t.integer "diary_date", default: 1, null: false
     t.string "avatar"
     t.text "introduction"
+    t.boolean "notification_on_comment", default: true
+    t.boolean "notification_on_like", default: true
+    t.boolean "notification_on_follow", default: true
+    t.boolean "notification_on_comment_like", default: true
     t.index ["activation_token"], name: "index_users_on_activation_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token"
