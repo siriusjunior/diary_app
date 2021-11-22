@@ -18,4 +18,31 @@ class UserMailer < ApplicationMailer
     mail(to: user.email, subject: "パスワードの再登録を行なってください")
   end
 
+  def comment_diary
+    @user_from = params[:user_from]
+    @user_to = params[:user_to]
+    @comment = params[:comment]
+    mail(to: @user_to.email, subject: "#{@user_from.username}があなたのダイアリーにコメントしました")
+  end
+  
+  def like_diary
+    @user_from = params[:user_from]
+    @user_to = params[:user_to]
+    @diary = params[:diary]
+    mail(to: @user_to.email, subject: "#{@user_from.username}があなたのダイアリーにいいねしました")
+  end
+  
+  def follow
+    @user_from = params[:user_from]
+    @user_to = params[:user_to]
+    mail(to: @user_to.email, subject: "#{@user_from.username}があなたをフォローしました")
+  end
+
+  def like_comment
+    @user_from = params[:user_from]
+    @user_to = params[:user_to]
+    @comment = params[:comment]
+    mail(to: @user_to.email, subject: "#{@user_from.username}があなたのコメントにいいねしました")
+  end
+
 end

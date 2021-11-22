@@ -1,0 +1,3 @@
+h2 = "#{@user_to.username}さん"
+p = "#{@user_from.username}さんがあなたのダイアリーにコメントしました。"
+= link_to "確認する", diary_url(@comment.diary, { anchor: "comment-#{@comment.id}" })
