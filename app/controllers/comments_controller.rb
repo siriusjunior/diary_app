@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
 
     def create
         @comment = current_user.comments.build(comment_params)
-        @comment.save
+        UserMailer.with(user_from: current_user, user_to: @comment.diary.user, comment: @comment).comment_diary.deliver_later if @comment.save
     end
 
     def edit
