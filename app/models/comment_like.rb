@@ -31,10 +31,9 @@ class CommentLike < ApplicationRecord
   private
 
     def create_activities
-      Activity.create(subject: self, user: comment.user, action_type: :liked_to_own_comment)
-      # 要調整/コメントいいねがコメントユーザーと等しいときは除外
-      # if !user = comment.user
-      #   Activity.create(subject: self, user: comment.user, action_type: :liked_to_own_comment)
-      # end
+      # コメントいいねがコメントユーザーと等しいときは除外
+      if user_id != comment.user_id
+        Activity.create(subject: self, user: comment.user, action_type: :liked_to_own_comment)
+      end
     end
 end
