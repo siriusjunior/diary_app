@@ -1,2 +1,16 @@
-h1 Mypage::NotificationSettings#edit
-p Find me in app/views/mypage/notification_settings/edit.html.slim
+= form_with model: @user, url: mypage_notification_setting_path, method: :patch, local: true do |f|
+    = render 'shared/error_messages', object: f.object
+    .form-group
+        = f.check_box :notification_on_comment, class: 'mr-2'
+        = f.label :notification_on_comment, class: 'black smooth'
+    .form-group
+        = f.check_box :notification_on_like, class: 'mr-2'
+        = f.label :notification_on_like, class: 'black smooth'
+    .form-group
+        = f.check_box :notification_on_follow, class: 'mr-2'
+        = f.label :notification_on_follow, class: 'black smooth'
+    .form-group.mb-4
+        = f.check_box :notification_on_comment_like, class: 'mr-2'
+        = f.label :notification_on_comment_like, class: 'black smooth'
+    .form-group.w-75.right.mb-3.text-right
+        = f.submit class: 'btn btn-primary btn-raised'
