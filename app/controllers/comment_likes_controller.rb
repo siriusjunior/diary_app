@@ -3,7 +3,7 @@ class CommentLikesController < ApplicationController
 
     def create
         @comment = Comment.find(params[:comment_id])
-        UserMailer.with(user_from: current_user, user_to: @comment.user, comment: @comment).like_comment.deliver_later if current_user.comment_like(@comment)
+        UserMailer.with(user_from: current_user, user_to: @comment.user, comment: @comment).like_comment.deliver_later if current_user.comment_like(@comment) && @comment.user.notification_on_comment_like?
     end
 
     def destroy
