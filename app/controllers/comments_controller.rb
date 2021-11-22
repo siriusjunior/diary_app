@@ -5,7 +5,11 @@ class CommentsController < ApplicationController
 
     def create
         @comment = current_user.comments.build(comment_params)
-        UserMailer.with(user_from: current_user, user_to: @comment.diary.user, comment: @comment).comment_diary.deliver_later if @comment.save && @comment.diary.user.notification_on_comment?
+        @comment.save
+        # コメントuser_idがダイアリーuser_idと等しいときは除外
+        if  current_user.id != @comment.diary.user_id && @comment.diary.user.notification_on_comment?
+            UserMailer.with(user_from: current_user, user_to: @comment.diary.user, comment: @comment).comment_diary.deliver_later
+        end
     end
 
     def edit
