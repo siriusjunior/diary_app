@@ -44,6 +44,7 @@ gem 'rubocop', require:false
 gem 'rubocop-rails', require:false
 gem 'redis-rails'
 gem 'letter_opener'
+gem 'config'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
