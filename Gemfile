@@ -46,6 +46,7 @@ gem 'redis-rails'
 gem 'letter_opener'
 gem 'config'
 gem 'sidekiq'
+gem 'sinatra'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
