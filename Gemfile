@@ -47,6 +47,7 @@ gem 'letter_opener'
 gem 'config'
 gem 'sidekiq'
 gem 'sinatra'
+gem 'meta-tags'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
