@@ -1,3 +1,8 @@
+- set_meta_tags title: 'ダイアリー詳細ページ', description: @diary.body
+- if @diary.image.present?
+    - set_meta_tags og: { image: "#{ request.base_url}#{ @diary.image.url }"}
+- else
+    - set_meta_tags og: { image: "#{ image_url(Settings.meta.og.image_path) }"}
 .card.mb-5.diary.diary_center.mt-5
     .card-header.d-flex.justify-content-between.align-items-center
         .diary__profile
