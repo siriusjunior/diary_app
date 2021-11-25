@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     collection do
       get :search
     end
+    # collection do
+    #   get :order
+    # end
     resources :comments
     member do
       patch :reset_image

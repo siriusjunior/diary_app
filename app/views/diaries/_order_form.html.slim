@@ -1,0 +1,6 @@
+= form_with url: order_diaries_path, method: :get, remote: true do |f|
+    = f.select :term, [ ['更新順', 'new'],
+                                ['投稿の古い順', 'old'],
+                                ['いいねの多い順', 'likes'],
+                                ['いいねの少ない順', 'dislikes'],]
+    = f.submit

@@ -1,6 +1,7 @@
 class DiariesController < ApplicationController
   include SessionsHelper
   before_action :require_login, only: %i[new create update destroy]
+  before_action :check_diary_post, only: %i[new create]
   def index
     @diaries = if current_user
       if current_user.feed.any?
@@ -72,9 +73,16 @@ class DiariesController < ApplicationController
       # flash.now[:info] = 'ダイアリーを検索しました'
     else
       redirect_to request.referer, danger: '検索ワードを入力してください'
-      # redirect_to users_path, danger: '検索ワードを入力してください'
     end
   end
+
+  # def order
+  #   @diaries = Diary.sort(params[:term]).page(params[:page]).per(5)
+  #   respond_to do |format| 
+  #     format.html { render :index }
+  #     format.js
+  #   end
+  # end
 
   private
 
@@ -84,5 +92,11 @@ class DiariesController < ApplicationController
 
     def search_diary_params
       params.fetch(:q, {}).permit(:body)
+    end
+
+    def check_diary_post
+      if current_user.cannot_post?
+        redirect_to diaries_path, danger: "ダイアリーの投稿は１日１回までです"
+      end
     end
 end

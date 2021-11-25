@@ -145,7 +145,25 @@ class User < ApplicationRecord
       end
     end
   end
+
+  def latest_diary
+    diaries.order(created_at: :desc).limit(1)
+  end
   
+  def cannot_post?
+    latest_diary = diaries.order(created_at: :desc).limit(1)
+    #現在時刻と最終投稿の時刻の差分が1日を経過していなかったらtrue
+    (Time.zone.now - latest_diary.first.created_at) < 1.day
+  end
 
-
+  def self.order_by_diaries
+    left_joins(:diaries)
+      .select("users.*, COUNT(users.id) AS number_of_users")
+      .group("diaries.user_id")
+      .order("number_of_users DESC")
+    # joins(:diaries)
+    #   .select("users.*, COUNT(users.id) AS number_of_users")
+    #   .group("diaries.user_id")
+    #   .order("number_of_users DESC")
+  end
 end
