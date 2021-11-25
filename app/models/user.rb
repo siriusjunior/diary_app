@@ -156,4 +156,14 @@ class User < ApplicationRecord
     (Time.zone.now - latest_diary.first.created_at) < 1.day
   end
 
+  def self.order_by_diaries
+    left_joins(:diaries)
+      .select("users.*, COUNT(users.id) AS number_of_users")
+      .group("diaries.user_id")
+      .order("number_of_users DESC")
+    # joins(:diaries)
+    #   .select("users.*, COUNT(users.id) AS number_of_users")
+    #   .group("diaries.user_id")
+    #   .order("number_of_users DESC")
+  end
 end

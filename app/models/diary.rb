@@ -47,5 +47,25 @@ class Diary < ApplicationRecord
   def register_date_sequence
     self.date_sequence = user_diary_date
   end
+
+  # def self.sort(term)
+  #   case term
+  #     when 'new'
+  #       return all.order(created_at: :DESC)
+  #     when 'old'
+  #       return all.order(created_at: :ASC)
+  #     when 'likes'
+  #       self.order_by_likes_count('desc')
+  #     when 'dislikes'
+  #       self.order_by_likes_count('asc')
+  #   end
+  # end
+
+  # def self.order_by_likes_count(order)
+  #   select("*, COUNT(diaries.id) AS likes_count") 
+  #     .left_joins(:likes)
+  #     .group("diaries.id")
+  #     .order(:likes_count => order)
+  # end
   
 end

@@ -1,5 +1,7 @@
 - set_meta_tags title: '最新ダイアリーページ'
 .wrapper.py-5
     h2.text-center.mb-5 みんなの最新ダイアリー
+    / #diary-order
+    /     = render 'order_form'
     #diaries
         = render 'diaries'
