@@ -22,9 +22,13 @@ module DiaryApp
       g.assets  false # CSS, JSが自動生成されない
       g.test_framework  false # Minitestが自動生成されない
       g.skip_routes  true # ルーティングが自動生成されない
+      g.test_framework :rspec,
+        view_specs: false,
+        helper_specs: false,
+        controller_specs: false,
+        routing_specs: false,
+        request_specs: false
     end
-
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
