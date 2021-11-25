@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Diary, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'バリデーション' do
+    it '本文は必須であること' do
+      diary = build(:diary, body: nil)
+      diary.valid?
+      expect(diary.errors[:body]).to include('を入力してください')
+    end
+  end
 end
