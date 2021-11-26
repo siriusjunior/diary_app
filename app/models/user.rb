@@ -115,11 +115,11 @@ class User < ApplicationRecord
   def add_tag!(labels)
     # 文字列labelsが渡される(ex:labels=["A","B","C","F","G"], current_labels=["A","B","C","D","E"])
     current_labels = self.tags.pluck(:name) unless self.tags.nil?
-    # 登録されているラベルのうち不要lable(ex:old_labels=["D","E"])
+    # 登録されているタグのうち不要タグ(ex:old_labels=["D","E"])
     old_labels = current_labels - labels
-    # すでに登録されているラベルを除いた新しい登録ラベル(ex:new_labels=["F","G"])
+    # すでに登録されているタグを除いた新しい登録タグ(ex:new_labels=["F","G"])
     new_labels = labels - current_labels
-    # 新規ラベルを登録
+    # 新規タグを登録
     self.class.transaction do
       new_labels.each do |new_label|
         tag = Tag.find_by(name: new_label)
@@ -131,7 +131,7 @@ class User < ApplicationRecord
         end
       end
     end
-    # 登録外のラベルを削除
+    # 登録外のタグを削除
     self.class.transaction do
       old_labels.each do |old_label|
         if tag = Tag.find_by(name: old_label)
@@ -156,14 +156,14 @@ class User < ApplicationRecord
     (Time.zone.now - latest_diary.first.created_at) < 1.day
   end
 
-  def self.order_by_diaries
-    left_joins(:diaries)
-      .select("users.*, COUNT(users.id) AS number_of_users")
-      .group("diaries.user_id")
-      .order("number_of_users DESC")
-    # joins(:diaries)
-    #   .select("users.*, COUNT(users.id) AS number_of_users")
-    #   .group("diaries.user_id")
-    #   .order("number_of_users DESC")
-  end
+  # def self.order_by_diaries
+  #   left_joins(:diaries)
+  #     .select("users.*, COUNT(users.id) AS number_of_users")
+  #     .group("diaries.user_id")
+  #     .order("number_of_users DESC")
+  #   # joins(:diaries)
+  #   #   .select("users.*, COUNT(users.id) AS number_of_users")
+  #   #   .group("diaries.user_id")
+  #   #   .order("number_of_users DESC")
+  # end
 end
