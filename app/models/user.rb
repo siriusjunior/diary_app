@@ -122,7 +122,8 @@ class User < ApplicationRecord
     # 新規タグを登録
     self.class.transaction do
       new_labels.each do |new_label|
-        tag = Tag.find_by(name: new_label)
+        break if new_label.blank?
+        tag = Tag.find_by(name: new_label) 
         tag ||= Tag.create!(name: new_label)
         # ユーザーのtag_linkを必要に応じ生成
         unless tag_links.where(tag_id: tag.id).exists?
@@ -151,9 +152,13 @@ class User < ApplicationRecord
   end
   
   def cannot_post?
-    latest_diary = diaries.order(created_at: :desc).limit(1)
-    #現在時刻と最終投稿の時刻の差分が1日を経過していなかったらtrue
-    (Time.zone.now - latest_diary.first.created_at) < 1.day
+    if diaries.any?
+      latest_diary = diaries.order(created_at: :desc).limit(1)
+      #現在時刻と最終投稿の時刻の差分が1日を経過していなかったらtrue
+      (Time.zone.now - latest_diary.first.created_at) < 1.day
+    else
+      return false
+    end
   end
 
   # def self.order_by_diaries
