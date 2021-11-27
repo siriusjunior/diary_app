@@ -33,13 +33,12 @@ RSpec.describe User, type: :model do
     describe 'own?' do
       context '自分のオブジェクトの場合' do
         it 'trueを返す' do
-          expect(user_a).own?(diary_by_user_a).to be true
+          expect(user_a.own?(diary_by_user_a)).to be true
         end
       end
-
       context '自分のオブジェクトではない場合' do
         it 'falseを返す' do
-          expect(user_a).own?(diary_by_user_b).to be false
+          expect(user_a.own?(diary_by_user_b)).to be false
         end
       end
     end
@@ -50,7 +49,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe 'unlike'
+    describe 'unlike' do
       it 'いいねを解除できること' do
         user_a.like(diary_by_user_b)
         expect { user_a.unlike(diary_by_user_b) }.to change { Like.count }.by(-1)
@@ -61,26 +60,26 @@ RSpec.describe User, type: :model do
       context 'いいねしている場合' do
         it 'trueを返す' do
           user_a.like(diary_by_user_b)
-          expect { user_a.like?(diary_by_user_b) }.to be true
+          expect(user_a.like?(diary_by_user_b)).to be true
         end
       end
       context 'いいねしていない場合' do
         it 'falseを返す' do
-          expect { user_a.like?(diary_by_user_b) }.to be false
+          expect(user_a.like?(diary_by_user_b)).to be false
         end
       end
     end
 
     describe 'comment_like' do
       it 'コメントいいねできること' do
-        expect { user_a.comment_like(ccomment_by_user_b) }.to change { CommentLike.count }.by(1)
+        expect{ user_a.comment_like(comment_by_user_b) }.to change { CommentLike.count }.by(1)
       end
     end
 
-    describe 'comment_unlike'
+    describe 'comment_unlike' do
       it 'コメントいいねを解除できること' do
         user_a.comment_like(comment_by_user_b)
-        expect { user_a.comment_unlike(comment_by_user_b) }.to change { CommentLike.count }.by(-1)
+        expect{ user_a.comment_unlike(comment_by_user_b) }.to change { CommentLike.count }.by(-1)
       end
     end
 
@@ -88,40 +87,40 @@ RSpec.describe User, type: :model do
       context 'コメントいいねしている場合' do
         it 'trueを返す' do
           user_a.comment_like(comment_by_user_b)
-          expect { user_a.comment_like?(comment_by_user_b) }.to be true
+          expect(user_a.comment_like?(comment_by_user_b)).to be true
         end
       end
       context 'コメントいいねしていない場合' do
         it 'falseを返す' do
-          expect { user_a.comment_like?(comment_by_user_b) }.to be false
+          expect(user_a.comment_like?(comment_by_user_b)).to be false
         end
       end
     end
 
-    describe 'like?' do
-      context 'いいねしている場合' do
+    describe 'comment_like?' do
+      context 'コメントいいねしている場合' do
         it 'trueを返す' do
-          user_a.like(diary_by_user_b)
-          expect { user_a.like?(diary_by_user_b) }.to be true
+          user_a.comment_like(comment_by_user_b)
+          expect(user_a.comment_like?(comment_by_user_b)).to be true
         end
       end
-      context 'いいねしていない場合' do
+      context 'コメントいいねしていない場合' do
         it 'falseを返す' do
-          expect { user_a.like?(diary_by_user_b) }.to be false
+          expect(user_a.comment_like?(comment_by_user_b)).to be false
         end
       end
     end
 
     describe 'follow' do
       it 'フォローできること' do
-        expect { user_a.follow(user_b) }.to cahge { Relationship.count }.by(1)
+        expect { user_a.follow(user_b) }.to change { Relationship.count }.by(1)
       end
     end
     
     describe 'unfollow' do
       it 'フォローが解除できること' do
         user_a.follow(user_b)
-        expect { user_a.unfollow(user_b) }.to cahge { Relationship.count }.by(-1)
+        expect { user_a.unfollow(user_b) }.to change { Relationship.count }.by(-1)
       end
     end
     
@@ -129,12 +128,12 @@ RSpec.describe User, type: :model do
       context 'フォローしている場合' do
         it 'trueを返す' do
           user_a.follow(user_b)
-          expect { user_a.following?(user_b) }.to be true
+          expect(user_a.following?(user_b)).to be true
         end
       end
       context 'フォローしていない場合' do
         it 'falseを返す' do
-          expect { user_a.following?(user_b) }.to be false
+          expect(user_a.following?(user_b)).to be false
         end
       end
     end
@@ -148,7 +147,7 @@ RSpec.describe User, type: :model do
       it { is_expected.to include diary_by_user_b }
       it { is_expected.not_to include diary_by_user_c }
     end
-
+    
     describe 'cannot_post?' do
       context  '1日以内に投稿した場合' do
         it 'trueを返す' do
@@ -157,18 +156,20 @@ RSpec.describe User, type: :model do
         end
       end
       context  '1日以内に投稿していない場合' do
+        let(:can_post_user) { create(:user) }
         it 'falseを返す' do
-          expect(user_a.cannot_post?).to be false
+          expect(can_post_user.cannot_post?).to be false
         end
       end
     end
 
     describe 'add_tag!' do
       labels = ["料理", "温泉", "音楽"]
-      
+      no_label = [""]
+
       context 'タグが存在しない場合' do
         it 'タグとタグリンクが作成されること' do
-          expect { user_a.add_tag!(labels) }.to cahge { Tag.count }.by(3).
+          expect { user_a.add_tag!(labels) }.to change { Tag.count }.by(3).
             and change { TagLink.count }.by(3)
         end
       end
@@ -176,13 +177,13 @@ RSpec.describe User, type: :model do
       context 'タグが存在する場合' do
         it '登録タグがない場合は、タグとタグリンクが削除されること' do
           user_a.add_tag!(labels)
-          expect { user_a.add_tag!() }.to cahge { Tag.count }.by(-3).
-            and change { TagLink.count }.by(-3)
+          expect { user_a.add_tag!(no_label) }.to change { Tag.count }.by(-3).
+            and change { TagLink.count }.by(-3) 
         end
         it '登録タグがない、かつ他ユーザーがタグを登録中の場合は、タグが残り、タグリンクだけが削除されること' do
           user_a.add_tag!(labels)
           user_b.add_tag!(labels)
-          expect { user_a.add_tag!() }.to cahge { Tag.count }.by(0).
+          expect { user_a.add_tag!(no_label) }.to change { Tag.count }.by(0).
             and change { TagLink.count }.by(-3)
         end
       end
