@@ -43,7 +43,7 @@ RSpec.describe 'ユーザー登録', type: :system do
         it 'フォローができること' do
             visit users_path
             expect {
-                within "#follow-area-#{other_user.id}" do
+                within "#follow-area-#{ other_user.id }" do
                     click_link 'フォローする'
                     expect(page).to have_content 'フォロー中'
                 end
@@ -54,7 +54,7 @@ RSpec.describe 'ユーザー登録', type: :system do
             login_user.follow(other_user)
             visit users_path
             expect {
-                within "#follow-area-#{other_user.id}" do
+                within "#follow-area-#{ other_user.id }" do
                     click_link 'フォロー中'
                     expect(page).to have_content 'フォローする'
                 end

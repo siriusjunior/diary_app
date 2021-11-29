@@ -1,7 +1,7 @@
 .comment-post.d-flex.mb-0.flex-column.justify-content-between
     .comment-post__upper.d-flex.justify-content-start.align-items-center.mb-1
         = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-2'
-        div.comment-post__before_login
+        div.comment-post__before_login#before_login
             span いいね・コメントするには
             = link_to 'ログイン', controller: 'user_sessions', action: 'store_location'
             |が必要です

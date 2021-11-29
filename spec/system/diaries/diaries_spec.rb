@@ -45,9 +45,11 @@ RSpec.describe 'ユーザー登録', type: :system do
     end
 
     describe 'ダイアリー投稿' do
+        let!(:user) { create(:user) }
+
         context '投稿内容が有効な場合' do
             it 'ダイアリーが投稿できること' do
-                login_as user_2
+                login_as user
                 visit new_diary_path
                 within '#post_form' do
                     attach_file 'アップロード画像(任意)', Rails.root.join('spec','fixtures','dummy.png')
@@ -58,9 +60,10 @@ RSpec.describe 'ユーザー登録', type: :system do
                 expect(page).to have_content 'テスト投稿のダミーテキスト'
             end
         end
+
         context '投稿内容が無効な場合' do
             it 'ダイアリーが投稿できないこと' do
-                login_as user_2
+                login_as user
                 visit new_diary_path
                 within '#post_form' do
                     fill_in 'ダイアリー本文', with: ''
@@ -70,7 +73,6 @@ RSpec.describe 'ユーザー登録', type: :system do
                 expect(page).to have_content 'ダイアリー本文を入力してください'
             end
         end
-        
     end
 
     describe 'ダイアリー更新' do
@@ -111,7 +113,7 @@ RSpec.describe 'ユーザー登録', type: :system do
             it '投稿が更新できること' do
                 visit edit_diary_path(diary_by_user)
                 within '#edit_form' do
-                    attach_file 'アップロード画像(任意)', Rails.root.join('spec','fixtures','dummy.png')
+                    attach_file 'アップロード画像', Rails.root.join('spec','fixtures','dummy.png')
                     fill_in 'ダイアリー本文', with: 'テスト編集のダミーテキスト'
                     page.accept_confirm { click_button '保存する' }
                 end
@@ -153,18 +155,39 @@ RSpec.describe 'ユーザー登録', type: :system do
 
     describe 'コメント投稿' do
         let!(:user) { create(:user) }
+        let!(:user2) { create(:user) }
         let!(:diary_by_user) { create(:diary, user: user) }
-        before do
-            login_as user
-        end
-        
-        it 'コメントを投稿できること' do
-            visit diary_path(diary_by_user)
-            within '#comment_body' do
-                fill_in :body, with: 'テスト投稿のダミーコメント'
-                click_button 'コメント'
+        context 'ログインしている場合' do
+            before do
+                login_as user
             end
-            expect(page).to have_content 'テスト投稿のダミーコメント'
+            it 'コメントを投稿できること' do
+                visit diary_path(diary_by_user)
+                find('#comment-post__form').click
+                fill_in "comment-post__form", with: 'テスト投稿のダミーコメント'
+                click_button 'コメント'
+                expect(page).to have_content 'テスト投稿のダミーコメント'
+            end
+        end
+        context 'ログインしていない場合' do
+            it 'コメントフォームにログインリンクが表示されていること' do
+                visit diary_path(diary_by_user)
+                expect(page).to have_content 'いいね・コメントするにはログインが必要です'
+                expect(page).to have_link 'ログイン'
+            end
+            it 'コメントフォームのログインリンクからログインして当該ダイアリー詳細に戻ること' do
+                visit diary_path(diary_by_user)
+                within "#before_login" do
+                    click_link('ログイン')
+                end
+                expect(page).to have_content 'こちらからログインしてください'
+                fill_in 'メールアドレス', with: user2.email
+                fill_in 'パスワード', with: '12345678'
+                click_button 'ログイン'
+                expect(page).to have_content 'ログインしました'
+                expect(current_path).to eq diary_path(diary_by_user)
+                expect(page).to have_css '.comment-post__input'
+            end
         end
     end
 
@@ -178,7 +201,7 @@ RSpec.describe 'ユーザー登録', type: :system do
         end
         it '自分のコメントに編集ボタンが表示されること' do
             visit diary_path(diary)
-            within "#comment-#{comment_by_user.id}" do
+            within "#comment-#{ comment_by_user.id }" do
                 expect(page).to have_css '.comment-edit-button'
                 expect(page).to have_css '.comment-delete-button'
             end
@@ -186,7 +209,7 @@ RSpec.describe 'ユーザー登録', type: :system do
         
         it '自分以外のコメントに編集ボタンが表示されないこと' do
             visit diary_path(diary)
-            within "#comment-#{comment_by_others.id}" do
+            within "#comment-#{ comment_by_others.id }" do
                 expect(page).not_to have_css '.comment-edit-button'
                 expect(page).not_to have_css '.comment-delete-button'
             end
@@ -202,49 +225,70 @@ RSpec.describe 'ユーザー登録', type: :system do
         end
         it 'コメントが削除できること' do
             visit diary_path(diary)
-            within "#comment-#{comment_by_user.id}" do
+            within "#comment-#{ comment_by_user.id }" do
                 page.accept_confirm { find('.comment-delete-button').click }
             end
             expect(page).not_to have_content comment_by_user.body
         end
     end
 
+    describe 'コメントいいね' do
+        let!(:user) { create(:user) }
+        let!(:diary) { create(:diary) }
+        let!(:comment) { create(:comment, diary: diary) }
+        before do
+            login_as user
+        end
 
-
-
-
-
-
-
-
-
-
-
+        it 'コメントいいねができるとともにいいね数が反映されること' do
+            visit diary_path(diary) 
+            expect {
+                within "#comment-#{ comment.id }" do
+                    find('.comment-like-button').click
+                    expect(page).to have_content "#{ comment.comment_likes.count }"
+                    expect(page).to have_css '.comment-unlike-button'
+                end
+            }.to change(user.like_comments, :count).by(1)
+        end
+        
+        it 'コメントいいねの取り消しができるとともにいいね数が反映されること' do
+            user.comment_like(comment)
+            visit diary_path(diary) 
+            expect {
+                within "#comment-#{ comment.id }" do
+                    find('.comment-unlike-button').click
+                    expect(page).to have_content "#{ comment.comment_likes.count }"
+                    expect(page).to have_css '.comment-like-button'
+                end
+            }.to change(user.like_comments, :count).by(-1)
+        end
+    end
 
     describe 'いいね' do
         let!(:user) { create(:user) }
         let!(:diary) { create(:diary) }
         before do
             login_as user
-            user.follow(diary.user)
         end
 
-        it 'ダイアリーにいいねができること' do
+        it 'ダイアリーにいいねができるとともにいいね数が反映されること' do
             visit diary_path(diary) 
             expect {
-                within "#diary-#{diary.id}" do
-                    find('.like_button').click
+                within "#like_area-#{ diary.id }" do
+                    find('.like-button').click
+                    expect(page).to have_content "#{ diary.likes.count }"
                     expect(page).to have_css '.unlike-button'
                 end
             }.to change(user.like_diaries, :count).by(1)
         end
         
-        it 'ダイアリーにいいねの取り消しができること' do
+        it 'ダイアリーにいいねの取り消しができるとともにいいね数が反映されること' do
             user.like(diary)
             visit diary_path(diary) 
             expect {
-                within "#diary-#{diary.id}" do
-                    find('.unlike_button').click
+                within "#like_area-#{ diary.id }" do
+                    find('.unlike-button').click
+                    expect(page).to have_content "#{ diary.likes.count }"
                     expect(page).to have_css '.like-button'
                 end
             }.to change(user.like_diaries, :count).by(-1)
