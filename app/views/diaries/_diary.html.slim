@@ -1,4 +1,4 @@
-= link_to(diary_path(diary), id: "diary-#{diary.id}", class: 'card mb-4 diary diary_center diary__link') do
+= link_to(diary_path(diary), id: "diary-#{ diary.id }", class: 'card mb-4 diary diary_center diary__link') do
     .card-header.d-flex.justify-content-between.align-items-center
         .diary__profile
             = image_tag diary.user.avatar.url, size: '40x40', class: 'rounded-circle mr-2'

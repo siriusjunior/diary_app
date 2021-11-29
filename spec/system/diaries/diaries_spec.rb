@@ -176,14 +176,17 @@ RSpec.describe 'ユーザー登録', type: :system do
                 fill_in "comment-post__form", with: 'テスト投稿のダミーコメント'
                 click_button 'コメント'
                 expect(page).to have_content 'テスト投稿のダミーコメント'
+                expect(page).to have_content "#{diary_by_user.comments.count}件のコメント"
             end
         end
+
         context 'ログインしていない場合' do
             it 'コメントフォームにログインリンクが表示されていること' do
                 visit diary_path(diary_by_user)
                 expect(page).to have_content 'いいね・コメントするにはログインが必要です'
                 expect(page).to have_link 'ログイン'
             end
+            
             it 'コメントフォームのログインリンクからログインして当該ダイアリー詳細に戻ること' do
                 visit diary_path(diary_by_user)
                 within "#before_login" do
@@ -324,5 +327,23 @@ RSpec.describe 'ユーザー登録', type: :system do
                 expect(page).not_to have_css '.like-button'
             end
         end
+    end
+
+    describe '画像リセット' do
+        let!(:user) { create(:user) }
+        let!(:diary) { create(:diary, user: user) }
+        before do
+            login_as user
+        end
+
+        it 'ダイアリー編集ページで画像リセットができること' do
+            visit edit_diary_path(diary)
+            within '#edit_form' do
+                expect(page).to have_css '.preview_valid'
+                page.accept_confirm { click_link('画像をリセット') }
+                expect(page).not_to have_css '.preview_valid'
+            end
+        end
+
     end
 end
