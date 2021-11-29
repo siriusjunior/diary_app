@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-Rspec.describe 'ユーザー登録', type: :system do
+RSpec.describe 'ユーザー登録', type: :system do
     
     describe 'ダイアリー一覧' do
         let!(:user) { create(:user) }

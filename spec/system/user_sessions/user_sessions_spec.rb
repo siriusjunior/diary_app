@@ -31,9 +31,11 @@ RSpec.describe 'ログイン・ログアウト', type: :system do
             login
         end
         it 'ログアウトできること' do
-            click_on('ログアウト')
-            expect(current_path).to eq diaries_path
+            page.accept_confirm do
+                click_on('ログアウト')
+            end
             expect(page).to have_content 'ログアウトしました'
+            expect(current_path).to eq root_path
         end
     end
     

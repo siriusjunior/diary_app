@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-Rspec.describe 'ユーザー登録', type: :system do
+RSpec.describe 'ユーザー登録', type: :system do
     
     describe 'ユーザー登録' do
         context '入力情報が正しい場合' do
@@ -60,10 +60,5 @@ Rspec.describe 'ユーザー登録', type: :system do
                 end
             }.to change(login_user.following, :count).by(-1)
         end
-
-
     end
-
-
-
 end
