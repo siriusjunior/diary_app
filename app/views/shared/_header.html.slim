@@ -20,7 +20,7 @@ header.navbar.navbar-expand-lg.navbar-light.header.header__bg
             object.mr-4
                 = link_to edit_mypage_account_path do
                     = icon 'fa', 'id-card', class: 'fa-lg header__fa'
-            object.mr-5
+            object.mr-5#new_diary_icon
                 = link_to new_diary_path do
                     = icon 'fa', 'edit', class: 'fa-lg header__fa'
             / = link_to '投稿する', new_diary_path, class: 'nav-link header-btn header-btn_mg-r'

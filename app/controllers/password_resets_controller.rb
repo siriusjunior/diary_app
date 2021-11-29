@@ -10,7 +10,7 @@ class PasswordResetsController < ApplicationController
     else
       return redirect_to(new_password_reset_path, danger: "このメールアドレスは登録されていません")
     end
-    return redirect_to(root_path, info: "パスワードリセットのメールを送信しました、メールをご確認ください")
+    return redirect_to(root_path, info: "パスワードリセットメールを送信しました、メールをご確認ください")
   end
 
   # editビューから新規パスワードを登録
@@ -34,7 +34,7 @@ class PasswordResetsController < ApplicationController
     if @user.change_password(params[:user][:password])
       redirect_to(root_path, success: 'パスワードの変更が完了しました')
     else
-      flash.now[:danger] = 'パスワードの変更ができませんでした'
+      flash.now[:danger] = 'パスワード変更に失敗しました'
       render :edit
     end
   end

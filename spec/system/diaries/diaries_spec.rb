@@ -73,6 +73,15 @@ RSpec.describe 'ユーザー登録', type: :system do
                 expect(page).to have_content 'ダイアリー本文を入力してください'
             end
         end
+
+        context '1日以内に投稿がされている場合' do
+            let!(:diary_by_user) { create(:diary, user: user)}
+            it '2度目の投稿ができないこと' do
+                login_as user
+                find('#new_diary_icon').click
+                expect(page).to have_content 'ダイアリーの投稿は１日１回までです'
+            end
+        end
     end
 
     describe 'ダイアリー更新' do
