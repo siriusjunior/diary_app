@@ -11,10 +11,10 @@ div id="comment-#{comment.id}"
                 = comment.body
         - if current_user&.own?(comment)
             div.d-flex.justify-content-between.comment__icons
-                    object
+                    object.comment-delete-button
                         = link_to comment_path(comment), method: :delete, data: { confirm: 'コメントを削除しますか？' }, remote: true  do
                             = icon 'far', 'trash-alt', class: 'fa-md'
-                    object.ml-3
+                    object.ml-3.comment-edit-button
                         = link_to edit_comment_path(comment), remote: true do
                             = icon 'far', 'edit', class: 'fa-md' 
     div.like-comment.d-flex.align-items-center

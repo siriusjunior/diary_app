@@ -40,8 +40,9 @@ class DiariesController < ApplicationController
   def update
     @diary = current_user.diaries.find(params[:id])
     if @diary.update(diary_params)
-      redirect_to diary_path(@diary)
+      redirect_to diary_path(@diary), success: "ダイアリーの変更を保存しました"
     else
+      flash.now[:danger] = 'ダイアリーの保存に失敗しました'
       render :edit
     end
   end

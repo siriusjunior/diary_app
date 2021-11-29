@@ -1,4 +1,4 @@
-= link_to like_path(current_user.likes.find_by(diary_id: diary.id)), method: :delete, remote: true do
+= link_to like_path(current_user.likes.find_by(diary_id: diary.id)), class: 'unlike-button', method: :delete, remote: true do
     = icon 'fa', 'heart', class: 'fa-lg like-icon'
 span.like-icon.ml-1
     = diary.likes.count
