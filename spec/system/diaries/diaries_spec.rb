@@ -236,62 +236,84 @@ RSpec.describe 'ユーザー登録', type: :system do
         let!(:user) { create(:user) }
         let!(:diary) { create(:diary) }
         let!(:comment) { create(:comment, diary: diary) }
-        before do
-            login_as user
+        context 'ログインユーザーの場合' do
+            before do
+                login_as user
+            end
+            
+            it 'コメントいいねができるとともにいいね数が反映されること' do
+                visit diary_path(diary) 
+                expect {
+                    within "#comment-#{ comment.id }" do
+                        find('.comment-like-button').click
+                        expect(page).to have_content "#{ comment.comment_likes.count }"
+                        expect(page).to have_css '.comment-unlike-button'
+                    end
+                }.to change(user.like_comments, :count).by(1)
+            end
+            
+            it 'コメントいいねの取り消しができるとともにいいね数が反映されること' do
+                user.comment_like(comment)
+                visit diary_path(diary) 
+                expect {
+                    within "#comment-#{ comment.id }" do
+                        find('.comment-unlike-button').click
+                        expect(page).to have_content "#{ comment.comment_likes.count }"
+                        expect(page).to have_css '.comment-like-button'
+                    end
+                }.to change(user.like_comments, :count).by(-1)
+            end
         end
 
-        it 'コメントいいねができるとともにいいね数が反映されること' do
-            visit diary_path(diary) 
-            expect {
+        context 'ログインユーザーではない場合' do
+            it 'コメントにコメントいいねフォームがないこと' do
+                visit diary_path(diary) 
                 within "#comment-#{ comment.id }" do
-                    find('.comment-like-button').click
-                    expect(page).to have_content "#{ comment.comment_likes.count }"
-                    expect(page).to have_css '.comment-unlike-button'
+                    expect(page).not_to have_css '.comment-like-button'
                 end
-            }.to change(user.like_comments, :count).by(1)
-        end
-        
-        it 'コメントいいねの取り消しができるとともにいいね数が反映されること' do
-            user.comment_like(comment)
-            visit diary_path(diary) 
-            expect {
-                within "#comment-#{ comment.id }" do
-                    find('.comment-unlike-button').click
-                    expect(page).to have_content "#{ comment.comment_likes.count }"
-                    expect(page).to have_css '.comment-like-button'
-                end
-            }.to change(user.like_comments, :count).by(-1)
+            end
         end
     end
 
     describe 'いいね' do
         let!(:user) { create(:user) }
         let!(:diary) { create(:diary) }
-        before do
-            login_as user
+
+        context 'ログインユーザーの場合' do
+            before do
+                login_as user
+            end
+            it 'ダイアリーにいいねができるとともにいいね数が反映されること' do
+                visit diary_path(diary) 
+                expect {
+                    within "#like_area-#{ diary.id }" do
+                        find('.like-button').click
+                        #いいねした数がビューに反映されているかどうか
+                        expect(page).to have_content "#{ diary.likes.count }"
+                        expect(page).to have_css '.unlike-button'
+                    end
+                }.to change(user.like_diaries, :count).by(1)
+            end
+            
+            it 'ダイアリーにいいねの取り消しができるとともにいいね数が反映されること' do
+                user.like(diary)
+                visit diary_path(diary) 
+                expect {
+                    within "#like_area-#{ diary.id }" do
+                        find('.unlike-button').click
+                        #いいね解除した数がビューに反映されているかどうか
+                        expect(page).to have_content "#{ diary.likes.count }"
+                        expect(page).to have_css '.like-button'
+                    end
+                }.to change(user.like_diaries, :count).by(-1)
+            end
         end
 
-        it 'ダイアリーにいいねができるとともにいいね数が反映されること' do
-            visit diary_path(diary) 
-            expect {
-                within "#like_area-#{ diary.id }" do
-                    find('.like-button').click
-                    expect(page).to have_content "#{ diary.likes.count }"
-                    expect(page).to have_css '.unlike-button'
-                end
-            }.to change(user.like_diaries, :count).by(1)
-        end
-        
-        it 'ダイアリーにいいねの取り消しができるとともにいいね数が反映されること' do
-            user.like(diary)
-            visit diary_path(diary) 
-            expect {
-                within "#like_area-#{ diary.id }" do
-                    find('.unlike-button').click
-                    expect(page).to have_content "#{ diary.likes.count }"
-                    expect(page).to have_css '.like-button'
-                end
-            }.to change(user.like_diaries, :count).by(-1)
+        context 'ログインユーザーではない場合' do
+            it 'ダイアリーにいいねフォームがないこと' do
+                visit diary_path(diary) 
+                expect(page).not_to have_css '.like-button'
+            end
         end
     end
 end
