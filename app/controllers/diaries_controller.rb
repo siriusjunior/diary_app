@@ -26,7 +26,6 @@ class DiariesController < ApplicationController
     @diary.register_date_sequence
     if @diary.save
       redirect_to diaries_path, success: "ダイアリー#{@diary.date_sequence}日目を投稿しました"
-      @diary.increment_diary_date
     else
       flash.now[:danger] = 'ダイアリーの投稿に失敗しました'
       render :new

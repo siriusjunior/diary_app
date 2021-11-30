@@ -27,6 +27,7 @@ class Diary < ApplicationRecord
   validates :date_sequence, presence: true
   mount_uploader :image, DiaryImageUploader
   before_create :register_date_sequence
+  after_create_commit :increment_diary_date
 
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -39,13 +40,14 @@ class Diary < ApplicationRecord
   def user_diary_date
     self.user.diary_date
   end
-
-  def increment_diary_date
-    self.user.increment!(:diary_date)
-  end
   
   def register_date_sequence
     self.date_sequence = user_diary_date
   end
   
+  private
+
+    def increment_diary_date
+      self.user.increment!(:diary_date)
+    end
 end

@@ -394,7 +394,6 @@ RSpec.describe 'ユーザー登録', type: :system do
         end
         it 'ダイアリー日数が順番通りに反映されていること' do
             travel_to 1.day.from_now do
-                byebug
                 visit new_diary_path
                 expect(page).to have_content 'ダイアリー3日目'
             end
