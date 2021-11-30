@@ -160,15 +160,5 @@ class User < ApplicationRecord
       return false
     end
   end
-
-  # def self.order_by_diaries
-  #   left_joins(:diaries)
-  #     .select("users.*, COUNT(users.id) AS number_of_users")
-  #     .group("diaries.user_id")
-  #     .order("number_of_users DESC")
-  #   # joins(:diaries)
-  #   #   .select("users.*, COUNT(users.id) AS number_of_users")
-  #   #   .group("diaries.user_id")
-  #   #   .order("number_of_users DESC")
-  # end
+  
 end

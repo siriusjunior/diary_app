@@ -329,21 +329,75 @@ RSpec.describe 'ユーザー登録', type: :system do
         end
     end
 
-    describe '画像リセット' do
+    # describe '画像リセット' do
+    #     let!(:user) { create(:user) }
+    #     let!(:diary) { create(:diary, user: user) }
+    #     before do
+    #         login_as user
+    #     end
+
+    #     it 'ダイアリー編集ページで画像リセットができること' do
+    #         visit edit_diary_path(diary)
+    #         within '#edit_form' do
+    #             expect(page).to have_css '.preview_valid'
+    #             page.accept_confirm { click_link('reset_image') }
+    #             expect(page).not_to have_css '.preview_valid'
+    #         end
+    #     end
+    # end
+
+    describe 'ダイアリー検索' do
         let!(:user) { create(:user) }
-        let!(:diary) { create(:diary, user: user) }
+        let!(:diary_1) { create(:diary, body: "ダイアリー検索のダミーテキスト") }
+        let!(:diary_2) { create(:diary, body: "2番目の検索用のダミーテキスト") }
         before do
             login_as user
         end
-
-        it 'ダイアリー編集ページで画像リセットができること' do
-            visit edit_diary_path(diary)
-            within '#edit_form' do
-                expect(page).to have_css '.preview_valid'
-                page.accept_confirm { click_link('画像をリセット') }
-                expect(page).not_to have_css '.preview_valid'
+        context '検索値がある場合' do
+            it '該当するダイアリーが表示されること' do
+                within '#search__form' do
+                    fill_in 'q[body]', with: 'ダミーテキスト'
+                    click_button '検索'
+                end
+                expect(page).to have_content '「ダミーテキスト」でヒットしたダイアリー: 2件'
+                expect(page).to have_content diary_1.body
+                expect(page).to have_content diary_2.body
+            end
+            it '検索結果が何も表示されないこと' do
+                within '#search__form' do
+                    fill_in 'q[body]', with: 'ノーダイアリー'
+                    click_button '検索'
+                end
+                expect(page).to have_content '「ノーダイアリー」でヒットしたダイアリー: 0件'
+                expect(page).not_to have_content diary_1.body
             end
         end
+        context '検索値がない場合' do
+            it 'ページを移動しないで、エラーメッセージが表示されること' do
+                visit diary_path(diary_1)
+                within '#search__form' do
+                    fill_in 'q[body]', with: ''
+                    click_button '検索'
+                end
+                expect(page).to have_content '検索ワードを入力してください'
+                expect(current_path).to eq diary_path(diary_1)
+            end
+        end
+    end
 
+    describe 'ダイアリー日数リセット' do
+        let!(:user) { create(:user) }
+        let!(:diary_1) { create(:diary, user: user) }
+        let!(:diary_2) { create(:diary, user: user) }
+        before do
+            login_as user
+        end
+        it 'ダイアリー日数が順番通りに反映されていること' do
+            travel_to 1.day.from_now do
+                byebug
+                visit new_diary_path
+                expect(page).to have_content 'ダイアリー3日目'
+            end
+        end
     end
 end
