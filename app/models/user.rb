@@ -37,8 +37,8 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
   attr_accessor :skip_password
 
-  validates :username, presence: true
-  validates :email, uniqueness: true, presence: true
+  validates :username, presence: true, length: { maximum: 8 }
+  validates :email, uniqueness: true, presence: true, length: { maximum: 45 }
   validates :password, length: { minimum: 8 }, unless: :skip_password
   validates :password, confirmation: true, unless: :skip_password
   validates :password_confirmation, presence: true, unless: :skip_password
@@ -160,15 +160,5 @@ class User < ApplicationRecord
       return false
     end
   end
-
-  # def self.order_by_diaries
-  #   left_joins(:diaries)
-  #     .select("users.*, COUNT(users.id) AS number_of_users")
-  #     .group("diaries.user_id")
-  #     .order("number_of_users DESC")
-  #   # joins(:diaries)
-  #   #   .select("users.*, COUNT(users.id) AS number_of_users")
-  #   #   .group("diaries.user_id")
-  #   #   .order("number_of_users DESC")
-  # end
+  
 end

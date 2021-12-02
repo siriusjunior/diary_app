@@ -1,7 +1,7 @@
 = form_with model: [diary, comment], class: 'comment-post d-flex mb-0 flex-column justify-content-between', remote: true do |f|
                 .comment-post__upper.d-flex.justify-content-between.mb-1.align-items-center
                     = image_tag current_user.avatar.url, size: '40x40', class: 'rounded-circle mr-2'
-                    = f.text_field :body, class: 'form-control comment-post__input', onclick: 'show_comment_edit()', placeholder: 'コメントを入力...'
+                    = f.text_field :body, id: 'comment-post__form', class: 'form-control comment-post__input', onclick: 'show_comment_edit()', placeholder: 'コメントを入力...'
                 .d-flex.justify-content-end.d-none.comment-edit__form_mg#comment-edit-form
                     .btn.btn_cancell.btn-raised.comment-post__edit-btn.px-0.mr-3 onclick="hide_comment_edit()"
                             |キャンセル

@@ -27,6 +27,7 @@ class Diary < ApplicationRecord
   validates :date_sequence, presence: true
   mount_uploader :image, DiaryImageUploader
   before_create :register_date_sequence
+  after_create_commit :increment_diary_date
 
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -39,33 +40,14 @@ class Diary < ApplicationRecord
   def user_diary_date
     self.user.diary_date
   end
-
-  def increment_diary_date
-    self.user.increment!(:diary_date)
-  end
   
   def register_date_sequence
     self.date_sequence = user_diary_date
   end
-
-  # def self.sort(term)
-  #   case term
-  #     when 'new'
-  #       return all.order(created_at: :DESC)
-  #     when 'old'
-  #       return all.order(created_at: :ASC)
-  #     when 'likes'
-  #       self.order_by_likes_count('desc')
-  #     when 'dislikes'
-  #       self.order_by_likes_count('asc')
-  #   end
-  # end
-
-  # def self.order_by_likes_count(order)
-  #   select("*, COUNT(diaries.id) AS likes_count") 
-  #     .left_joins(:likes)
-  #     .group("diaries.id")
-  #     .order(:likes_count => order)
-  # end
   
+  private
+
+    def increment_diary_date
+      self.user.increment!(:diary_date)
+    end
 end

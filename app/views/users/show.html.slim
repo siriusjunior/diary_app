@@ -10,12 +10,12 @@ h2.text-center.py-5
             span.userprofile__username.mb-1
                 = @user.username
             .userprofile__follow-info.d-flex.flex-column.align-items-center.mb-2
-                object
+                object#following_user
                     = link_to following_user_path(@user), class: 'span w-100 text-center'
                         span 
                             = @user.following.count
                             |フォロー
-                object
+                object#followers_user
                     = link_to followers_user_path(@user), class: 'span w-100 text-center'
                         span 
                             = @user.followers.count

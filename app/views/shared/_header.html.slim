@@ -14,13 +14,13 @@ header.navbar.navbar-expand-lg.navbar-light.header.header__bg
                         = render 'shared/header_activities'
             object.mr-4 href="#"
                 = icon 'fa', 'comments', class: 'fa-lg header__fa'
-            object.mr-4
+            object.mr-4#users_icon
                 = link_to users_path do
                     = icon 'fa', 'user-friends', class: 'fa-lg header__fa'
-            object.mr-4
+            object.mr-4#edit_mypage_account
                 = link_to edit_mypage_account_path do
                     = icon 'fa', 'id-card', class: 'fa-lg header__fa'
-            object.mr-5
+            object.mr-5#new_diary_icon
                 = link_to new_diary_path do
                     = icon 'fa', 'edit', class: 'fa-lg header__fa'
             / = link_to '投稿する', new_diary_path, class: 'nav-link header-btn header-btn_mg-r'

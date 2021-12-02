@@ -1,4 +1,4 @@
-= link_to comment_likes_path(comment_id: comment.id), method: :post, remote: true do 
+= link_to comment_likes_path(comment_id: comment.id), class: 'comment-like-button', method: :post, remote: true do 
     = icon 'fas', 'thumbs-up', class: 'like-comment-icon'
 span.ml-1.like-comment-icon__count
     = comment.comment_likes.count

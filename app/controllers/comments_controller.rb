@@ -25,13 +25,14 @@ class CommentsController < ApplicationController
         @comment.update(comment_update_params)
     end
 
-    # def show
-    #     @comment = current_user.comments.find(params[:id])
-    #     respond_to do |format|
-    #         format.html
-    #         format.js
-    #     end
-    # end
+    # コメント編集中にキャンセルボタンによる復帰でshow.js.slim発火
+    def show
+        @comment = current_user.comments.find(params[:id])
+        respond_to do |format|
+            format.html
+            format.js
+        end
+    end
 
     def destroy
         @comment = current_user.comments.find(params[:id])
