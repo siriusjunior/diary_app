@@ -16,6 +16,5 @@ function previewEditImageFile(preview){
         $('.uploader__placeholder').replaceWith(data);
         $('#preview_link').attr('href', reader.result);
         $('#preview').attr('src', reader.result);
-        $('#preview').addClass('preview_valid');
     }
 }

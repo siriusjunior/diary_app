@@ -388,21 +388,21 @@ RSpec.describe 'ユーザー登録', type: :system do
         end
     end
 
-    # describe '画像リセット' do
-    #     let!(:user) { create(:user) }
-    #     let!(:diary) { create(:diary, user: user) }
-    #     before do
-    #         login_as user
-    #     end
-    #     it 'ダイアリー編集ページで画像リセットができること' do
-    #         visit edit_diary_path(diary)
-    #         within '#uploader' do
-    #             expect(page).to have_css '.preview_valid'
-    #             page.accept_confirm { click_button '画像をリセット' }
-    #             expect(page).not_to have_css '.preview_valid'
-    #         end
-    #     end
-    # end
+    describe '画像リセット' do
+        let!(:user) { create(:user) }
+        let!(:diary) { create(:diary, user: user) }
+        before do
+            login_as user
+        end
+        it 'ダイアリー編集ページで画像リセットができること' do
+            visit edit_diary_path(diary)
+            within "#uploader" do
+                expect(page).to have_css '#preview_link'
+                page.accept_confirm { click_link '画像をリセット' }
+                expect(page).not_to have_css '#preview_link'
+            end
+        end
+    end
 
     describe 'ダイアリー検索' do
         let!(:user) { create(:user) }
