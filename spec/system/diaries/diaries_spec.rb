@@ -46,10 +46,12 @@ RSpec.describe 'ユーザー登録', type: :system do
 
     describe 'ダイアリー投稿' do
         let!(:user) { create(:user) }
+        before do
+            login_as user
+        end
 
         context '投稿内容が有効な場合' do
             it 'ダイアリーが投稿できること' do
-                login_as user
                 visit new_diary_path
                 within '#post_form' do
                     attach_file 'アップロード画像(任意)', Rails.root.join('spec','fixtures','dummy.png')
@@ -63,7 +65,6 @@ RSpec.describe 'ユーザー登録', type: :system do
 
         context '投稿内容が無効な場合' do
             it 'ダイアリーが投稿できないこと' do
-                login_as user
                 visit new_diary_path
                 within '#post_form' do
                     fill_in 'ダイアリー本文', with: ''
@@ -75,12 +76,27 @@ RSpec.describe 'ユーザー登録', type: :system do
         end
 
         context '1日以内に投稿がされている場合' do
-            let!(:diary_by_user) { create(:diary, user: user)}
             it '2度目の投稿ができないこと' do
-                login_as user
+                create(:diary, user: user)
                 find('#new_diary_icon').click
                 expect(page).to have_content 'ダイアリーの投稿は１日１回までです'
             end
+        end
+        
+        context '投稿がされて1日経過した場合' do
+            it '2日目の投稿ができること' do
+                create(:diary, user: user)
+                travel_to 1.day.from_now do
+                    visit new_diary_path
+                    within '#post_form' do
+                        attach_file 'アップロード画像(任意)', Rails.root.join('spec','fixtures','dummy.png')
+                        fill_in 'ダイアリー本文', with: 'テスト投稿のダミーテキスト'
+                        page.accept_confirm { click_button '投稿する' }
+                    end
+                    expect(page).to have_content 'ダイアリー2日目を投稿しました'
+                end
+            end
+            
         end
     end
 
@@ -159,6 +175,49 @@ RSpec.describe 'ユーザー登録', type: :system do
         it '投稿の詳細画面が閲覧できること' do
             visit diary_path(diary_by_user)
             expect(current_path).to eq diary_path(diary_by_user)
+        end
+    end
+
+    describe 'コメント認可' do
+        let!(:user) { create(:user) }
+        let!(:comment_unauthorized) { create(:diary, comment_authorization: false) }
+        
+        context 'コメントを許可しない場合' do
+            it 'ダイアリー作成者の場合コメントのオフ通知と設定リンクが表示されること' do
+                login_as user
+                visit new_diary_path
+                within '#post_form' do
+                    fill_in 'ダイアリー本文', with: 'コメント認可のダミーテキスト'
+                    uncheck 'コメントを許可する'
+                    page.accept_confirm { click_button '投稿する' }
+                end
+                # 以下の1行が無いとvisitが効かない
+                expect(page).to have_content('ダイアリー1日目を投稿しました')
+                visit diary_path(user.diaries.last)
+                expect(page).to have_content('コメントはオフになっています。設定を変更する')
+                expect(page).to have_link('設定')
+            end
+            it 'ダイアリー作成者でない場合コメントのオフ通知のみが表示されること' do
+                login_as user
+                visit diary_path(comment_unauthorized)
+                expect(page).to have_content('コメントはオフになっています')
+                expect(page).not_to have_link('設定')
+            end
+        end
+        context 'コメントを許可する場合' do
+            it 'コメント欄が表示されること' do
+                login_as user
+                visit new_diary_path
+                within '#post_form' do
+                    fill_in 'ダイアリー本文', with: 'コメント認可のダミーテキスト'
+                    check 'コメントを許可する'
+                    page.accept_confirm { click_button '投稿する' }
+                end
+                # 以下の1行が無いとvisitが効かない
+                expect(page).to have_content('ダイアリー1日目を投稿しました')
+                visit diary_path(user.diaries.last)
+                expect(page).to have_content('0件のコメント')
+            end
         end
     end
 
