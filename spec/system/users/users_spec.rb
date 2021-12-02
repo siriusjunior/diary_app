@@ -61,4 +61,63 @@ RSpec.describe 'ユーザー登録', type: :system do
             }.to change(login_user.following, :count).by(-1)
         end
     end
+
+    describe 'ユーザータグ検索' do
+        let!(:no_tag_user) { create(:user) }
+        # タグ1登録ユーザー
+        let!(:one_tag_user) { create(:user, :user_with_tag, username: '1tag') }
+        # タグ1~3登録ユーザー
+        let!(:three_tags_user) { create(:user, :user_with_3_tags, username: '3tags') }
+        # タグ1~5登録ユーザー
+        let!(:five_tags_user) { create(:user, :user_with_5_tags, username: '5tags') }
+        before do
+            login_as no_tag_user
+        end
+
+        it 'タグ登録されていること' do
+            visit edit_mypage_account_path
+            expect {
+                fill_in "search-form-input", with: "タグA,タグB,タグC"
+                click_button '更新する'
+            }.to change(no_tag_user.tag_links, :count).by(3)
+            tag_names = no_tag_user.tags.pluck(:name)
+            visit users_path
+            tag_names.each do |tag_name|
+                expect(page).to have_content tag_name
+            end
+        end
+
+        it 'タグをクリックすると該当ユーザーが表示されること' do
+            tag_names = Tag.all.pluck(:name)
+            find('#users_icon').click
+            expect(current_path).to eq users_path
+            tag_names.each do |tag_name|
+                expect(page).to have_content tag_name
+            end
+            within("#tags") do
+                click_link 'タグ1'
+            end
+            expect(page).to have_content one_tag_user.username
+            expect(page).not_to have_content no_tag_user.username
+        end
+        
+        it 'タグをクリックすると該当ユーザーが表示されないこと' do
+            find('#users_icon').click
+            expect(current_path).to eq users_path
+            within("#tags") do
+                click_link 'タグ5'
+            end
+            expect(page).not_to have_content one_tag_user.username
+            expect(page).not_to have_content three_tags_user.username
+            expect(page).to have_content five_tags_user.username
+            within("#tags") do
+                click_link 'タグ3'
+            end
+            expect(page).not_to have_content one_tag_user.username
+            expect(page).to have_content three_tags_user.username
+            expect(page).to have_content five_tags_user.username
+        end
+
+    end
+
 end

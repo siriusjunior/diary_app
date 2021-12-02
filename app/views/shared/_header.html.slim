@@ -14,7 +14,7 @@ header.navbar.navbar-expand-lg.navbar-light.header.header__bg
                         = render 'shared/header_activities'
             object.mr-4 href="#"
                 = icon 'fa', 'comments', class: 'fa-lg header__fa'
-            object.mr-4
+            object.mr-4#users_icon
                 = link_to users_path do
                     = icon 'fa', 'user-friends', class: 'fa-lg header__fa'
             object.mr-4

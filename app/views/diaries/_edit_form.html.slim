@@ -8,7 +8,7 @@
             |ダイアリー
             = diary.date_sequence
             |日目
-    .form-group.mb-5.d-flex.justify-content-start.uploader__image.align-items-center.pb-1
+    .form-group.mb-5.d-flex.justify-content-start.uploader__image.align-items-center.pb-1#uploader
         - if diary.image.present?
             = f.label :image, 'アップロード画像', class: 'mr-5 uploader__label'
             = f.file_field :image, onchange: 'previewEditImageFile(preview)', accept: 'image/*'

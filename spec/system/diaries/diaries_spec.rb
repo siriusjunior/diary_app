@@ -335,12 +335,11 @@ RSpec.describe 'ユーザー登録', type: :system do
     #     before do
     #         login_as user
     #     end
-
     #     it 'ダイアリー編集ページで画像リセットができること' do
     #         visit edit_diary_path(diary)
-    #         within '#edit_form' do
+    #         within '#uploader' do
     #             expect(page).to have_css '.preview_valid'
-    #             page.accept_confirm { click_link('reset_image') }
+    #             page.accept_confirm { click_button '画像をリセット' }
     #             expect(page).not_to have_css '.preview_valid'
     #         end
     #     end
@@ -396,6 +395,22 @@ RSpec.describe 'ユーザー登録', type: :system do
             travel_to 1.day.from_now do
                 visit new_diary_path
                 expect(page).to have_content 'ダイアリー3日目'
+            end
+        end
+        it 'ダイアリー日数のリセットができるとともに、投稿が反映されていること', js: true do
+            # 1日のダイアリー投稿数の制限がかかるので1日経過させておく
+            travel_to 1.day.from_now do
+                visit new_diary_path
+                within '#post_form' do
+                    page.accept_confirm { click_link 'リセット' }
+                end
+                expect(page).to have_content 'ダイアリー日数がリセットされました'
+                within '#post_form' do
+                    fill_in 'ダイアリー本文', with: '日数リセット後のダミーテキスト'
+                    page.accept_confirm { click_button '投稿する' }
+                end
+                expect(page).to have_content 'ダイアリー1日目を投稿しました'
+                expect(page).to have_content '日数リセット後のダミーテキスト'
             end
         end
     end
