@@ -62,6 +62,43 @@ RSpec.describe 'ユーザー登録', type: :system do
         end
     end
 
+    describe 'フォローユーザー・フォロワーの一覧' do
+        let!(:login_user) { create(:user) }
+        let!(:following) { create_list(:user, 3) }
+        let!(:followers) { create_list(:user, 3) }
+        before do
+            login_as login_user
+            following.each do |followed|
+                login_user.follow(followed)
+            end
+            followers.each do |follower|
+                follower.follow(login_user)
+            end
+        end
+
+        it 'フォローユーザーの一覧が表示されていること' do
+            visit user_path(login_user)
+            expect(page).to have_content login_user.following.count
+            find('#following_user').click
+            expect(current_path).to eq following_user_path(login_user)
+            following.each do |followed|
+                expect(page).to have_content followed.username
+            end
+            expect(page).not_to have_content followers.first.username
+        end
+        
+        it 'フォローユーザーの一覧が表示されていること' do
+            visit user_path(login_user)
+            expect(page).to have_content login_user.followers.count
+            find('#followers_user').click
+            expect(current_path).to eq followers_user_path(login_user)
+            followers.each do |follower|
+                expect(page).to have_content follower.username
+            end
+            expect(page).not_to have_content following.first.username
+        end
+    end
+
     describe 'ユーザータグ検索' do
         let!(:no_tag_user) { create(:user) }
         # タグ1登録ユーザー
@@ -117,7 +154,29 @@ RSpec.describe 'ユーザー登録', type: :system do
             expect(page).to have_content three_tags_user.username
             expect(page).to have_content five_tags_user.username
         end
+    end
 
+    describe 'プロフィール編集' do
+        let!(:login_user) { create(:user) }
+        before do
+            login_as login_user
+        end
+        
+        it 'プロフィール編集ができて反映がされること' do
+            find('#edit_mypage_account').click
+            expect(current_path).to eq edit_mypage_account_path
+            attach_file 'user_avatar', File.join(Rails.root + 'spec/fixtures/dummy.png')
+            fill_in 'ユーザー名', with: '柿句恵子'
+            fill_in 'プロフィール', with: 'プロフ編集のダミーテキスト'
+            fill_in 'search-form-input', with: 'タグ7,タグ8,タグ9'
+            click_button '更新する'
+            expect(current_path).to eq user_path(login_user)
+            login_user.reload
+            expect(page).to have_content login_user.username
+            expect(page).to have_content login_user.introduction
+            expect(page).to have_content login_user.tags.first.name
+            expect(page).to have_content 'プロフィールを更新しました'
+        end
     end
 
 end
