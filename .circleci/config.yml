@@ -28,9 +28,9 @@ jobs:
             gem install bundler:2.2.24
             bundle -v
       - restore_cache: #キャッシュがsave_cacheで存在していればリストアして、ビルドタイムを向上させる
-        keys: #キャッシュの複数指定
-          - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
-          - rails-demo-bundle-v2-
+          keys: #キャッシュの複数指定
+            - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - rails-demo-bundle-v2-
       - run:
           name: bundle install
           command: | #パスの指定とインストール実行
