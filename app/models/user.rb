@@ -135,7 +135,8 @@ class User < ApplicationRecord
     # 登録外のタグを削除
     self.class.transaction do
       old_labels.each do |old_label|
-        if tag = Tag.find_by(name: old_label)
+        tag = Tag.find_by(name: old_label)
+        if tag
           #クラス内なのでuser_idも反映
           tag_links.find_by(tag_id: tag.id).destroy
           # tagに紐づくtag_linkがなくなればタグを削除

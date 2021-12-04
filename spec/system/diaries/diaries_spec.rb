@@ -156,10 +156,12 @@ RSpec.describe 'ユーザー登録', type: :system do
             login_as user
         end
         it '投稿を削除できること' do
-            visit diaries_path
+            visit diary_path(diary_by_user)
+            expect(current_path).to eq diary_path(diary_by_user)
             within "#diary-#{ diary_by_user.id }" do
                 page.accept_confirm { find('.delete-button').click }
             end
+            expect(current_path).to eq root_path
             expect(page).to have_content 'ダイアリーを削除しました'
             expect(page).not_to have_content diary_by_user.body
         end

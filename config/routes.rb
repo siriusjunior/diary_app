@@ -6,8 +6,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
   get 'user_sessions/store_location'
   
-  resources :users do
-    %i[index new create show]
+  resources :users, only: %i[index new create show] do
     member do
       get :activate
       get :diaries
