@@ -9,4 +9,4 @@ default: &default
 
 test:
   <<: *default
-  database: circleci_test
+  database: circle_test
