@@ -10,9 +10,9 @@
             = link_to @diary.user.username, @diary.user
         - if current_user&.own?(@diary)
             .diary__user-links
-                = link_to diary_path(@diary), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do
+                = link_to diary_path(@diary), class: 'mr-3 delete-button', method: :delete, data: { confirm: 'ダイアリーを削除しますか？' } do
                     = icon 'far', 'trash-alt', class: 'fa-lg'
-                = link_to edit_diary_path(@diary) do
+                = link_to edit_diary_path(@diary), class: 'mr-3 edit-button' do
                     = icon 'far', 'edit', class: 'fa-lg'
     .card-body
         span.d-flex.justify-content-between
