@@ -80,4 +80,4 @@ Rails/OutputSafety:
     - 'app/helpers/**/*.rb'
 
 Rails/InverseOf:
-  Enabled: false 
+  Enabled: false
