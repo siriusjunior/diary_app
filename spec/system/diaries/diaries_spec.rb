@@ -157,8 +157,8 @@ RSpec.describe 'ユーザー登録', type: :system do
         end
         it '投稿を削除できること' do
             visit diaries_path
-            sleep(2)
             within "#diary-#{ diary_by_user.id }" do
+                sleep(2)
                 page.accept_confirm { find('.delete-button').click }
             end
             expect(page).to have_content 'ダイアリーを削除しました'
