@@ -63,6 +63,13 @@ jobs:
       - run:
           name: Rubocop #rubocopの起動
           command: bundle exec rubocop --lint
+      # local環境との不整合が疑われるため、chrome-driverのバージョンを更新する
+      - run:
+          name: update chromeDriver version
+          command: |
+            CHROME_VERSION=$(google-chrome --version | sed -r 's/[^0-9]+([0-9]+\.[0-9]+\.[0-9]+).*/\1/g')
+            CHROMEDRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
+            bundle exec chromedriver-update $CHROMEDRIVER_VERSION
       - run:
           name: execute rspec #Rspecの実行
           command: | #RspecJunitFormatterのgemでrspec結果をCIが読める,rspecファイルをglobしファイル名でrspecを並行させる--split-by=timings
