@@ -17,6 +17,9 @@ jobs:
           username: siriusjunior
           password: $DOCKERHUB_PASSWORD
       - image: circleci/myspl:5.7 #MySQLのバージョンを確認、データベースイメージ指定
+        auth:
+          username: siriusjunior
+          password: $DOCKERHUB_PASSWORD
         environment: #データベースの環境変数設定
           MYSQL_ALLOW_EMPTY_PASSWORD: yes #[MYSQL_ROOT_PASSWORD]のnull_valueの有効化
           MYSQL_ROOT_PASSWORD: '' #null_valueで設定
