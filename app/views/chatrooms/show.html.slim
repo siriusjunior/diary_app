@@ -6,3 +6,6 @@
                     h2 チャットルーム
                 .card-body
                     ul.list-unstyled#message-box
+                        = render @chatroom.messages
+                    / 編集は_messageよりモダール表示
+                    = render 'messages/form', chatroom: @chatroom, message: @message ||= Message.new
