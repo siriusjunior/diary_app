@@ -1,35 +1,38 @@
 ja:
   activerecord:
     models:
-      user: ユーザー
-      diary: ダイアリー
-      comment: コメント
+      user: 'ユーザー'
+      diary: 'ダイアリー'
+      comment: 'コメント'
+      message: 'メッセージ'
     attributes:
       user:
-        username: ユーザー名
-        email: メールアドレス
-        password: パスワード
-        password_confirmation: パスワード確認
-        introduction: プロフィール
-        avatar: プロフィール画像
+        username: 'ユーザー名'
+        email: 'メールアドレス'
+        password: 'パスワード'
+        password_confirmation: 'パスワード確認'
+        introduction: 'プロフィール'
+        avatar: 'プロフィール画像'
         notification_on_comment: 'コメントの通知メール'
         notification_on_like: 'いいねの通知メール'
         notification_on_follow: 'フォローの通知メール'
         notification_on_comment_like: 'コメントにいいねの通知メール'
       diary:
-        body: ダイアリー本文
-        check: チェック
-        date_sequence: ダイアリー日数
-        image: アップロード画像
+        body: 'ダイアリー本文'
+        check: 'チェック'
+        date_sequence: 'ダイアリー日数'
+        image: 'アップロード画像'
       comment:
-        body: コメント
+        body: 'コメント'
+      message:
+        body: 'メッセージ'
   activemodel:
     attributes:
       account_form:
-        avatar: アバター
-        username: ユーザー名
-        introduction: プロフィール
-        labels: タグ
+        avatar: 'アバター'
+        username: 'ユーザー名'
+        introduction: 'プロフィール'
+        labels: 'タグ'
 
     # attributes:
     #   created_at: 作成日時
