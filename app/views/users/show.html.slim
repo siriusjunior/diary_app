@@ -20,8 +20,11 @@ h2.text-center.py-5
                         span 
                             = @user.followers.count
                             |フォロワー
-            a.mb-2 href="#"
-                = icon 'far', 'comments', class: 'fa-lg chat-btn'
+            - if current_user && current_user.id != @user.id
+                .text-center
+                    = render 'message_button', user: @user
+            / a.mb-2 href="#"
+            /     = icon 'far', 'comments', class: 'fa-lg chat-btn'
             = render 'users/follow_area', user: @user
             / .btn.btn-raised.block-btn.mt-1
             /     |ブロック
