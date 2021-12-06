@@ -35,9 +35,13 @@
             - if current_user && !current_user.own?(@diary)
                 object
                     = render 'like_area', diary: @diary
-            / ダイアリー所有者には非表示
+            / ダイアリー所有者にはいいねの表示だけ
             - else current_user && current_user.own?(@diary)
-        / ログインしていないユーザーにもいいね表示
+                object#unlike-icon
+                    = icon 'far', 'heart', class: 'fa-lg unlike-icon'
+                    span.unlike-icon.ml-1
+                        = @diary.likes.count
+        / ログインしていないユーザーにもいいね表示だけ
         - else
             object#unlike-icon
                 = icon 'far', 'heart', class: 'fa-lg unlike-icon'
