@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.all.includes(:diaries).page(params[:page]).per(10).order(created_at: :desc)
+    @users = User.all.includes(:diaries, :tags).page(params[:page]).per(10).order(created_at: :desc)
     # @users = User.order_by_diaries.page(params[:page]).per(10)
     respond_to do |format|
       format.html
@@ -74,7 +74,7 @@ class UsersController < ApplicationController
 
   def following
     @user  = User.find(params[:id])
-    @users = @user.following.includes(:diaries).page(params[:page]).per(5).order(created_at: :desc)
+    @users = @user.following.includes(:diaries, :tags).page(params[:page]).per(5).order(created_at: :desc)
     respond_to do |format|
       format.html
       format.js
@@ -83,7 +83,7 @@ class UsersController < ApplicationController
   
   def followers
     @user  = User.find(params[:id])
-    @users = @user.followers.includes(:diaries).page(params[:page]).per(5).order(created_at: :desc)
+    @users = @user.followers.includes(:diaries, :tags).page(params[:page]).per(5).order(created_at: :desc)
     respond_to do |format|
       format.html
       format.js

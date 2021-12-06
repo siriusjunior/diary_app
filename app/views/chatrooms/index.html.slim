@@ -1,8 +1,19 @@
-.container
-    .row
-        .col-md-6.col-12.offset-md-3.mb-3
-            .card
-                .card-body
-                    = render(@chatrooms) || 'まだありません'
-        .col-md-6.col-12.offset-md-3
-            = paginate @chatrooms
+- set_meta_tags title: 'ユーザーリスト'
+.wrapper.py-5
+    .card.center.dm__wrapper
+        .card-body
+            - if @chatrooms.any?
+                = render(@chatrooms)
+            - else
+                span.dm__info まだルームがありません。
+                object
+                    = link_to following_user_path(@user) do 
+                        i.dm__link
+                            |フォローユーザー
+                span.dm__info
+                    |にDMを送りましょう
+    .col-md-6.col-12.offset-md-3
+        = paginate @chatrooms
+
+        / = link_to @diary.image.url, class: 'diary__image ml-3', "data-lightbox" => "image-#{@diary.id}" do
+        /         = image_tag @diary.image.url, height: '40', width: '40'
