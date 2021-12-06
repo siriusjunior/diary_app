@@ -3,9 +3,13 @@ class MessagesController < ApplicationController
   def create
     @message = current_user.messages.build(message_params)
     if @message.save
+      ActionCable.server.broadcast(
+        "chatroom_#{@message.chatroom_id}",
+        type: :create, html: (render_to_string partial: 'message', locales: { message: @message }, layout: false), message: @message.as_json
+      )
+      head :ok
     else
-      # js.slimではなくcable/chatroom.jsのActionCableで実装
-
+      head :bad_request
     end
   end
 
@@ -16,16 +20,25 @@ class MessagesController < ApplicationController
   def update
     @message = current_user.messages.find(params[:id])
     if @message.update(message_update_params)
-    
+      ActionCable.server.broadcast(
+        "chatroom_#{@message.chatroom_id}",
+        type: :update, html: (render_to_string partial: 'message', locales: { message: @message }, layout: false), message: @message.as_json
+      )
+      head :ok
     else
-      # js.slimではなくcable/chatroom.jsのActionCableで実装
+      head :bad_request
     end
   end
 
   def destroy
     @message = current_user.messages.find(params[:id])
     @message.destroy!
-    # js.slimではなくcable/chatroom.jsのActionCableで実装
+
+    ActionCable.server.broadcast(
+      "chatroom_#{ @message.chatroom_id }",
+      type: :delete, html: (render_to_string partial: 'message', locales: { message: @message }, layout: false), message: @message.as_json
+    )
+    head :ok
   end
 
   private
