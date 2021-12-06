@@ -1,2 +1,8 @@
-h1 Chatrooms#index
-p Find me in app/views/chatrooms/index.html.slim
+.container
+    .row
+        .col-md-6.col-12.offset-md-3.mb-3
+            .card
+                .card-body
+                    = render(@chatrooms) || 'まだありません'
+        .col-md-6.col-12.offset-md-3
+            = paginate @chatrooms
