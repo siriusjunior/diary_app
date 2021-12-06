@@ -3,17 +3,20 @@ class DiariesController < ApplicationController
   before_action :require_login, only: %i[new create update destroy]
   before_action :check_diary_post, only: %i[new create]
   def index
-    @diaries = if current_user
-      if current_user.feed.any?
+    if current_user
+      if current_user.have_following?
         # ログインユーザーでフィードデータがある場合
-        current_user.feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+        @diaries = current_user.feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+        @title = "みんなの最新ダイアリー"
       else
         # ログインユーザーでフィードデータがない場合
-        Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+        @diaries = current_user.self_feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+        @title = "あなたの最新ダイアリー"
       end
     else
       # ログインユーザーでない場合
-      Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+      @diaries = Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+      @title = "みんなの最新ダイアリー"
     end
   end
 

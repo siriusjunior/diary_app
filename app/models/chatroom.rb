@@ -22,5 +22,6 @@ class Chatroom < ApplicationRecord
             chatroom.save
         end
         chatroom
+        binding.pry
     end
 end

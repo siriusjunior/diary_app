@@ -8,3 +8,5 @@
 require './db/seeds/users'
 require './db/seeds/diaries'
 require './db/seeds/tags'
+require './db/seeds/likes'
+require './db/seeds/comment_likes'

@@ -111,8 +111,16 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def have_following?
+    following_ids.any?
+  end
+
   def feed
     Diary.where(user_id: following_ids << id)
+  end
+
+  def self_feed
+    Diary.where(user_id: id)
   end
 
   def add_tag!(labels)

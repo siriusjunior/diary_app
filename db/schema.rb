@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2021_12_05_202248) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chatroom_id"], name: "index_chatroom_users_on_chatroom_id"
+    t.index ["user_id", "chatroom_id"], name: "index_chatroom_users_on_user_id_and_chatroom_id", unique: true
     t.index ["user_id"], name: "index_chatroom_users_on_user_id"
   end
 
