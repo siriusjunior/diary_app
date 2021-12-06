@@ -9,3 +9,14 @@
                         = render @chatroom.messages
                     / 編集は_messageよりモダール表示
                     = render 'messages/form', chatroom: @chatroom, message: @message ||= Message.new
+/ 参加者一覧のモダール
+#chatroom-users.modal.fade tabindex="-1"
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h5.modal-title 参加者
+                button.close aria-label="Close" data-dismiss="modal" type="button"
+                    span aria-hidden="true" ×
+            .modal-body
+                = render @chatroom.users
+            .modal-footer.text-center   
