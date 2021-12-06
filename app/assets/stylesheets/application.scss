@@ -590,6 +590,11 @@ form {
         color: #52b2f1;
         border: 1px solid #52b2f1;
     }
+    &__outer {
+        padding: 0;
+        border: 0px;
+        background-color: #fff;
+    }
 }
 .tag {
     &__label {

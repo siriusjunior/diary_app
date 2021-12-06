@@ -63,7 +63,7 @@ class User < ApplicationRecord
   has_many :tag_links, dependent: :destroy
   has_many :tags, -> { order(:name) }, through: :tag_links
   has_many :activities, dependent: :destroy
-  has_many :chatroom_users, dependen: :destroy
+  has_many :chatroom_users, dependent: :destroy
   has_many :chatrooms, through: :chatroom_users
   has_many :messages, dependent: :destroy
 

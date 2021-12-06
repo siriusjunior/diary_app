@@ -2,8 +2,8 @@
 //= require popper
 //= require rails-ujs
 //= require_tree .
-//= require_tree channels
-//= require_tree channels/chatroom.js
+//= require cable
+//= require cable/chatroom.js
 
 
 // 通知アイコン中リストのドロップダウン処理
