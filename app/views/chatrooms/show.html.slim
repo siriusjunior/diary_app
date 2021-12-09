@@ -1,11 +1,12 @@
-.wrapper.py-5
-    h2.text-center.mb-3 チャットルーム
+.wrapper.py-3.pt-5.w-60
+    h2.text-center チャットルーム
+    = link_to '参加者一覧', '#', class: 'btn btn-primary chatroom__user-btn btn-raised', id: 'js-chatroom-users'
 .container
     .row
         .chatroom__container
             .card#chatroom data-chatroom-id="#{ @chatroom.id }" data-current-user-id="#{ current_user.id }"
                 .card-header
-                    = link_to '参加者一覧', '#', class: 'btn btn-primary chatroom__user-btn btn-raised mr-3', id: 'js-chatroom-users'
+                    
                 .card-body
                     ul.list-unstyled#message-box
                         = render @chatroom.messages

@@ -9,9 +9,16 @@ class DiariesController < ApplicationController
         @diaries = current_user.feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
         @title = "みんなの最新ダイアリー"
       else
-        # ログインユーザーでフィードデータがない場合
-        @diaries = current_user.self_feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
-        @title = "あなたの最新ダイアリー"
+        # ログインユーザーでフォロワーがいない場合で
+        if current_user.diaries.any?
+          # ダイアリーが1件以上ある場合
+          @diaries = current_user.self_feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+          @title = "あなたの最新ダイアリー"
+        else
+          # ダイアリーが1件もない場合
+          @diaries = Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+          @title = "みんなの最新ダイアリー"
+        end
       end
     else
       # ログインユーザーでない場合

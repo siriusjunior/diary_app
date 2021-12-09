@@ -3,8 +3,10 @@ class MessagesController < ApplicationController
   def create
     @message = current_user.messages.build(message_params)
     if @message.save
+      # クライアントサイド(chatroom.js)で購読中の各ルームにbroadcast
       ActionCable.server.broadcast(
         "chatroom_#{ @message.chatroom_id }",
+        # クライアントサイドでdataとしてjson形式で取得する(data.html)
         type: :create, html: (render_to_string partial: 'message', locals: { message: @message }, layout: false), message: @message.as_json
       )
       head :ok

@@ -741,6 +741,36 @@ form {
         transform: translate(-50%,-50%);
     }
 }
+.message {
+    // ActionCableでBroadcastする際にクライアントサイドのjsのクラス付与による各々の処理
+    // current_userなら.message__containerの階層に付与
+    &__container_self {
+        justify-content: flex-end;
+        border-bottom-right-radius: 0;
+    }
+    &__body {
+        background-color: #b3ff8c;
+        color: $black;
+        border-radius: 15px;
+        border-bottom-left-radius: 0;
+    }
+     // current_userなら.message__bodyの階層に付与
+    &__body_self {
+        background-color: #36a100;
+        color: #fff;
+        border-radius: 15px;
+        border-bottom-right-radius: 0;
+    }
+    // current_userなら.message__iconの階層に付与
+    &__icon_self {
+        display: none!important;
+    }
+    &__time {
+        bottom: -20px;
+        right: 0;
+        color: #a7a7a7;
+    }
+}
 #js-chatroom-users {
     z-index: 0;
 }
@@ -748,7 +778,7 @@ form {
     background-color: #E8F0FE;
 }
 .navbar {
-    z-index: 0;
+    z-index: 1;
 }
 .navbar-badge {
     position: absolute;

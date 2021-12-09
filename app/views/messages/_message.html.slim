@@ -1,15 +1,24 @@
-li.media.mb-3.border-bottom.p-2 id="message-#{ message.id }" data-sender-id="#{ message.user.id }"
-    div 
-        div
-            = link_to message.user.username, user_path(message.user)
-        = image_tag message.user.avatar_url, class: 'mr-3 rounded-circle', size: '50x50'
-    .media-body
-        = simple_format(message.body)
-        div.text-right
-            = message.decorate.created_at
-        div.text-right.crud-area
-            - if current_user&.own?(message)
-                = link_to message_path(message), class: 'mr-3 delete-button', method: :delete, data: { confirm: 'メッセージを削除しますか？' }, remote: true do
-                    = icon 'far', 'trash-alt', class: 'fa-sm'
-                = link_to edit_message_path(message), class: 'edit-button', remote: true do
-                    = icon 'far', 'edit', class: 'fa-sm'
+/ ActionCableでBroadcastする際にここの条件分岐は発信者のコンテキストが残るので,クライアントサイドでjsクラス処理をする
+- if !current_user&.own?(message)
+    li.message.mb-3.p-2 id="message-#{ message.id }" data-sender-id="#{ message.user.id }"
+        div.message__container.d-flex.align-items-center
+            = link_to user_path(message.user), class: 'message__icon' do 
+                = image_tag message.user.avatar_url, class: 'mr-2 rounded-circle', size: '30x30'
+            span.message__body.py-2.px-3.position-relative
+                = message.body
+                span.text-right.message__time.position-absolute
+                    = time_ago_in_words(message.created_at)
+- else 
+    li.message.mb-3.p-2 id="message-#{ message.id }" data-sender-id="#{ message.user.id }"
+            div.message__container.message__container_self.d-flex.align-items-center
+                = link_to user_path(message.user), class: 'message__icon message__icon_self' do 
+                    = image_tag message.user.avatar_url, class: 'mr-2 rounded-circle', size: '30x30'
+                span.message__body.message__body_self.py-2.px-3.position-relative
+                    = message.body
+                    span.text-right.message__time.position-absolute
+                        = time_ago_in_words(message.created_at)
+                        span.crud-area
+                            = link_to message_path(message), class: 'mx-2 delete-button', method: :delete, data: { confirm: 'メッセージを削除しますか？' }, remote: true do
+                                = icon 'far', 'trash-alt', class: 'fa-sm'
+                            = link_to edit_message_path(message), class: 'edit-button', remote: true do
+                                = icon 'far', 'edit', class: 'fa-sm'
