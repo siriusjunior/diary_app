@@ -1,1 +1,6 @@
-| $('#follow-area-#{@user.id}').html("#{j render('users/unfollow', user: @user)}")
+| $('#follow-area-#{@user.id}').html("#{j render('users/unfollow', user: @user)}");
+- if current_user.has_room_with?(@user)
+    | $('#message-button__container').html("#{j render('users/message_button', user: @user)}");
+- else
+    | $('#message-button__container').html("#{j render('users/message_button', user: @user)}");
+    | $('#message-button__container').addClass("inactive");

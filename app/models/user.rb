@@ -172,5 +172,12 @@ class User < ApplicationRecord
       return false
     end
   end
+
+  def has_room_with?(other)
+    users = [self] + [other]
+    user_ids = users.map(&:id).sort
+    room_name = user_ids.join(':').to_s
+    Chatroom.find_by(name: room_name).present?
+  end
   
 end
