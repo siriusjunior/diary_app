@@ -1,22 +1,23 @@
+.wrapper.py-5
+    h2.text-center.mb-3 チャットルーム
 .container
     .row
-        .col-sm-8.offset-sm-2
-            .card#chatroom data-chatroom-id="#{@chatroom.id}" data-current-user-id="#{current_user.id}"
+        .chatroom__container
+            .card#chatroom data-chatroom-id="#{ @chatroom.id }" data-current-user-id="#{ current_user.id }"
                 .card-header
-                    h2 チャットルーム
+                    = link_to '参加者一覧', '#', class: 'btn btn-primary chatroom__user-btn btn-raised mr-3', id: 'js-chatroom-users'
                 .card-body
                     ul.list-unstyled#message-box
                         = render @chatroom.messages
                     / 編集は_messageよりモダール表示
                     = render 'messages/form', chatroom: @chatroom, message: @message ||= Message.new
 / 参加者一覧のモダール
-#chatroom-users.modal.fade tabindex="-1"
-    .modal-dialog
-        .modal-content
-            .modal-header
-                h5.modal-title 参加者
-                button.close aria-label="Close" data-dismiss="modal" type="button"
-                    span aria-hidden="true" ×
-            .modal-body
-                = render @chatroom.users
-            .modal-footer.text-center   
+#js-member-modal.modal
+    .modal__bg.js-modal-close
+    .modal__content
+        .modal-header
+            h5.modal-title 参加者
+            .js-modal-close
+                span.close-btn aria-hidden="true" ×
+        .modal-body
+            = render partial: "chatroom_user", collection: @chatroom.users

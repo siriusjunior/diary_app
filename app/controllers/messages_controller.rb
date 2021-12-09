@@ -4,13 +4,17 @@ class MessagesController < ApplicationController
     @message = current_user.messages.build(message_params)
     if @message.save
       ActionCable.server.broadcast(
-        "chatroom_#{@message.chatroom_id}",
-        type: :create, html: (render_to_string partial: 'message', locales: { message: @message }, layout: false), message: @message.as_json
+        "chatroom_#{ @message.chatroom_id }",
+        type: :create, html: (render_to_string partial: 'message', locals: { message: @message }, layout: false), message: @message.as_json
       )
       head :ok
     else
       head :bad_request
     end
+  end
+
+  def show
+    @message = current_user.messages.find(params[:id])
   end
 
   def edit
@@ -21,8 +25,8 @@ class MessagesController < ApplicationController
     @message = current_user.messages.find(params[:id])
     if @message.update(message_update_params)
       ActionCable.server.broadcast(
-        "chatroom_#{@message.chatroom_id}",
-        type: :update, html: (render_to_string partial: 'message', locales: { message: @message }, layout: false), message: @message.as_json
+        "chatroom_#{ @message.chatroom_id }",
+        type: :update, html: (render_to_string partial: 'message', locals: { message: @message }, layout: false), message: @message.as_json
       )
       head :ok
     else
@@ -33,10 +37,9 @@ class MessagesController < ApplicationController
   def destroy
     @message = current_user.messages.find(params[:id])
     @message.destroy!
-
     ActionCable.server.broadcast(
       "chatroom_#{ @message.chatroom_id }",
-      type: :delete, html: (render_to_string partial: 'message', locales: { message: @message }, layout: false), message: @message.as_json
+      type: :delete, html: (render_to_string partial: 'message', locals: { message: @message }, layout: false), message: @message.as_json
     )
     head :ok
   end

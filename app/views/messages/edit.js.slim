@@ -1,3 +1,1 @@
-/ application.html.slimに要素の_modal.html.slimをrender
-| $("#modal-container").html("#{ escape_javascript(render 'modal_form', message: @message) }");
-| $("#message-edit-modal").modal('show');
+| $('#message-#{ @message.id } .media-body').replaceWith("#{j render('messages/edit_form', object: @message)}");

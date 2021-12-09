@@ -48,7 +48,7 @@
                 span.unlike-icon.ml-1
                     = @diary.likes.count
         - if @diary.image.present?
-            = link_to @diary.image.url, class: 'diary__image ml-3', "data-lightbox" => "image-#{@diary.id}" do
+            = link_to @diary.image.url, class: 'diary__image ml-3', "data-lightbox" => "image-#{ @diary.id }" do
                 = image_tag @diary.image.url, height: '40', width: '40'
 hr.comment__wrapper
 / コメントエリアはauthorizationがオンになっていれば表示

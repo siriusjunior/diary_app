@@ -13,15 +13,20 @@ class Chatroom < ApplicationRecord
     has_many :messages, dependent: :destroy
 
     def self.chatroom_with_users(users)
-        # [1,4,6]
+        # [3,6]
         user_ids = users.map(&:id).sort
         name = user_ids.join(':').to_s
-        unless(chatroom = find_by(name: name))
+
+        unless (chatroom = find_by(name: name))
             chatroom = new(name: name)
+            users.each do |user|
+                user.skip_password = true
+            end
+            # ここでsorceryのuserpasswordバリデーションがかかるのでカバー
             chatroom.users = users
             chatroom.save
         end
         chatroom
-        binding.pry
     end
+
 end

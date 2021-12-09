@@ -5,9 +5,6 @@
             object
                 = link_to user_path(user), class: 'mb-1 userprofile__username d-block' do
                     = user.username
-            object.mb-2
-                a href="#"
-                    = icon 'far', 'comments', class: 'fa-lg chat-btn'
             = render 'users/follow_area', user: user
             / .btn.btn-raised.block-btn.mt-1
             /     |ブロック
