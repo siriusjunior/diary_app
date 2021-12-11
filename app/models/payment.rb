@@ -20,4 +20,7 @@
 #
 class Payment < ApplicationRecord
   belongs_to :contract
+  validates :current_period_start, presence: true
+  validates :current_period_end, presence: true
+  validates :charge_id, presence: true
 end

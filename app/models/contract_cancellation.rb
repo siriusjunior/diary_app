@@ -18,4 +18,5 @@
 #
 class ContractCancellation < ApplicationRecord
   belongs_to :contract
+  enum reason: { by_user_canceled: 1, by_payment_failed: 2 }
 end

@@ -21,4 +21,6 @@
 class Contract < ApplicationRecord
   belongs_to :plan
   belongs_to :user
+  has_many :payments, dependent: :restrict_with_error
+  has_one :contract_cancellation, dependent: :restrict_with_error
 end

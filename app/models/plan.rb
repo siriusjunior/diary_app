@@ -11,4 +11,9 @@
 #  updated_at :datetime         not null
 #
 class Plan < ApplicationRecord
+    validates :code, presence: true
+    validates :interval, presence: true
+    validates :name, presence: true
+    validates :price, presence: true
+    enum interval: { month: 1, year: 2 }
 end
