@@ -17,7 +17,7 @@ h2.text-center.py-5
                             |フォロー
                 object#followers_user
                     = link_to followers_user_path(@user), class: 'span w-100 text-center'
-                        span 
+                        span#followers_user_count 
                             = @user.followers.count
                             |フォロワー
             - if current_user && current_user.id != @user.id && current_user.has_room_with?(@user)

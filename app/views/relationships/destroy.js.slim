@@ -1,2 +1,3 @@
 | $('#follow-area-#{@user.id}').html("#{j render('users/follow', user: @user)}");
 | $('#message-button__container').removeClass('active');
+| $('#followers_user_count').html("#{@user.followers.count}フォロワー");
