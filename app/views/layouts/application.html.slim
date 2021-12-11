@@ -9,8 +9,8 @@ html
     link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet"
     script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" 
     script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript" 
-    = javascript_include_tag "application"
     = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag "application"
   body
     - if logged_in?
       = render 'shared/header'

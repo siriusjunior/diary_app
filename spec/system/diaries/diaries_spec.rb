@@ -161,7 +161,6 @@ RSpec.describe 'ユーザー登録', type: :system do
             within "#diary-#{ diary_by_user.id }" do
                 page.accept_confirm { find('.delete-button').click }
             end
-            expect(current_path).to eq root_path
             expect(page).to have_content 'ダイアリーを削除しました'
             expect(page).not_to have_content diary_by_user.body
         end
@@ -237,7 +236,7 @@ RSpec.describe 'ユーザー登録', type: :system do
                 fill_in "comment-post__form", with: 'テスト投稿のダミーコメント'
                 click_button 'コメント'
                 expect(page).to have_content 'テスト投稿のダミーコメント'
-                expect(page).to have_content "#{diary_by_user.comments.count}件のコメント"
+                expect(page).to have_content "#{ diary_by_user.comments.count }件のコメント"
             end
         end
 

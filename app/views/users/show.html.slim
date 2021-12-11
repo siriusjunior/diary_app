@@ -20,12 +20,15 @@ h2.text-center.py-5
                         span 
                             = @user.followers.count
                             |フォロワー
-            #message-button__container
-                = render 'message_button', user: @user
-                / - if current_user && current_user.id != @user.id && current_user.has_room_with?(@user)
-                /     = render 'message_button', user: @user
-                / - elsif current_user && current_user.id != @user.id  && current_user.following?(@user)
-                /     = render 'message_button', user: @user
+            - if current_user && current_user.id != @user.id && current_user.has_room_with?(@user)
+                #message-button__container.active.d-block
+                    = render 'message_button', user: @user
+            - elsif current_user && current_user.id != @user.id  && current_user.following?(@user)
+                #message-button__container.active
+                    = render 'message_button', user: @user
+            - else 
+                #message-button__container
+                    = render 'message_button', user: @user
             = render 'users/follow_area', user: @user
             / .btn.btn-raised.block-btn.mt-1
             /     |ブロック
