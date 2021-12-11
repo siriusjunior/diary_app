@@ -49,6 +49,8 @@ gem 'sidekiq'
 gem 'sinatra'
 gem 'meta-tags'
 gem 'draper'
+gem 'payjp'
+gem 'whenever'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
