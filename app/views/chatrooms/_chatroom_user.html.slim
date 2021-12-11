@@ -1,0 +1,5 @@
+.d-flex.justify-content-between 
+    = link_to user_path(chatroom_user) do
+        = image_tag chatroom_user.avatar.url, size: '40x40', class: 'rounded-circle mr-1'
+        = chatroom_user.username
+hr

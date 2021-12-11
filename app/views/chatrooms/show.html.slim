@@ -1,0 +1,24 @@
+.wrapper.py-3.pt-5.w-60
+    h2.text-center チャットルーム
+    = link_to '参加者一覧', '#', class: 'btn btn-primary chatroom__user-btn btn-raised', id: 'js-chatroom-users'
+.container
+    .row
+        .chatroom__container
+            .card#chatroom data-chatroom-id="#{ @chatroom.id }" data-current-user-id="#{ current_user.id }"
+                .card-header
+                    
+                .card-body
+                    ul.list-unstyled#message-box
+                        = render @chatroom.messages
+                    / 編集は_messageよりモダール表示
+                    = render 'messages/form', chatroom: @chatroom, message: @message ||= Message.new
+/ 参加者一覧のモダール
+#js-member-modal.modal
+    .modal__bg.js-modal-close
+    .modal__content
+        .modal-header
+            h5.modal-title 参加者
+            .js-modal-close
+                span.close-btn aria-hidden="true" ×
+        .modal-body
+            = render partial: "chatroom_user", collection: @chatroom.users

@@ -63,6 +63,9 @@ class User < ApplicationRecord
   has_many :tag_links, dependent: :destroy
   has_many :tags, -> { order(:name) }, through: :tag_links
   has_many :activities, dependent: :destroy
+  has_many :chatroom_users, dependent: :destroy
+  has_many :chatrooms, through: :chatroom_users
+  has_many :messages, dependent: :destroy
 
   def own?(object)
     id == object.user_id
@@ -108,8 +111,16 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def have_following?
+    following_ids.any?
+  end
+
   def feed
     Diary.where(user_id: following_ids << id)
+  end
+
+  def self_feed
+    Diary.where(user_id: id)
   end
 
   def add_tag!(labels)
@@ -160,6 +171,13 @@ class User < ApplicationRecord
     else
       return false
     end
+  end
+
+  def has_room_with?(other)
+    users = [self] + [other]
+    user_ids = users.map(&:id).sort
+    room_name = user_ids.join(':').to_s
+    Chatroom.find_by(name: room_name).present?
   end
   
 end

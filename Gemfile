@@ -48,6 +48,7 @@ gem 'config'
 gem 'sidekiq'
 gem 'sinatra'
 gem 'meta-tags'
+gem 'draper'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

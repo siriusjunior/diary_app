@@ -1,9 +1,10 @@
-names = %w(山東料理 四川料理 広東料理 江蘇料理 福建料理 浙江料理 湖南料理 安徽料理 魯菜 川菜 粤菜 蘇菜 閩菜 浙菜 徽菜)
+names = %w(ロック リズム ビート レゲエ オペラ ジャズ ヘビメタ フォーク ダンス カントリー クラシック ブルース ギター ドラム ピアノ バイオリン サックス ビオラ ハウス ラウンジ ディープ R&B)
 puts 'Start inserting seed "tags" ...'
     names.map do |name|
         Tag.create!(name: name)
         puts "Tag whose name \"#{name}\" has been created!"
     end
+
 tags = Tag.all
 
 puts 'Start inserting seed "tag_links" ...'

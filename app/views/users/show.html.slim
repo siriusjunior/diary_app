@@ -17,11 +17,18 @@ h2.text-center.py-5
                             |フォロー
                 object#followers_user
                     = link_to followers_user_path(@user), class: 'span w-100 text-center'
-                        span 
+                        span#followers_user_count 
                             = @user.followers.count
                             |フォロワー
-            a.mb-2 href="#"
-                = icon 'far', 'comments', class: 'fa-lg chat-btn'
+            - if current_user && current_user.id != @user.id && current_user.has_room_with?(@user)
+                #message-button__container.active.d-block
+                    = render 'message_button', user: @user
+            - elsif current_user && current_user.id != @user.id  && current_user.following?(@user)
+                #message-button__container.active
+                    = render 'message_button', user: @user
+            - else 
+                #message-button__container
+                    = render 'message_button', user: @user
             = render 'users/follow_area', user: @user
             / .btn.btn-raised.block-btn.mt-1
             /     |ブロック
