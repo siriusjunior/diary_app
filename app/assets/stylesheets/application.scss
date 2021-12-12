@@ -831,6 +831,12 @@ form {
 .smooth {
     -webkit-font-smoothing: antialiased;
 }
+.gray {
+    color: #a1a1a1;
+}
+.black {
+    color: $black;
+}
 
 @mixin box_sizing {
     -moz-box-sizing:    border-box;

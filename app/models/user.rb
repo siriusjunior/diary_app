@@ -36,6 +36,7 @@
 #
 class User < ApplicationRecord
   authenticates_with_sorcery!
+  include PayjpCustomer
   attr_accessor :skip_password
 
   validates :username, presence: true, length: { maximum: 8 }

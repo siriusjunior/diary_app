@@ -1,0 +1,23 @@
+.border.p-3 
+    h2.h5.black 現在登録中のカード
+    .table-responsive.mb-3 
+        table.table.table-bordered 
+            tbody 
+                tr 
+                    th.smooth.black 名義
+                    td.smooth.black #{ @card.name }
+                tr 
+                    th.smooth.black カード番号
+                    td.smooth.black ××××-××××-××××-#{ @card.last4 }
+                tr 
+                    th.smooth.black 有効期限
+                    td.smooth.black #{ @card.exp_year }/#{ @card.exp_month }
+    h2.h5.black カードを変更する
+    = form_with url: mypage_creditcard_path, method: :patch, id: 'js-payment-form', calss: 'mb-3', local: true do 
+        javascript: 
+            function onCreated() {
+                document.querySelector("#js-payment-form").submit()
+            }
+        script.payjp-button data-key="#{ Settings[:payjp][:pk] }" data-partial="true" data-submit-text="トークンを作成する" src="https://checkout.pay.jp/" type="text/javascript" class="payjp-button" data-on-created="onCreated"
+    .small.gray.smooth
+        | ※現在登録中のカードは削除されます
