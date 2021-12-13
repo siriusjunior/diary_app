@@ -2,6 +2,13 @@ module PayjpCustomer
     extend ActiveSupport::Concern
     included do
         has_many :contracts, dependent: :restrict_with_error
+        scope :subscription_to_be_updated, lambda {
+            joins(contracts: :payments).joins('LEFT OUTER JOIN contract_cancellations ON contracts.id = contract_cancellations.contract_id')
+                                    .where(contracts: { id: Contract.group(:user_id).select('max(id)') })#Userごとの最新contract
+                                    .where(contract_cancellations: { id: nil })
+                                    .where(payments: { id: Payment.groud(:contract_id).select('max(id)') })#Contractごとの最新payment
+                                    .where('payments.current_period_end < ?', Time.current)
+        }
     end
 
     def register_creditcard!(token:)
