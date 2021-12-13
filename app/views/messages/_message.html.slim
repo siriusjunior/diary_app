@@ -10,6 +10,7 @@
                     = time_ago_in_words(message.created_at)
 - else 
     li.message.mb-3.p-2 id="message-#{ message.id }" data-sender-id="#{ message.user.id }"
+            #js-update-error-messages
             div.message__container.message__container_self.d-flex.align-items-center
                 = link_to user_path(message.user), class: 'message__icon message__icon_self' do 
                     = image_tag message.user.avatar_url, class: 'mr-2 rounded-circle', size: '30x30'

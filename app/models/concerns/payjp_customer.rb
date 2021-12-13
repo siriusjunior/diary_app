@@ -73,6 +73,14 @@ module PayjpCustomer
         contracts.last
     end
 
+    # メッセージ制限チェック
+    def can_message?
+        # プレミアム無制限,ベーシック20件,無契約10件まで
+        subscripting_premium_plan? ||
+        subscripting_basic_plan? && messages.where(created_at: latest_contract.current_period_start...latest_contract.current_period_end).count <= 20 ||
+        messages.count <= 10
+    end
+
     private
     
         def add_customer!(token:)

@@ -1,5 +1,5 @@
 = form_with model: [chatroom, message], class: 'mt-5', remote: true do |f|
-    = render 'shared/error_messages', object: message
+    #js-error-messages
     = f.label :body
     = f.text_field :body, class: 'form-control mb-3 input-message-body', required: true
     - if message.new_record?

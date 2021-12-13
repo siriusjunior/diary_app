@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :require_login, only: %i[create]
+
   def create
     @message = current_user.messages.build(message_params)
     if @message.save
@@ -11,7 +12,7 @@ class MessagesController < ApplicationController
       )
       head :ok
     else
-      head :bad_request
+      render :errors #errors.js.slimを呼ぶ
     end
   end
 
@@ -32,7 +33,7 @@ class MessagesController < ApplicationController
       )
       head :ok
     else
-      head :bad_request
+      render :update #update.js.slimを呼ぶ
     end
   end
 
@@ -43,7 +44,7 @@ class MessagesController < ApplicationController
       "chatroom_#{ @message.chatroom_id }",
       type: :delete, html: (render_to_string partial: 'message', locals: { message: @message }, layout: false), message: @message.as_json
     )
-    head :ok
+    render :destroy, content_type: "text/javascript" #destroy.js.slimを呼ぶ
   end
 
   private
