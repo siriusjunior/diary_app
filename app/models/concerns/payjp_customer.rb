@@ -6,7 +6,7 @@ module PayjpCustomer
             joins(contracts: :payments).joins('LEFT OUTER JOIN contract_cancellations ON contracts.id = contract_cancellations.contract_id')
                                     .where(contracts: { id: Contract.group(:user_id).select('max(id)') })#Userごとの最新contract
                                     .where(contract_cancellations: { id: nil })
-                                    .where(payments: { id: Payment.groud(:contract_id).select('max(id)') })#Contractごとの最新payment
+                                    .where(payments: { id: Payment.group(:contract_id).select('max(id)') })#Contractごとの最新payment
                                     .where('payments.current_period_end < ?', Time.current)
         }
     end
