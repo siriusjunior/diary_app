@@ -58,6 +58,7 @@ Rails.application.routes.draw do
     resource :creditcard, only: %i[new create edit update]
     resources :plans, only: %i[index]
     resource :contract, only: %i[create]
+    resources :payments, only: %i[index]
   end
 
   if Rails.env.development?
