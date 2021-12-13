@@ -2,5 +2,20 @@
     .card-header = plan.name
     .card-body
         p = number_to_currency(plan.price, unit: "¥", format: '%u%n', precision: 0)
-        div
-            = link_to '契約', mypage_contract_path(code: plan.code), class: 'btn btn-primary btn-raised', method: :post
+        p
+            / キャンセルしているか
+            - if current_user.about_to_cancel?(plan)
+                = link_to '解約済み', '#', class: 'btn btn-outline-primary', disabled: true
+                div
+                    span.small.black.smooth = "#{ l current_user.latest_contract.current_period_end, format: :short }までご利用できます。"
+            - elsif current_user.subscripting_to?(plan)
+                = link_to '解約', mypage_contract_contract_cancellation_path, class: 'btn btn-outline-primary', method: :post
+            - else
+                / 他プランを契約しているか
+                - if current_user.subscripting?
+                    = link_to '契約', '#', class: 'btn btn-outline-primary', disabled: true
+                    div
+                        span.small.black.smooth = "現在契約中のプランが#{ l current_user.latest_contract.current_period_end, format: :short }まで有効です。プラン変更は翌日以降可能です。"
+                / いずれのプランにも登録していない
+                - else
+                    = link_to '契約', mypage_contract_path(code: plan.code), class: 'btn btn-outline-primary', method: :post

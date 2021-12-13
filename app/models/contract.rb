@@ -27,4 +27,16 @@ class Contract < ApplicationRecord
   def pay!(charge)
     payments.create!(charge_id: charge.id, current_period_start: plan.period_start, current_period_end: plan.period_end)
   end
+
+  def cancel!(reason:)
+    create_contract_cancellation!(reason: reason)
+  end
+
+  def current_period_start
+    payments.last.current_period_start
+  end
+  
+  def current_period_end
+    payments.last.current_period_end
+  end
 end

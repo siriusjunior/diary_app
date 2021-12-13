@@ -24,6 +24,7 @@ module PayjpCustomer
         old_card.delete
     end
 
+    # プラン契約して支払う
     def subscript!(plan)
         contract = contracts.create(plan: plan)
         pay!
@@ -33,6 +34,39 @@ module PayjpCustomer
         charge = charge!(latest_contract.plan.price)
         # 支払い履歴を契約に登録
         latest_contract.pay!(charge)
+    end
+
+    # 解約する
+    def stop_subscript!(reason: :by_user_canceled)
+        latest_contract.cancel!(reason: reason)
+    end
+
+    def subscripting_to?(plan)
+        subscripting? && 
+        latest_contract.plan.code == plan.code
+    end
+
+    # プランを問わず契約中か
+    def subscripting?
+        latest_contract.present? &&
+        # 最終支払いが有効期間内か
+        latest_contract.payments.last.current_period_end >= Time.current.to_date
+    end
+
+    # ベーシックプランを契約中か
+    def subscripting_basic_plan?
+        subscripting_to?(Plan.find_by!(code: '0001'))
+    end
+    
+    # プレミアムプランを契約中か
+    def subscripting_premium_plan?
+        subscripting_to?(Plan.find_by!(code: '0002'))
+    end
+
+    # 契約中でキャンセルしているか
+    def about_to_cancel?(plan)
+        subscripting_to?(plan) &&
+        latest_contract.contract_cancellation.present?
     end
 
     def latest_contract
