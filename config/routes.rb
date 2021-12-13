@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     resource :notification_setting, only: %i[edit update]
     resource :creditcard, only: %i[new create edit update]
     resources :plans, only: %i[index]
+    resource :contract, only: %i[create]
   end
 
   if Rails.env.development?

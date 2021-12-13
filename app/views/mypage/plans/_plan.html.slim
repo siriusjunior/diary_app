@@ -2,3 +2,5 @@
     .card-header = plan.name
     .card-body
         p = number_to_currency(plan.price, unit: "¥", format: '%u%n', precision: 0)
+        div
+            = link_to '契約', mypage_contract_path(code: plan.code), class: 'btn btn-primary btn-raised', method: :post

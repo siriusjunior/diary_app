@@ -23,4 +23,8 @@ class Contract < ApplicationRecord
   belongs_to :user
   has_many :payments, dependent: :restrict_with_error
   has_one :contract_cancellation, dependent: :restrict_with_error
+
+  def pay!(charge)
+    payments.create!(charge_id: charge.id, current_period_start: plan.period_start, current_period_end: plan.period_end)
+  end
 end

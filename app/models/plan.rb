@@ -16,4 +16,18 @@ class Plan < ApplicationRecord
     validates :name, presence: true
     validates :price, presence: true
     enum interval: { month: 1, year: 2 }
+
+    def period_start
+        time_current
+    end
+
+    def period_end
+        time_current + 1.send(interval) - 1.day
+    end
+
+    private
+
+        def time_current
+            Time.current
+        end
 end

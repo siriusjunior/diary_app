@@ -10,7 +10,6 @@ module PayjpCustomer
         self.skip_password = true
         update!(customer_id: customer.id)
     end
-
     
     def default_card
         @default_card ||= customer.cards.retrieve(customer.default_card)
@@ -25,6 +24,21 @@ module PayjpCustomer
         old_card.delete
     end
 
+    def subscript!(plan)
+        contract = contracts.create(plan: plan)
+        pay!
+    end
+
+    def pay!
+        charge = charge!(latest_contract.plan.price)
+        # 支払い履歴を契約に登録
+        latest_contract.pay!(charge)
+    end
+
+    def latest_contract
+        contracts.last
+    end
+
     private
     
         def add_customer!(token:)
@@ -33,5 +47,11 @@ module PayjpCustomer
 
         def customer
             @customer ||= Payjp::Customer.retrieve(customer_id)
+        end
+
+        def charge!(price)
+            Payjp::Charge.create(currency: 'jpy',
+                                    amount: price,
+                                    customer: customer_id)
         end
 end
