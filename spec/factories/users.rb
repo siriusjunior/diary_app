@@ -40,6 +40,7 @@ FactoryBot.define do
     password { '12345678' }
     password_confirmation { '12345678' }
     username { Faker::Name.name }
+    customer_id { SecureRandom.uuid }
     after(:create) do |user|
       user.skip_password = true
       user.update!(activation_state: "active")
@@ -80,6 +81,10 @@ FactoryBot.define do
           end
         end
       end
+    end
+
+    trait :without_customer_id do
+      customer_id { nil }
     end
 
   end

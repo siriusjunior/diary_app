@@ -21,7 +21,7 @@
 #
 FactoryBot.define do
   factory :message do
-    body { "MyText" }
+    body { Faker::Lorem.sentence(word_count: 3, supplemental: false, random_words_to_add: 4) }
     user { nil }
     chatroom { nil }
   end

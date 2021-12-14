@@ -35,6 +35,7 @@ module PayjpCustomer
     def subscript!(plan)
         contract = contracts.create(plan: plan)
         pay!
+        contract
     end
 
     def pay!
