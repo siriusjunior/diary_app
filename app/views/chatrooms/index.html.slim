@@ -1,5 +1,7 @@
-- set_meta_tags title: 'ユーザーリスト'
+- set_meta_tags title: "#{ @user.username }さんのチャットルーム"
 .wrapper.py-5
+    h2.text-center.mb-5
+        = "#{ @user.username }さんのチャットルーム"
     .card.center.dm__wrapper
         .card-body
             - if @chatrooms.any?

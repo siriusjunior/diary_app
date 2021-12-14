@@ -104,6 +104,12 @@ form {
 }
 .header {
     height: 80px;
+    &__icon {
+        &:hover {
+            transform: translateY(-0.15em);
+            transition: .3s;
+        }
+    }
     &__bg {
         background-color: #267700;
     }
