@@ -34,10 +34,10 @@ puts "\"#{ guest.username }\" has been created!"
     puts "\"#{ user.username }\" has been created!"
 end
 
-puts "Start creating some relationships about \"#{ guest.username }\" ."
+puts "Start creating some relationships about \"#{ guest.username }\""
 users = User.all
 following = users[11..20]
 followers = users[3..10]
 following.each { |followed| guest.follow(followed) }
 followers.each { |follower| follower.follow(guest) }
-puts "Created some relationships about \"#{ guest.username }\" ."
+puts "Created some relationships about \"#{ guest.username }\""

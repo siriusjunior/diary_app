@@ -7,5 +7,6 @@ User.limit(13).each do |user|
     diaries.sample(10).each do |diary|
         user.like(diary)
     end
-    puts "Diary likes of #{user.username} has been created!"
 end
+
+puts "Diary likes have been created!"
