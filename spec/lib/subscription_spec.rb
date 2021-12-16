@@ -18,7 +18,6 @@ describe 'subscription:create' do
     it 'サブスクの更新、キャンセルが正常に行われること' do
         expect {
             task.invoke
-            byebug
         }.to change{ ContractCancellation.by_payment_failed.count }.by(1).and change { Payment.count }.by(1)
     end
 end

@@ -34,8 +34,10 @@ class Message < ApplicationRecord
               user.messages
                   .where(created_at: user.latest_contract.current_period_start...user.latest_contract.current_period_end)
                   .size <= 20
-    # 契約期間が切れた,未契約者の制限
+                  # 20件目の投稿は可能
+    # 契約期間が切れた,未契約者の制限,10件目の投稿は可能
     return if user.messages.size <= 10
     errors.add(:base, '今月のメッセージ可能回数をオーバーしました。')
   end
+  
 end

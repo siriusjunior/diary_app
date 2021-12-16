@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
         # クライアントサイドでdataとしてjson形式で取得する(data.html)
         type: :create, html: (render_to_string partial: 'message', locals: { message: @message }, layout: false), message: @message.as_json
       )
-      head :ok
+      render :create, content_type: "text/javascript" #create.js.slimを呼び,メッセージ投稿時のアラートを除去
     else
       render :errors #errors.js.slimを呼ぶ
     end
