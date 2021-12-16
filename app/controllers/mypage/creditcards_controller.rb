@@ -27,6 +27,6 @@ class Mypage::CreditcardsController < Mypage::BaseController
   private
 
     def set_api
-      Payjp.api_key = Settings[:payjp][:sk]
+      Payjp.api_key = Settings.payjp.dig(:sk)
     end
 end
