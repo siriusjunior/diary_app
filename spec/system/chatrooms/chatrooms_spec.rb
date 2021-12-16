@@ -30,7 +30,7 @@ RSpec.describe "チャットルーム", type: :system do
         within "#follow-area-#{ receiver.id }" do
           click_link('フォロー中')
         end
-        expect(page).to have_selector '#message-button__container'
+        expect(page).to have_css '#message-button__container'
         expect(page).not_to have_selector '#message-button__container', class: 'active'
       end
 
@@ -127,7 +127,7 @@ RSpec.describe "チャットルーム", type: :system do
           within "#header-container" do
             page.accept_confirm { click_on('ログアウト') }
           end
-          expect(current_path).to eq root_path
+          expect(page).to have_content 'ログアウトしました'
           login_as receiver
           visit user_path(sender)
           expect(page).to have_selector '#message-button__container', class: 'active'
