@@ -1,4 +1,5 @@
 class PasswordResetsController < ApplicationController
+  before_action :check_normal, only: %i[create]
 
   def new; end
 
@@ -38,5 +39,13 @@ class PasswordResetsController < ApplicationController
       render :edit
     end
   end
+
+  private
+
+    def check_normal
+      if params[:email].downcase == 'guest@example.com'
+        redirect_to new_password_reset_path, danger: 'ゲストユーザーのパスワードの再設定はできません'
+      end
+    end
 
 end
