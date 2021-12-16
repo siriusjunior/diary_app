@@ -23,5 +23,21 @@ class Message < ApplicationRecord
   belongs_to :user
   belongs_to :chatroom
 
-  validates :body, presence: true, length: { maximum: 1000 }
+  validates :body, presence: true, length: { maximum: 300 }
+  validate :number_of_times
+
+  # 契約状況に応じた制御
+  def number_of_times
+    return if user.subscripting_premium_plan?
+    # subscripting?でlatest_contract.current_period_startは有効期間内のpaymentを持つ
+    return if user.subscripting_basic_plan? &&
+              user.messages
+                  .where(created_at: user.latest_contract.current_period_start...user.latest_contract.current_period_end)
+                  .size <= 20
+                  # 20件目の投稿は可能
+    # 契約期間が切れた,未契約者の制限,10件目の投稿は可能
+    return if user.messages.size <= 10
+    errors.add(:base, '今月のメッセージ可能回数をオーバーしました。')
+  end
+  
 end

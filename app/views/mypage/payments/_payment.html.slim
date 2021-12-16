@@ -1,0 +1,5 @@
+tr
+    td.black = l payment.created_at, format: :short
+    td.black = payment.contract.plan.name
+    td.black = payment.decorate.contract_valid_period
+    td.black = number_to_currency(payment.contract.plan.price, unit: "¥", format: '%u%n')
