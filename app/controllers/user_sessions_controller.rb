@@ -20,6 +20,31 @@ class UserSessionsController < ApplicationController
     end
   end
 
+  def guest_login
+    user = User.guest
+    if user && user.activation_state == 'pending'
+      user.skip_password = true
+      user.update!(activation_state: "active")
+    end
+    auto_login(user)
+    @user = user
+    if @user
+      if session[:return_to]
+        # ActionCableの認証処理に必要なcookies
+        cookies.signed['user_id'] = current_user.id
+        redirect_to session[:return_to], info: "ゲストユーザーでログインしました"
+        session.delete(:return_to)
+      else
+        # ActionCableの認証処理に必要なcookies
+        cookies.signed['user_id'] = current_user.id
+        redirect_back_or_to diaries_url, info: "ゲストユーザーでログインしました"
+      end
+    else
+      flash.now[:danger] = "ゲストユーザーのログインに失敗しました"
+      render :new
+    end
+  end
+
   def destroy
     logout
     cookies.delete('user_id') if !cookies['user_id'].nil?

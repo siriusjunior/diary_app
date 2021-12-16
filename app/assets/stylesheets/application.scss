@@ -127,10 +127,10 @@ form {
         border-color: #fff;
         color: white!important;
         text-align: center;
-        width: 90px;
         height: 40px;
         &:hover {
             background-color: #67ac47;
+            transform: translateY(-0.15em);
             transition: .3s;
         }
         &_mg-r {

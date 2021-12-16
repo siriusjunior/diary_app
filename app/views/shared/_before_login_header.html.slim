@@ -9,6 +9,8 @@ header.navbar.navbar-expand-lg.navbar-light.header.header__bg
         /     button.header-btn.my-2.my-sm-0 type="submit"  検索
         ul.navbar-nav.mt-2.mt-lg-0
             li.nav-item
+            = link_to 'ゲストログイン', guest_login_path, class: 'nav-link header-btn header-btn_mg-r', method: :post
+            li.nav-item
             = link_to 'ログイン', login_path, class: 'nav-link header-btn header-btn_mg-r'
             li.nav-item
             = link_to '会員登録', new_user_path, class: 'nav-link header-btn'
