@@ -1,7 +1,14 @@
+@import './setting';
+@import './mixin';
+
 .comment {
     &__wrapper {
         max-width: 710px;
         margin: 0 auto;
+    }
+    &__icons {
+        margin-left: 10px;
+        width: 30px;
     }
     &__count {
         display: block;
@@ -25,9 +32,9 @@
     &__item {
         width: 100%;
     }
-    &__middle {
-        width: 90%;
-    }
+    // &__middle {
+    //     width: 90%;
+    // }
     &__info {
         display: inline-block;
         width: 100%;
