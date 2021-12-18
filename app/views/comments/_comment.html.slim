@@ -30,7 +30,9 @@ div id="comment-#{comment.id}"
                     = render 'comments/comment_like_area', comment: comment
                 i.fas.fa-thumbs-down.unlike-comment-icon
                 - if comment.liked_by_owner?
-                    = image_tag comment.diary.user.avatar.url, size: '20x20', class: 'rounded-circle mr-2'
+                    .owner-like.position-relative
+                        = image_tag comment.diary.user.avatar.url, size: '23x23', class: 'owner-like__avatar rounded-circle'
+                        = icon 'fa', 'heart', class: 'owner-like__icon like-icon'
             / コメント所有者に非表示にする設定に戻す場合は以下を使用
             / - else current_user && current_user.own?(comment)
         / ログインしていないユーザーにもコメントいいね表示
@@ -43,8 +45,9 @@ div id="comment-#{comment.id}"
             object#like-icon.d-flex.align-items-center
                 = icon 'fas', 'thumbs-down', class: 'fa-lg unlike-icon unlike-comment-icon'
             - if comment.liked_by_owner?
-                    span
-                        |ふがふが
+                    .owner-like.position-relative
+                        = image_tag comment.diary.user.avatar.url, size: '23x23', class: 'owner-like__avatar rounded-circle'
+                        = icon 'fa', 'heart', class: 'owner-like__icon like-icon'
         / レイアウトだけのコメントいいね
         / div.like-comment__fill
         / i.far.fa-thumbs-up.like-comment-icon.mr-4

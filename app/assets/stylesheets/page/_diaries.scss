@@ -32,15 +32,24 @@
     &__item {
         width: 100%;
     }
-    // &__middle {
-    //     width: 90%;
-    // }
     &__info {
         display: inline-block;
         width: 100%;
         color: $black;
         text-align: center;
         -webkit-font-smoothing: antialiased;
+    }
+}
+.owner-like {
+    &__icon {
+        width: 13px;
+        color: #FF0200!important;
+        position: absolute;
+        bottom: -5px;
+        right: -5px;
+    }
+    &__avatar {
+        margin-left: 18px;
     }
 }
 .comment-authorization {

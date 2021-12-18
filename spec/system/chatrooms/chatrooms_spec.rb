@@ -217,7 +217,7 @@ RSpec.describe "チャットルーム", type: :system do
           fill_in 'message_body', with: 'Lorem ipsum dolor sit amet'
           click_on '送信'
           expect(page).to have_content 'Lorem ipsum dolor sit amet'
-          expect(page).not_to have_css('.alert')
+          expect(page).not_to have_content '今月のメッセージ可能回数をオーバーしました'
         end
         it 'メッセージ21件目を投稿しようとするとアラートが表示されること', js: true do
           # 20件目の投稿
@@ -228,8 +228,7 @@ RSpec.describe "チャットルーム", type: :system do
           # 21件目の投稿
           fill_in 'message_body', with: 'Nec dui nunc mattis enim'
           click_on '送信'
-          expect(page).to have_css('.alert')
-          expect(page).to have_content '今月のメッセージ可能回数をオーバーしました。'
+          expect(page).to have_content '今月のメッセージ可能回数をオーバーしました'
           expect(page).not_to have_content 'Nec dui nunc mattis enim'
         end
       end
