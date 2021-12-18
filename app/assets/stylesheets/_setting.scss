@@ -1,12 +1,10 @@
 $layout-width-inner: 1024px;
-
 // ブレークポイント
 $breakpoints: (
 	"sp": "screen and (max-width: 767px)",
 	"tab": "screen and (max-width: #{$layout-width-inner - 1px})",
 	"pc": "screen and (min-width: #{$layout-width-inner})",
 );
-
 $black: #666;
 
 // メディアクエリ
