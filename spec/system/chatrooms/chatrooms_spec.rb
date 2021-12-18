@@ -209,10 +209,11 @@ RSpec.describe "チャットルーム", type: :system do
           end
           find('#message-button').click
           @chatroom = Chatroom.chatroom_with_users([basic_subscriber] + [invited])
-          create_list(:message, 20, user: basic_subscriber, chatroom: @chatroom)
+          create_list(:message, 19, user: basic_subscriber, chatroom: @chatroom)
         end
 
-        it 'メッセージ21件目を投稿してもアラートが表示されないこと', js: true do
+        it 'メッセージ20件目を投稿してもアラートが表示されないこと', js: true do
+          # 20件目の投稿
           fill_in 'message_body', with: 'Lorem ipsum dolor sit amet'
           click_on '送信'
           expect(page).to have_content 'Lorem ipsum dolor sit amet'

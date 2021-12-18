@@ -178,8 +178,8 @@ RSpec.describe PayjpCustomer, type: :model do
                     create_list(:message, 11, user: user, chatroom: @chatroom)
                     expect(user.can_message?).to be_truthy
                 end
-                it 'メッセージが21件だとfalseが返ること' do
-                    create_list(:message, 21, user: user, chatroom: @chatroom)
+                it 'メッセージが20件だとfalseが返ること' do
+                    create_list(:message, 20, user: user, chatroom: @chatroom)
                     expect(user.can_message?).to be_falsey
                 end
             end
