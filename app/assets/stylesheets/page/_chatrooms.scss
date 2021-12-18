@@ -103,6 +103,20 @@
         display: none;
     }
 }
+.dm {
+    &__info {
+        text-align: center;
+        color: #a3a3a3;
+        font-size: 1.0rem;
+    } 
+    &__link {
+        font-size: 1.0rem;
+    }
+    &__wrapper {
+        max-width: 710px;
+        margin: 0 auto;
+    }
+}
 .input-message-body {
     background-color: #E8F0FE;
 }

@@ -255,6 +255,30 @@ h2 {
         transform: translate(-50%,-50%);
     }
 }
+.alert ul {
+    padding-inline-start: 20px;
+}
+.card {
+    text-decoration: none!important;
+    &_no-shadow {
+        box-shadow: none;
+    }
+}
+.card-header {
+    border: 0!important;
+}
+label {
+    margin-bottom: 0;
+}
+form {
+    margin: 0;
+}
+.fa-md {
+    font-size: .95em;
+}
+.form-inline {
+    flex-flow: row nowrap!important;
+}
 .active {
     display: block!important;
 }

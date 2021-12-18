@@ -418,7 +418,7 @@ RSpec.describe 'ユーザー登録', type: :system do
                     fill_in 'q[body]', with: 'ダミーテキスト'
                     click_button '検索'
                 end
-                expect(page).to have_content '「ダミーテキスト」でヒットしたダイアリー: 2件'
+                expect(page).to have_content '2件'
                 expect(page).to have_content diary_1.body
                 expect(page).to have_content diary_2.body
             end
