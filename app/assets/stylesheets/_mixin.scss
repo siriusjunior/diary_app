@@ -1,0 +1,16 @@
+// メディアクエリ
+@mixin mq($breakpoint: sp) {
+	@media #{map-get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}
+// メディアクエリ
+// PC: 1024px 以上
+// TAB: 1023px 以下
+// SP: 767px 以下
+
+@mixin box_sizing {
+    -moz-box-sizing:    border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing:         border-box;
+}

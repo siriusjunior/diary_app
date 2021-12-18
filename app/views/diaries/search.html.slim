@@ -1,8 +1,8 @@
 .wrapper.py-5
     - if @search_form.body.present?
         - if @diaries.present?
-            h2.text-center.mb-5 
-                |「#{@search_form.body}」でヒットしたダイアリー: #{@diaries.total_count}件
+            h2.text-center.mb-5.search-title 
+                |「#{@search_form.body}」でヒットしたダイアリー:<br class='sp'> #{@diaries.total_count}件
             #diaries
                 = render 'diaries'
         - else

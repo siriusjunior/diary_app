@@ -1,0 +1,80 @@
+.userprofile {
+    width: 100%;
+    color: $black;
+    @include mq('sp') {
+        flex-direction: column;
+    }
+    &__username {
+        font-size: .9rem;
+        -webkit-font-smoothing: antialiased;
+    }
+    &__follow-info {
+        font-size: .8rem;
+        font-weight: bold;
+        color: #888;
+        line-height: 16px;
+        -webkit-font-smoothing: antialiased;
+    }
+    &__labels {
+        align-items: flex-start;
+        @include mq('sp') {
+            width: 80%!important;
+        }
+    }
+    &__label {
+        width: 20%;
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+        @include mq('sp') {
+            width: 30%;
+        }
+    }
+    &__label-t {
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+    }
+    &__contents {
+        width: 70%;
+        font-size: .8rem;
+        @include mq('sp') {
+            width: 80%;
+        }
+    }
+    &__section {
+        width: 100%;
+    }
+    &__icons {
+        width: 18.3%;
+        @include mq('sp') {
+            width: 100%;
+        }
+    }
+    &__info {
+        width: 81.7%;
+        @include mq('sp') {
+            width: 100%;
+            margin-left: 0!important;
+        }
+    }
+    &__link {
+        margin: 0 0 0 auto;
+        font-size: .8rem;
+    }
+    &__thumbnails {
+        width: 80%;
+    }
+    &__diaries-link {
+        color: $black;
+        font-size: .8rem;
+    }
+}
+.account-edit {
+    &__uploader {
+        flex-grow: 1;
+    }
+    &__label {
+        font-weight: bold;
+        color: $black;
+        font-size: .9rem;
+    }
+}
