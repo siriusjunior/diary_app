@@ -1,9 +1,10 @@
 Faker::Config.locale = :en
 
 comments = Comment.all
+users = User.all
 puts 'Start inserting seed "comment_likes" ...'
 
-User.limit(20).each do |user|
+users.each do |user|
     comments.sample(150).each do |comment|
         user.comment_like(comment)
     end
