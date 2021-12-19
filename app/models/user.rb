@@ -181,5 +181,14 @@ class User < ApplicationRecord
     room_name = user_ids.join(':').to_s
     Chatroom.find_by(name: room_name).present?
   end
+
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.username = 'ゲストユーザー'
+      user.password = SecureRandom.urlsafe_base64.slice(1..8).downcase
+      user.password_confirmation = user.password
+      user.introduction = 'ゲストユーザーの自己紹介です。'
+    end
+  end
   
 end

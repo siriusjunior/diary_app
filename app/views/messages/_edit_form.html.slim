@@ -1,4 +1,4 @@
-= form_with model: @message, class: 'comment-edit d-flex mb-0 flex-column w-70', remote: true do |f|
+= form_with model: @message, class: 'comment-edit comment-edit__message-edit d-flex mb-0 flex-column', remote: true do |f|
     = f.text_field :body, class: 'form-control comment-edit__form', id: 'message-edit', placeholder: 'メッセージ'
     .comment-edit__bottom.d-flex.mt-1.justify-content-end.comment-edit__form
         object

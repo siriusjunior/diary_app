@@ -1,10 +1,12 @@
 header.navbar.navbar-expand-lg.navbar-light.header.header__bg#header-container
     .wrapper.d-flex.flex-row.align-items-center
-        = link_to image_tag('white-logo.png', size: '98x94', alt: 'ヘッダーのロゴ', class: 'header__logo header__logo_mg-r'), root_path
-        button.navbar-toggler aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarTogglerDemo02" data-toggle="collapse" type="button"
-        / span.navbar-toggler-icon
-        / #navbarTogglerDemo02.collapse.navbar-collapse
+        = link_to image_tag('white-logo.png', size: '98x94', alt: 'ヘッダーのロゴ', class: 'header__logo mr-3'), root_path
         = render 'diaries/search_form', search_form: @search_form
+        / ハンバーガーボタン
+        .btn-gnav#btn-gnav onclick="show_side()"
+            span.btn-gnav__border#line-1
+            span.btn-gnav__border#line-2
+            span.btn-gnav__border#line-3
         .navbar-nav.mt-2.mt-lg-0.d-flex.align-items-center
             object#dropdown.position-relative.mr-4
                 a href="#" 
@@ -26,3 +28,29 @@ header.navbar.navbar-expand-lg.navbar-light.header.header__bg#header-container
                     = icon 'fa', 'edit', class: 'fa-lg header__fa'
             / = link_to '投稿する', new_diary_path, class: 'nav-link header-btn header-btn_mg-r'
             = link_to 'ログアウト', logout_path, class: 'nav-link header-btn', method: :delete, data: { confirm: 'ログアウトします。よろしいですか？' } 
+        / ハンバーガーボタン
+        nav#sp-nav.sp-nav.pl-4
+            .menu.d-flex.flex-column
+                object.sp-nav__item.sp-nav_border.mt-5
+                    = link_to mypage_activities_path, class: 'sp-nav__link' do
+                        - if current_user.activities.unread.count > 0
+                            |通知一覧 (未読
+                            = current_user.activities.unread.count
+                            |件)
+                        - else
+                            |通知一覧
+                object.sp-nav__item.sp-nav_border
+                    = link_to chatrooms_path, class: 'sp-nav__link' do
+                        |チャットルーム一覧
+                object.sp-nav__item.sp-nav_border
+                    = link_to users_path, class: 'sp-nav__link' do
+                        |ユーザーリスト
+                object.sp-nav__item.sp-nav_border
+                    = link_to edit_mypage_account_path, class: 'sp-nav__link' do
+                        |アカウント設定
+                object.sp-nav__item.sp-nav_border
+                    = link_to new_diary_path, class: 'sp-nav__link' do
+                        |ダイアリーの新規作成
+                object.sp-nav__item.sp-nav_border
+                    = link_to logout_path, class: 'sp-nav__link', method: :delete, data: { confirm: 'ログアウトします。よろしいですか？' } 
+                        |ログアウト

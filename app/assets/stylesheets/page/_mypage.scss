@@ -1,0 +1,32 @@
+@import './setting';
+@import './mixin';
+
+.mypage {
+    &__title {
+        @include mq('sp') {
+            padding: 30px 0 15px!important;
+        }
+    }
+    &__edit-sec {
+        @include mq('tab') {
+            width: 100%!important;
+        }
+        @include mq('sp') {
+            width: 100%!important;
+        }
+    }
+}
+.dropdown-item {
+    -webkit-font-smoothing: antialiased;
+    font-size: 12px;
+    max-width: 100%;
+    @include mq('sp') {
+        white-space: pre-wrap;
+        padding: 0;
+    }
+}
+    .pagination {
+        @include mq('sp') {
+            overflow: scroll;
+        }
+    }

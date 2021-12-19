@@ -1,14 +1,27 @@
-header.navbar.navbar-expand-lg.navbar-light.header.header__bg
-    .wrapper.d-flex.flex-row.justify-content-between.align-items-center
-        = link_to image_tag('white-logo.png', size: '98x94', alt: 'ヘッダーのロゴ', class: 'header__logo'), root_path
-        button.navbar-toggler aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarTogglerDemo02" data-toggle="collapse" type="button"
-        / span.navbar-toggler-icon
-        / #navbarTogglerDemo02.collapse.navbar-collapse
-        / form.form-inline.my-2.my-lg-0.mr-auto
-        /     input.search__form.search__form_mg-r. placeholder="ダイアリーを検索" type="search" /
-        /     button.header-btn.my-2.my-sm-0 type="submit"  検索
+header.navbar.navbar-expand-lg.navbar-light.header.header__bg#header-container
+    .wrapper.d-flex.flex-row.align-items-center
+        = link_to image_tag('white-logo.png', size: '98x94', alt: 'ヘッダーのロゴ', class: 'header__logo mr-3'), root_path
+        = render 'diaries/search_form', search_form: @search_form
+        / ハンバーガーボタン
+        .btn-gnav#btn-gnav onclick="show_side()"
+            span.btn-gnav__border#line-1
+            span.btn-gnav__border#line-2
+            span.btn-gnav__border#line-3
         ul.navbar-nav.mt-2.mt-lg-0
+            li.nav-item
+            = link_to 'ゲストログイン', guest_login_path, class: 'nav-link header-btn header-btn_mg-r', method: :post
             li.nav-item
             = link_to 'ログイン', login_path, class: 'nav-link header-btn header-btn_mg-r'
             li.nav-item
             = link_to '会員登録', new_user_path, class: 'nav-link header-btn'
+        nav#sp-nav.sp-nav.pl-4
+            .menu.d-flex.flex-column
+                object.sp-nav__item.sp-nav_border.mt-5
+                    = link_to guest_login_path, class: 'sp-nav__link', method: :post do
+                        |ゲストログイン
+                object.sp-nav__item.sp-nav_border
+                    = link_to login_path, class: 'sp-nav__link' do
+                        |ログイン
+                object.sp-nav__item.sp-nav_border
+                    = link_to new_user_path, class: 'sp-nav__link'
+                        |会員登録

@@ -30,6 +30,11 @@ class Comment < ApplicationRecord
 
   after_create_commit :create_activities
 
+  def liked_by_owner?
+    owner_like =  comment_likes.find_by(user_id: diary.user_id)
+    comment_likes.include?(owner_like)
+  end
+
   private
 
     def create_activities

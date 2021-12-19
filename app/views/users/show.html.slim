@@ -1,78 +1,84 @@
 - set_meta_tags title: 'ユーザー詳細ページ'
-h2.text-center.py-5
-    = @user.username 
-    |さんのプロフィール
-.card.mb-5.diary.diary_center
-    .card-header.d-flex.userprofile
-        .userprofile__icons.d-flex.flex-column.align-items-center
-            = image_tag @user.avatar.url, size: '60x60', class: 'rounded-circle'
-            / = image_tag 'profile-placeholder.png', size: '60x60', class: 'rounded-circle'
-            span.userprofile__username.mb-1
-                = @user.username
-            .userprofile__follow-info.d-flex.flex-column.align-items-center.mb-2
-                object#following_user
-                    = link_to following_user_path(@user), class: 'span w-100 text-center'
-                        span 
-                            = @user.following.count
-                            |フォロー
-                object#followers_user
-                    = link_to followers_user_path(@user), class: 'span w-100 text-center'
-                        span#followers_user_count 
-                            = @user.followers.count
-                            |フォロワー
-            - if current_user && current_user.id != @user.id && current_user.has_room_with?(@user)
-                #message-button__container.active.d-block
-                    = render 'message_button', user: @user
-            - elsif current_user && current_user.id != @user.id  && current_user.following?(@user)
-                #message-button__container.active
-                    = render 'message_button', user: @user
-            - else 
-                #message-button__container
-                    = render 'message_button', user: @user
-            = render 'users/follow_area', user: @user
-            / .btn.btn-raised.block-btn.mt-1
-            /     |ブロック
-        .userprofile__info.ml-3
-            .userprofile__label-t.mb-2
-                |ユーザー情報
-            .userprofile__section.d-flex.mb-4 
-                .userprofile__label
-                    |プロフィール
-                .userprofile__contents 
-                    = @user.introduction
-            .userprofile__section.d-flex.mb-1
-                .userprofile__label
-                    |登録日
-                .userprofile__contents
-                    = @user.created_at.strftime('%Y/%m/%d')
-            .userprofile__section.d-flex.mb-1
-                .userprofile__label
-                    |投稿数
-                .userprofile__contents.d-flex 
-                    span
-                        = @user.diaries.count
-            .userprofile__section.d-flex.mb-2
-                .userprofile__label
-                    |登録タグ
-                .userprofile__contents.d-flex
-                    = render partial: "tag_name", collection: @tags
-            .userprofile__section.d-flex.mb-2
-                .userprofile__label
-                .userprofile__contents.userprofile__thumbnails.d-flex.align-items-center
-                    = render partial: 'diaries/thumbnail_diary', collection: @thumbnail_diaries
-                    = link_to diaries_user_path(@user), class: 'userprofile__link' do
-                        span
-                            |(ダイアリーを見る)
-            - if current_user == @user
-                = link_to edit_mypage_account_path, class: 'userprofile__link d-block w-100' do
-                    span.text-right.d-block
-                        |(プロフィールを編集する)
-.pt-5.diary__wrapper.diary_center
-    h2.text-center
+.wrapper.pb-5
+    h2.text-center.py-5
         = @user.username 
-        |さんの最新ダイアリー
-    .text-right.mb-4.userprofile__diaries-link
-        = link_to diaries_user_path(@user), class: 'userprofile__link' do
-            span
-                |(一覧ページへ)
-    = render @diaries
+        |さんのプロフィール
+    .card.mb-5.diary.diary_center
+        .card-header.d-flex.userprofile
+            .userprofile__icons.d-flex.flex-column.align-items-center
+                = image_tag @user.avatar.url, size: '60x60', class: 'rounded-circle'
+                / = image_tag 'profile-placeholder.png', size: '60x60', class: 'rounded-circle'
+                span.userprofile__username.mb-1
+                    = @user.username
+                .userprofile__follow-info.d-flex.flex-column.align-items-center.mb-2
+                    object#following_user
+                        = link_to following_user_path(@user), class: 'span w-100 text-center'
+                            span 
+                                = @user.following.count
+                                |フォロー
+                    object#followers_user
+                        = link_to followers_user_path(@user), class: 'span w-100 text-center'
+                            span#followers_user_count 
+                                = @user.followers.count
+                                |フォロワー
+                - if current_user && current_user.id != @user.id && current_user.has_room_with?(@user)
+                    #message-button__container.active.d-block
+                        = render 'message_button', user: @user
+                - elsif current_user && current_user.id != @user.id  && current_user.following?(@user)
+                    #message-button__container.active
+                        = render 'message_button', user: @user
+                - else 
+                    #message-button__container
+                        = render 'message_button', user: @user
+                = render 'users/follow_area', user: @user
+                / .btn.btn-raised.block-btn.mt-1
+                /     |ブロック
+            .userprofile__info.ml-3
+                .userprofile__label-t.mb-2
+                    |ユーザー情報
+                .userprofile__section.d-flex.mb-4 
+                    .userprofile__label
+                        |プロフィール
+                    .userprofile__contents 
+                        = @user.introduction
+                .userprofile__section.d-flex.mb-1
+                    .userprofile__label
+                        |登録日
+                    .userprofile__contents
+                        = @user.created_at.strftime('%Y/%m/%d')
+                .userprofile__section.d-flex.mb-1
+                    .userprofile__label
+                        |投稿数
+                    .userprofile__contents.d-flex 
+                        span
+                            = @user.diaries.count
+                .userprofile__section.d-flex.mb-2
+                    .userprofile__label
+                        |登録タグ
+                    .d-flex.flex-wrap.w-60.userprofile__labels
+                        = render partial: "tag_name", collection: @tags
+                / .userprofile__section.d-flex.mb-2
+                /     .userprofile__label
+                /         |登録タグ
+                /     .userprofile__labels.d-flex
+                /         = render partial: "tag_name", collection: @tags
+                .userprofile__section.d-flex.mb-2
+                    .userprofile__label
+                    .userprofile__contents.userprofile__thumbnails.d-flex.align-items-center
+                        = render partial: 'diaries/thumbnail_diary', collection: @thumbnail_diaries
+                        = link_to diaries_user_path(@user), class: 'userprofile__link' do
+                            span
+                                |(ダイアリーを見る)
+                - if current_user == @user
+                    = link_to edit_mypage_account_path, class: 'userprofile__link d-block w-100' do
+                        span.text-right.d-block
+                            |(プロフィールを編集する)
+    .pt-5.diary__wrapper.diary_center
+        h2.text-center
+            = @user.username 
+            |さんの最新ダイアリー
+        .text-right.mb-4.userprofile__diaries-link
+            = link_to diaries_user_path(@user), class: 'userprofile__link' do
+                span
+                    |(一覧ページへ)
+        = render @diaries

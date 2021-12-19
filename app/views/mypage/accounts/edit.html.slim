@@ -1,19 +1,19 @@
 = form_with model: @account_form, url: mypage_account_path, method: :patch, local: true do |f|
     = render 'shared/error_messages', object: f.object
-    .d-flex.justify-content-between.flex-row-reverse
+    .d-flex.account-edit__up-wrapper
         .account-edit__uploader.d-flex.flex-column
             = f.label :avatar, 'プロフィール画像', class: 'account-edit__label mb-3'
             = f.file_field :avatar, onchange: 'previewFileWithId(preview)', accept: 'image/*'
             = f.hidden_field :avatar_cache
-        .account-edit__avatar.w-25
+        .account-edit__avatar.w-25.mypage__edit-sec.mr-2
             = image_tag @user.avatar.url, class: 'rounded-circle', id: 'preview', size: '100x100'
-    .form-group.w-75.right.mb-2
+    .form-group.w-75.right.mb-2.mypage__edit-sec
         = f.label :username, class: 'account-edit__label'
         = f.text_field :username, class: 'form-control'
-    .form-group.w-75.right.mb-3
+    .form-group.w-75.right.mb-3.mypage__edit-sec
         = f.label :introduction, 'プロフィール', class: 'account-edit__label'
         = f.text_area :introduction, class: 'form-control', rows: '5'
-    .form-group.w-75.right.mb-3
+    .form-group.w-75.right.mb-3.mypage__edit-sec
         / = hidden_field_tag :label, @labels, id: 'hidden-labels'
         = f.label :labels, 'タグ', class: 'account-edit__label'
         span.d-block.search-form__info.pl-3 ※カンマで区切る

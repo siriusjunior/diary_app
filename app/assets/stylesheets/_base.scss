@@ -1,0 +1,105 @@
+@import './setting';
+@import './mixin';
+
+.header {
+    height: 80px;
+    &__icon {
+        &:hover {
+            transform: translateY(-0.15em);
+            transition: .3s;
+        }
+    }
+    &__bg {
+        background-color: #267700;
+    }
+    &__logo {
+        width: 40px;
+        height: auto;
+    }
+    &-btn {
+        border-radius: 30px;
+        border-width: 0;
+        background-color: #519233;
+        border-color: #fff;
+        color: white!important;
+        text-align: center;
+        height: 40px;
+        &:hover {
+            background-color: #67ac47;
+            transform: translateY(-0.15em);
+            transition: .3s;
+        }
+        &_mg-r {
+            margin-right: 20px;
+        }
+    }
+    &__fa{
+        color: #fff;
+        &_mg-r-20 {
+            margin-right: 20px;
+        }
+        &_mg-r-10 {
+            margin-right: 10px;
+        }
+    }
+}
+.navbar-nav {
+    @include mq('tab') {
+        display: none!important;
+    }
+}
+.tag {
+    &:hover {
+        text-decoration: none;
+    }
+    &__label {
+        display: block;
+        font-size: .7rem;
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+        color: #fff;
+        background-color: #6dacff; 
+        border-radius: 4px;
+        letter-spacing: 1px;
+        margin-bottom: 2px;
+    }
+    &__wrapper {
+        max-width: 710px;
+        margin: 0 auto;
+        @include mq('sp') {
+            margin-bottom: 30px!important;
+        }
+    }
+    &_current {
+        background-color: #2062b8;
+        color: #fff;
+        &:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+}
+#header-activities {
+    width: 400px;
+    top: 30px;
+    .dropdown-item {
+        -webkit-font-smoothing: antialiased;
+        padding: .9rem;
+        font-size: 12px;
+        max-width: 100%;
+    }
+    .read {
+        background: #f1f1f1;
+    }
+}
+body {
+    box-sizing: border-box;
+    margin: 0;
+    position: relative;
+    height: 100vh;
+    background-color: #FAFAFA;
+}
+h2 {
+    color: $black;
+    -webkit-font-smoothing: antialiased;
+}

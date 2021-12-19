@@ -1,0 +1,29 @@
+$layout-width-inner: 1024px;
+// ブレークポイント
+$breakpoints: (
+	"sp": "screen and (max-width: 767px)",
+	"tab": "screen and (max-width: #{$layout-width-inner - 1px})",
+	"pc": "screen and (min-width: #{$layout-width-inner})",
+);
+$black: #666;
+
+// メディアクエリ
+// PC: 1024px 以上
+// TAB: 1023px 以下
+// SP: 767px 以下
+
+// 任意のブレイクポイントの引数指定でセレクタ内に記述、以下は例
+// .item {
+// 	width: 360px;
+// 	margin: 0 50px 50px 0;
+// ここから指定開始
+// 	    @include mq('tab') {
+// 		    width: calc(33.33333333% - 20px);
+// 		    margin-right: 30px;
+// 		    margin-bottom: 30px;
+//  	}
+// 	    @include mq('sp') {
+// 	    	width: 100%;
+// 	    	margin-right: 0;
+//  	}
+// }
