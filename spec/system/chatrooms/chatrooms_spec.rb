@@ -180,22 +180,19 @@ RSpec.describe "チャットルーム", type: :system do
           create_list(:message, 9, user: no_subscriber, chatroom: @chatroom)
         end
 
-        it 'メッセージ10件目を投稿してもアラートが表示されないこと', js: true do
+        it 'メッセージ10件目を投稿できること', js: true do
           fill_in 'message_body', with: 'Lorem ipsum dolor sit amet'
           click_on '送信'
           expect(page).to have_content 'Lorem ipsum dolor sit amet'
-          expect(page).not_to have_css('.alert')
         end
         it 'メッセージ11件目を投稿しようとするとアラートが表示されること', js: true do
           # 10件目の投稿
           fill_in 'message_body', with: 'Lorem ipsum dolor sit amet'
           click_on '送信'
-          expect(page).to have_content 'Lorem ipsum dolor sit amet'
           # 11件目の投稿
           fill_in 'message_body', with: 'Nec dui nunc mattis enim'
           click_on '送信'
           expect(page).to have_css('.alert')
-          expect(page).to have_content '今月のメッセージ可能回数をオーバーしました。'
           expect(page).not_to have_content 'Nec dui nunc mattis enim'
         end
       end
@@ -217,18 +214,15 @@ RSpec.describe "チャットルーム", type: :system do
           fill_in 'message_body', with: 'Lorem ipsum dolor sit amet'
           click_on '送信'
           expect(page).to have_content 'Lorem ipsum dolor sit amet'
-          expect(page).not_to have_content '今月のメッセージ可能回数をオーバーしました'
         end
         it 'メッセージ21件目を投稿しようとするとアラートが表示されること', js: true do
           # 20件目の投稿
           fill_in 'message_body', with: 'Lorem ipsum dolor sit amet'
           click_on '送信'
-          expect(page).not_to have_css('.alert')
-          expect(page).to have_content 'Lorem ipsum dolor sit amet'
           # 21件目の投稿
           fill_in 'message_body', with: 'Nec dui nunc mattis enim'
           click_on '送信'
-          expect(page).to have_content '今月のメッセージ可能回数をオーバーしました'
+          expect(page).to have_css('.alert')
           expect(page).not_to have_content 'Nec dui nunc mattis enim'
         end
       end

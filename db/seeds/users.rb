@@ -4,7 +4,8 @@ puts 'Start inserting first seed "user" ...'
         username: 'foobar',
         password: 'password',
         password_confirmation: 'password',
-        activation_state: "active"
+        activation_state: "active",
+        avatar: open("./db/fixtures/foobar.png")
     )
 puts "\"#{ first_user.username }\" has been created!"
 
@@ -16,7 +17,8 @@ puts 'Start inserting first seed "gest" ...'
         password: password,
         password_confirmation: password,
         activation_state: 'active',
-        introduction: 'ゲストユーザーの自己紹介です。'
+        introduction: 'ゲストユーザーの自己紹介です。',
+        avatar: open("./db/fixtures/guest.png")
     )
     guest.skip_password = true
     guest.update!(activation_state: "active")
@@ -27,7 +29,8 @@ puts "\"#{ guest.username }\" has been created!"
         email: Faker::Internet.unique.email,
         username: Faker::Name.name,
         password: 'password',
-        password_confirmation: 'password'
+        password_confirmation: 'password',
+        remote_avatar_url: "https://i.pravatar.cc/200"
     )
     user.skip_password = true
     user.update!(activation_state: "active")

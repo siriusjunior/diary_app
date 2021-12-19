@@ -158,10 +158,10 @@ RSpec.describe PayjpCustomer, type: :model do
 
         describe 'can_message?' do
             let!(:invited) { create(:user) }
-            before do
-                @chatroom = Chatroom.chatroom_with_users([user] + [invited])
-            end
             context '未契約の場合' do
+                before do
+                    @chatroom = Chatroom.chatroom_with_users([user] + [invited])
+                end
                 it 'メッセージが0件でもtrueが返ること' do
                     expect(user.can_message?).to be_truthy
                 end
@@ -173,6 +173,7 @@ RSpec.describe PayjpCustomer, type: :model do
             context 'ベーシックプランの場合' do
                 before do
                     user.subscript!(basic_plan)
+                    @chatroom = Chatroom.chatroom_with_users([user] + [invited])
                 end
                 it 'メッセージが11件でもtrueが返ること' do
                     create_list(:message, 11, user: user, chatroom: @chatroom)
@@ -180,13 +181,13 @@ RSpec.describe PayjpCustomer, type: :model do
                 end
                 it 'メッセージが20件だとfalseが返ること' do
                     create_list(:message, 20, user: user, chatroom: @chatroom)
-                    expect(user.messages.count).to eq 20
                     expect(user.can_message?).to be_falsey
                 end
             end
             context 'プレミアムプランの場合' do
                 before do
                     user.subscript!(premium_plan)
+                    @chatroom = Chatroom.chatroom_with_users([user] + [invited])
                 end
                 it 'メッセージが32件でもtrueが返ること' do
                     create_list(:message, 32, user: user, chatroom: @chatroom)
