@@ -156,10 +156,30 @@
     }
     &__image {
         border-bottom: silver solid 1px;
+        display: flex;
+        @include mq('pc') {
+            justify-content: flex-start;
+        }
+        @include mq('tab') {
+            justify-content: flex-start;
+        }
+        @include mq('sp') {
+            flex-direction: column;
+            justify-content: flex-start;
+        }
     }
     &__label {
         color: $black;
         font-size: .9rem;
+        margin-right: 3rem;
+        @include mq('sp') {
+            margin-right: 0;
+        }
+    }
+    &__preview {
+        @include mq('sp') {
+            margin: 10px 0 15px;
+        }
     }
 }
 .new-diary {

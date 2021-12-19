@@ -10,9 +10,9 @@
                 |日目
         = link_to diary_reset_path, { method: :patch, data: { confirm: 'ダイアリー日数をリセットしますか？' }, class: "reset-btn reset-btn_mg card card_no-shadow new-diary new-diary_center d-flex flex-column mb-4", remote: true } do
             = "リセット"
-        .form-group.d-flex.justify-content-start.uploader__image.align-items-center.pb-1
-            = f.label :image, 'アップロード画像(任意)', class: 'mr-5 uploader__label'
-            = f.file_field :image, onchange: 'previewDiaryImageFile(preview)', accept: 'image/*'
+        .form-group.uploader__image.pb-1
+            = f.label :image, 'アップロード画像(任意)', class: 'uploader__label'
+            = f.file_field :image, onchange: 'previewDiaryImageFile(preview)', accept: 'image/*', class: 'uploader__preview'
             / バリデーションエラーが発生してフォーム再表示の際に、キャッシュを利用してファイルを保持する
             = f.hidden_field :image_cache
             - if diary.image.present?
