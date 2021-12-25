@@ -8,7 +8,7 @@ RUN apt-get update -qq && \
     && rm -rf /var/lib/apt/lists/*
 
 # コンテナのディレクトリ設定
-ENV APP_ROOT /my_app
+ENV APP_ROOT /app
 RUN mkdir ${APP_ROOT}
 WORKDIR ${APP_ROOT}
 

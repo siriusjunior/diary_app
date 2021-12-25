@@ -1,0 +1,26 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - 3000:3000
+    volumes:
+      - ".:/app"
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - "./data/redis:/data"
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: "6989"
+    volumes_from:
+      - data
+  data:
+    image: busybox
+    volumes:
+      - "/var/lib/mysql/data"
