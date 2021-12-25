@@ -1,4 +1,4 @@
-FROM ruby:2.7.5
+FROM ruby:2.6.4
 
 # パッケージのインストール
 RUN apt-get update -qq && \
