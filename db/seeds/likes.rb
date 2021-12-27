@@ -9,4 +9,4 @@ User.limit(13).each do |user|
     end
 end
 
-puts "Diary likes have been created!"
+puts "Diary likes created!"

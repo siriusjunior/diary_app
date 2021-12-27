@@ -11,4 +11,4 @@ diaries.each do |diary|
     end
 end
 
-puts "Comments have been created!"
+puts "Comments created!"

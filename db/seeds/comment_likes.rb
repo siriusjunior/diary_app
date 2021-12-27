@@ -9,4 +9,4 @@ users.each do |user|
         user.comment_like(comment)
     end
 end
-puts "Comment_likes have been created!"
+puts "Comment_likes created!"

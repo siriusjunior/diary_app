@@ -7,7 +7,7 @@ puts 'Start inserting first seed "user" ...'
         activation_state: "active",
         avatar: open("./db/fixtures/foobar.png")
     )
-puts "\"#{ first_user.username }\" has been created!"
+puts "\"#{ first_user.username }\" created!"
 
 puts 'Start inserting first seed "gest" ...'
     password = SecureRandom.urlsafe_base64.slice(1..8).downcase
@@ -22,7 +22,7 @@ puts 'Start inserting first seed "gest" ...'
     )
     guest.skip_password = true
     guest.update!(activation_state: "active")
-puts "\"#{ guest.username }\" has been created!"
+puts "\"#{ guest.username }\" created!"
 
 20.times do
     user = User.create(
@@ -34,7 +34,7 @@ puts "\"#{ guest.username }\" has been created!"
     )
     user.skip_password = true
     user.update!(activation_state: "active")
-    puts "\"#{ user.username }\" has been created!"
+    puts "\"#{ user.username }\" created!"
 end
 
 puts "Start creating some relationships about \"#{ guest.username }\""
@@ -43,4 +43,4 @@ following = users[11..20]
 followers = users[3..10]
 following.each { |followed| guest.follow(followed) }
 followers.each { |follower| follower.follow(guest) }
-puts "Created some relationships about \"#{ guest.username }\""
+puts "Created some relationships about \"#{ guest.username }\"!"

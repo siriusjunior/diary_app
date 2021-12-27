@@ -12,5 +12,5 @@ invited.messages.create!(body: 'メッセージありがとう。天気いいよ
 user.messages.create!(body: 'ドライブいいね。旅行するとしたら、県内の旅行がいいな。', user: user, chatroom: chatroom)
 invited.messages.create!(body: 'そうだな。どっこも行ってないし今日暇だし、どっか行ってみる？', user: user, chatroom: chatroom)
 
-puts 'Created chatroom! with some messages'
+puts 'Created chatroom with some messages!'
 

@@ -3,7 +3,7 @@ puts 'Start inserting seed "tags" ...'
     names.map do |name|
         Tag.create!(name: name)
     end
-puts "Tags have been created!"
+puts "Tags created!"
 
 tags = Tag.all
 puts 'Start inserting seed "tag_links" ...'
@@ -12,4 +12,4 @@ User.all.each do |u|
         TagLink.create!(user: u, tag: tag)
     end
 end
-puts "TagLinks have been created!"
+puts "TagLinks created!"
