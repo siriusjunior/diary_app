@@ -34,7 +34,7 @@ RSpec.describe "チャットルーム", type: :system do
         expect(page).not_to have_selector '#message-button__container', class: 'active'
       end
 
-      it 'チャットルームボタンを押すとルームが作られること' do
+      it 'チャットルームボタンを押すとルームが作られること', js: true do
         within "#follow-area-#{ receiver.id }" do
           click_link('フォローする')
         end
@@ -46,7 +46,7 @@ RSpec.describe "チャットルーム", type: :system do
       end
     end
 
-    context 'チャットルームが存在する場合' do
+    context 'チャットルームが存在する場合', js: true do
       before do
         login_as sender
         visit user_path(receiver)
@@ -72,7 +72,7 @@ RSpec.describe "チャットルーム", type: :system do
 
   describe 'チャットルーム詳細ページ' do
 
-    describe 'メッセージの送受信者ごとの表示切替え' do
+    describe 'メッセージの送受信者ごとの表示切替え', js: true do
       context '送信者の場合' do
         before do
           login_as sender

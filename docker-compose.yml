@@ -33,8 +33,7 @@ services:
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    # pry-byebugを使えるようにする
-    tty: true
+    tty: true # pry-byebugを使えるようにする
     stdin_open: true
     depends_on:
       - db #DBコンテナ起動後に実行
@@ -42,11 +41,9 @@ services:
       - 3000:3000
     volumes:
       - .:/app:delegated #delegatedで同期の一貫性を保証しないでパフォーマンス向上
-    environment:
-      SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub #コンテナのブラウザ指定
-  chrome:    #Chromeでのテスト実行用コンテナ
-    image: selenium/standalone-chrome
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
     ports:
-      - '4444:4444'
+      - 4444:4444
 volumes:
   mysql-data:

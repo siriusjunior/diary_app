@@ -67,7 +67,11 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = Settings.default_url_options.to_h
   config.action_mailer.delivery_method = :letter_opener
-
+  
+  # whitelistの検証無効化
+  config.web_console.whiny_requests = false
+  
   # Cannot render console fromに対応
   config.web_console.whitelisted_ips = '172.22.0.1'
+
 end

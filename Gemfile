@@ -82,7 +82,7 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara'
-  gem 'webdrivers', require: !ENV['SELENIUM_DRIVER_URL'] #docker-compose.ymlの環境にブラウザ指定した
+  gem 'webdrivers'
   gem 'rspec_junit_formatter'
   # Easy installation and use of chromedriver to run system tests with Chrome
   # gem 'chromedriver-helper'

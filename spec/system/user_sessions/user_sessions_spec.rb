@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'ログイン・ログアウト', type: :system do
+RSpec.describe 'ログイン・ログアウト', js: true, type: :system do
     let(:user) { create(:user) }
     
     describe 'ログイン' do

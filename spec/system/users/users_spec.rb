@@ -40,7 +40,7 @@ RSpec.describe 'ユーザー登録', type: :system do
             login_as login_user
         end
 
-        it 'フォローができること' do
+        it 'フォローができること', js: true  do
             visit users_path
             expect {
                 within "#follow-area-#{ other_user.id }" do
@@ -50,7 +50,7 @@ RSpec.describe 'ユーザー登録', type: :system do
             }.to change(login_user.following, :count).by(1)
         end
         
-        it 'フォローが外せること' do
+        it 'フォローが外せること', js: true  do
             login_user.follow(other_user)
             visit users_path
             expect {
@@ -76,7 +76,7 @@ RSpec.describe 'ユーザー登録', type: :system do
             end
         end
 
-        it 'フォローユーザーの一覧が表示されていること' do
+        it 'フォローユーザーの一覧が表示されていること', js: true do
             visit user_path(login_user)
             expect(page).to have_content login_user.following.count
             find('#following_user').click
@@ -87,7 +87,7 @@ RSpec.describe 'ユーザー登録', type: :system do
             expect(page).not_to have_content followers.first.username
         end
         
-        it 'フォローユーザーの一覧が表示されていること' do
+        it 'フォローユーザーの一覧が表示されていること', js: true do
             visit user_path(login_user)
             expect(page).to have_content login_user.followers.count
             find('#followers_user').click
@@ -124,7 +124,7 @@ RSpec.describe 'ユーザー登録', type: :system do
             end
         end
 
-        it 'タグをクリックすると該当ユーザーが表示されること' do
+        it 'タグをクリックすると該当ユーザーが表示されること', js: true  do
             tag_names = Tag.all.pluck(:name)
             find('#users_icon').click
             expect(current_path).to eq users_path
@@ -138,7 +138,7 @@ RSpec.describe 'ユーザー登録', type: :system do
             expect(page).not_to have_content no_tag_user.username
         end
         
-        it 'タグをクリックすると該当ユーザーが表示されないこと' do
+        it 'タグをクリックすると該当ユーザーが表示されないこと', js: true  do
             find('#users_icon').click
             expect(current_path).to eq users_path
             within("#tags") do
@@ -162,7 +162,7 @@ RSpec.describe 'ユーザー登録', type: :system do
             login_as login_user
         end
         
-        it 'プロフィール編集ができて反映がされること' do
+        it 'プロフィール編集ができて反映がされること', js: true do
             find('#edit_mypage_account').click
             expect(current_path).to eq edit_mypage_account_path
             attach_file 'user_avatar', File.join(Rails.root + 'spec/fixtures/dummy.png')
