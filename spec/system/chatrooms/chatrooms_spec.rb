@@ -12,32 +12,30 @@ RSpec.describe "チャットルーム", type: :system do
       before do
         login_as sender
         visit user_path(receiver)
+        within "#follow-area-#{ receiver.id }" do
+          click_link('フォローする')
+        end
       end
 
       it 'ユーザー詳細ページにてフォローするとDMボタンが出現すること', js: true do
-        within "#follow-area-#{ receiver.id }" do
-          click_link('フォローする')
+        within ".userprofile__icons" do
+          expect(page).to have_selector '#message-button__container', class: 'active'
         end
-        expect(page).to have_selector '#message-button__container', class: 'active'
       end
 
-      it 'ユーザー詳細ページにてアンフォローするとDMボタンが削除されること', js: true do
-        within "#follow-area-#{ receiver.id }" do
-          click_link('フォローする')
+      it 'ユーザー詳細ページにてアンフォローするとDMボタンが表示されないこと', js: true do
+        within ".userprofile__icons" do
+          expect(page).to have_selector '#message-button__container', class: 'active'
         end
-        expect(page).to have_css '#message-button'
-        expect(page).to have_content 'フォロー中'
         within "#follow-area-#{ receiver.id }" do
           click_link('フォロー中')
         end
-        expect(page).to have_css '#message-button__container'
-        expect(page).not_to have_selector '#message-button__container', class: 'active'
+        within ".userprofile__icons" do
+          expect(page).not_to have_selector '#message-button__container', class: 'active'
+        end
       end
 
       it 'チャットルームボタンを押すとルームが作られること', js: true do
-        within "#follow-area-#{ receiver.id }" do
-          click_link('フォローする')
-        end
         find('#message-button').click
         expect(current_path).to eq chatroom_path(Chatroom.first)
         click_link '参加者一覧'
@@ -63,7 +61,7 @@ RSpec.describe "チャットルーム", type: :system do
         within "#follow-area-#{ receiver.id }" do
           click_link('フォロー中')
         end
-        expect(page).to have_selector '#message-button__container', class: 'active'
+        expect(page).to have_css('#message-button__container', visible: true)
       end
 
     end
@@ -130,7 +128,9 @@ RSpec.describe "チャットルーム", type: :system do
           expect(page).to have_content 'ログアウトしました'
           login_as receiver
           visit user_path(sender)
-          expect(page).to have_selector '#message-button__container', class: 'active'
+          within ".userprofile__icons" do
+            expect(page).to have_selector '#message-button__container', class: 'active'
+          end
         end
         
         it 'メッセージの編集・削除ボタンが表示されていないこと', js: true do
@@ -314,5 +314,4 @@ RSpec.describe "チャットルーム", type: :system do
     # 文字数の制限
   end
   # チャットルーム詳細ページ
-
 end
