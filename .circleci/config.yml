@@ -1,81 +1,37 @@
 version: 2
 jobs:
   build:
-    parallelism: 1
-    docker:
-      - image: circleci/ruby:2.6.4-node-browsers #このイメージをstepsの実行時のプライマリコンテナとして使用
-        auth:
-          username: siriusjunior
-          password: $DOCKERHUB_PASSWORD
-        environment: #コンテナの環境変数設定
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle #vendor/bundle 依存関係のファイルはbundle_installを後でrun
-          RAILS_ENV: test
-      - image: redis:latest
-        auth:
-          username: siriusjunior
-          password: $DOCKERHUB_PASSWORD
-      - image: circleci/mysql:5.7 #MySQLのバージョンを確認、データベースイメージ指定
-        environment: #データベースの環境変数設定
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes #[MYSQL_ROOT_PASSWORD]のnull_valueの有効化
-          MYSQL_ROOT_PASSWORD: '' #null_valueで設定
-    steps: #CIで動作するコマンドを設定する必須キー
-      - checkout #作業ディレクトリにGitリポジトリをコピー
-      - run:  #コマンド実行
-          name: setup bundler #任意のrunの名前
-          command: |
-            gem install bundler:2.2.24
-            bundle -v
-      - restore_cache: #キャッシュがsave_cacheで存在していればリストアして、ビルドタイムを向上させる
-          keys: #キャッシュの複数指定
-            - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - rails-demo-bundle-v2-
+    machine:
+      image: circleci/classic:edge
+    steps:
+      - checkout
       - run:
-          name: bundle install
-          command: | #パスの指定とインストール実行
-            bundle config set --local path 'vendor/bundle'
-            bundle install
-      - save_cache: #キャッシュの保存
-          key:  rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      - restore_cache: #キャッシュがsave_cacheで存在していればリストアして、ビルドタイムを向上させる
-          keys: #キャッシュの複数指定
-            - rails-demo-yarn-{{ checksum "yarn.lock" }}
-            - rails-demo-yarn-
+        name: docker-compose build
+        command: docker-compose build
       - run:
-          name: yarn install #Yarnパッケージのキャッシュ化
-          command: yarn install --cache-folder ~/.cache/yarn
-      - save_cache: #Yarnキャッシュの保存
-          key: rails-demo-yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+        name: docker-compose up
+        command: docker-compose up -d
       - run:
-          name: wait database #依存関係の待機(MySQLの場合)
-          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+        name: wait for db launch
+        command: sleep 10
       - run:
-          name: setup database.yml #CircleCiで構築されるDBを反映
-          command: cp config/database.ci.yml config/database.yml
+        name: setup db
+        command: docker-compose run web rails db:create db:migrate
       - run:
-          name: setup database #スキーマファイルからテーブル作成、--traceでfull_traceチェック
-          command: bin/rails db:schema:load --trace
-      - run:
-          name: Rubocop #rubocopの起動
-          command: bundle exec rubocop --lint
-      # local環境との不整合が疑われるため、chrome-driverのバージョンを更新する
-      - run:
-          name: update chromeDriver version
-          command: bundle exec rake webdrivers:chromedriver:update
-      - run:
-          name: execute rspec #Rspecの実行
-          command: | #RspecJunitFormatterのgemでrspec結果をCIが読める,rspecファイルをglobしファイル名でrspecを並行させる--split-by=timings
-            bundle exec rspec \
-              --format RspecJunitFormatter \
-              --out test_results/rspec.xml \
-              --format progress \
-              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+        name: test
+        command: |
+          docker-compose run web bundle exec rspec spec  \
+            --format RspecJunitFormatter \
+            --out test_results/rspec.xml \
+            --format progress \
+            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
       - store_test_results: #テスト結果のアップロード
           path: test_results
       - store_artifacts:
           path: tmp/screenshots/
+      - run:
+          name: Rubocop #rubocopの起動
+          command: bundle exec rubocop --lint
+      - run:
+        name: docker-compose down
+        command: docker-compose down
