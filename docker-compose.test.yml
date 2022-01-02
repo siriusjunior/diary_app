@@ -1,8 +1,8 @@
 version: '3'
 services:
   web:
-    build: .
-    dockerfile: Dockerfile.test
+    build:
+      dockerfile: Dockerfile.test
     tty: true # pry-byebugを使えるようにする
     stdin_open: true
     depends_on:
