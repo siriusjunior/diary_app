@@ -20,11 +20,11 @@ jobs:
             docker cp -L config/database.ci.yml project_web_1:app/config/database.yml
       - run:
           name: setup database
-          command: docker-compose -f docker-compose.test.yml exec project_web_1 rails db:migrate
+          command: docker-compose exec project_web_1 rails db:migrate
       - run:
           name: test
           command: |
-            docker-compose -f docker-compose.test.yml exec project_web_1 bundle exec rspec spec  \
+            docker-compose exec project_web_1 bundle exec rspec spec  \
               --format RspecJunitFormatter \
               --out test_results/rspec.xml \
               --format progress \
@@ -35,7 +35,7 @@ jobs:
           path: tmp/screenshots/
       - run:
           name: Rubocop #rubocopの起動
-          command: docker-compose -f docker-compose.test.yml exec project_web_1 bundle exec rubocop --lint
+          command: docker-compose exec project_web_1 bundle exec rubocop --lint
       - run:
           name: docker-compose down
-          command: docker-compose -f docker-compose.test.yml exec project_web_1 docker-compose down
+          command: docker-compose down
