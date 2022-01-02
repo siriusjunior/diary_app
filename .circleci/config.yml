@@ -15,6 +15,9 @@ jobs:
           name: wait for db launch
           command: sleep 10
       - run:
+          name: setup database.yml #CircleCiで構築されるDBを反映
+          command: cp config/database.ci.yml config/database.yml
+      - run:
           name: setup db
           command: docker-compose -f docker-compose.test.yml exec web rails db:migrate
       - run:
