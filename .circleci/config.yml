@@ -20,7 +20,7 @@ jobs:
             docker cp -L config/database.ci.yml project_web_1:app/config/database.yml
       - run:
           name: setup database
-          command: docker-compose exec web rails db:migrate
+          command: docker-compose exec web rails db:migrate RAILS_ENV=test
       - run:
           name: test
           command: |
