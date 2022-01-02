@@ -17,10 +17,9 @@ jobs:
       - run:
           name: setup database.yml #CircleCiで構築されるDBを反映
           command: |
-            mkdir config \
             docker cp -L config/database.ci.yml project_web_1:config/database.yml
       - run:
-          name: setup db
+          name: setup database
           command: docker-compose -f docker-compose.test.yml exec project_web_1 rails db:migrate
       - run:
           name: test
