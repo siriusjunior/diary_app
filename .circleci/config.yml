@@ -20,10 +20,11 @@ jobs:
         environment: #データベースの環境変数設定
           MYSQL_ALLOW_EMPTY_PASSWORD: yes #[MYSQL_ROOT_PASSWORD]のnull_valueの有効化
           MYSQL_ROOT_PASSWORD: '' #null_valueで設定
-      - image: selenium/standalone-chrome-debug:latest
-        name: chrome
     steps: #CIで動作するコマンドを設定する必須キー
       - checkout #作業ディレクトリにGitリポジトリをコピー
+      - run:
+          command: chromedriver
+          background: true
       - run:  #コマンド実行
           name: setup bundler #任意のrunの名前
           command: |
