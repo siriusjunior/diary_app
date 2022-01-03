@@ -17,8 +17,8 @@ jobs:
       - run:
           name: create database #circleciで構築されるDBを反映
           command: |
-          docker cp -L config/database.ci.yml project_web_1:app/config/database.yml \
-          docker-compose exec web rails db:create RAILS_ENV=test
+            docker cp -L config/database.ci.yml project_web_1:app/config/database.yml \
+              docker-compose exec web rails db:create RAILS_ENV=test
       - run:
           name: migrate database #circleciで構築されるDBを反映
           command: docker-compose exec web rails db:migrate RAILS_ENV=test
