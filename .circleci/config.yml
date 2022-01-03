@@ -5,9 +5,9 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
-      - run:
-          name: docker-compose build
-          command: docker-compose -f docker-compose.test.yml build
+      # - run:
+      #     name: docker-compose build
+      #     command: docker-compose -f docker-compose.test.yml build
       - run:
           name: docker-compose up
           command: docker-compose -f docker-compose.test.yml up -d
@@ -15,11 +15,12 @@ jobs:
           name: wait for db launch
           command: sleep 10
       - run:
-          name: setup database.yml #circleciで構築されるDBを反映
+          name: create database #circleciで構築されるDBを反映
           command: |
-            docker cp -L config/database.ci.yml project_web_1:app/config/database.yml
+          docker cp -L config/database.ci.yml project_web_1:app/config/database.yml \
+          docker-compose exec web rails db:create RAILS_ENV=test
       - run:
-          name: setup database
+          name: migrate database #circleciで構築されるDBを反映
           command: docker-compose exec web rails db:migrate RAILS_ENV=test
       - run:
           name: test
