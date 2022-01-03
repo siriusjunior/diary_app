@@ -15,7 +15,7 @@ jobs:
           name: wait for db launch
           command: sleep 10
       - run:
-          name: setup database.yml #circleCiで構築されるDBを反映
+          name: setup database.yml #circleciで構築されるDBを反映
           command: |
             docker cp -L config/database.ci.yml project_web_1:app/config/database.yml
       - run:

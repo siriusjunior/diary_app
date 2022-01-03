@@ -1,8 +1,11 @@
 default: &default
   adapter: mysql2
   encoding: utf8
+  username: <%= ENV.fetch("MYSQL_USERNAME") %>
+  password: <%= ENV.fetch("MYSQL_PASSWORD") %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS"){ 5 } %>
-  host: test-db
+  host: <%= ENV.fetch("MYSQL_HOST") %>
+  port: <%= ENV.fetch("MYSQL_PORT") %>
   # host: 127.0.0.1
   # port: 3306
   username: root
@@ -10,4 +13,4 @@ default: &default
 
 test:
   <<: *default
-  database: circle_test
+  database: ci_test
