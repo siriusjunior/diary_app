@@ -70,9 +70,6 @@ jobs:
           paths:
             - ~/.cache/yarn
       - run:
-          name: init redis
-          command: redis-server
-      - run:
           name: wait database #依存関係の待機(MySQLの場合)
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
