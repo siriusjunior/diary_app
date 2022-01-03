@@ -15,10 +15,11 @@ jobs:
           name: wait for db launch
           command: sleep 10
       - run:
-          name: create database #circleciで構築されるDBを反映
-          command: |
-            docker cp -L config/database.ci.yml project_web_1:app/config/database.yml \
-              docker-compose exec web rails db:create RAILS_ENV=test
+          name: create database.yml 
+          command: docker cp -L config/database.ci.yml project_web_1:app/config/database.yml
+      - run:
+          name: create database
+          command: docker-compose exec web rails db:create RAILS_ENV=test
       - run:
           name: migrate database #circleciで構築されるDBを反映
           command: docker-compose exec web rails db:migrate RAILS_ENV=test
