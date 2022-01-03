@@ -38,7 +38,6 @@ jobs:
             sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
             sudo apt-get update && sudo apt-get install -y google-chrome-stable
           background: true
-
       - checkout #作業ディレクトリにGitリポジトリをコピー
       - run:  #コマンド実行
           name: setup bundler #任意のrunの名前
