@@ -13,6 +13,7 @@ jobs:
           BUNDLE_PATH: vendor/bundle #vendor/bundle 依存関係のファイルはbundle_installを後でrun
           RAILS_ENV: test
           REDIS_URL: redis://127.0.0.1:6379
+          REDIS_HOST: 127.0.0.1
       - image: redis:latest
         auth:
           username: siriusjunior
