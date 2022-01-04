@@ -23,15 +23,6 @@ jobs:
           MYSQL_ROOT_PASSWORD: '' #null_valueで設定
     steps: #CIで動作するコマンドを設定する必須キー
       - checkout #作業ディレクトリにGitリポジトリをコピー
-      - run:
-          name: Install Chrome
-          command: |
-            sudo apt-get update
-            sudo apt-get install google-chrome-stable 
-      # local環境との不整合が疑われるため、chrome-driverのバージョンを更新する
-      - run:
-          name: update chromeDriver version
-          command: bundle exec rake webdrivers:chromedriver:update
       - run:  #コマンド実行
           name: setup bundler #任意のrunの名前
           command: |
