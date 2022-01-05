@@ -2,16 +2,19 @@ version: 2
 jobs:
   build:
     parallelism: 1
+    environment: #コンテナの環境変数設定
+      - BUNDLE_JOBS: 3
+      - BUNDLE_RETRY: 3
+      - BUNDLE_PATH: vendor/bundle #vendor/bundle 依存関係のファイルはbundle_installを後でrun
+      - RAILS_ENV: test
+      - REDIS_HOST: localhost
+      - REDIS_PORT: 6379
+      # - REDIS_URL: redis://localhost:6379
     docker:
       - image: circleci/ruby:2.6.4-node-browsers #このイメージをstepsの実行時のプライマリコンテナとして使用
         auth:
           username: siriusjunior
           password: $DOCKERHUB_PASSWORD
-        environment: #コンテナの環境変数設定
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle #vendor/bundle 依存関係のファイルはbundle_installを後でrun
-          RAILS_ENV: test
       - image: redis:latest
         auth:
           username: siriusjunior
@@ -63,10 +66,7 @@ jobs:
       - run:
           name: Rubocop #rubocopの起動
           command: bundle exec rubocop --lint
-      # local環境との不整合が疑われるため、chrome-driverのバージョンを更新する
-      - run:
-          name: update chromeDriver version
-          command: bundle exec rake webdrivers:chromedriver:update
+      # chrome_update
       - run:
           name: execute rspec #Rspecの実行
           command: | #RspecJunitFormatterのgemでrspec結果をCIが読める,rspecファイルをglobしファイル名でrspecを並行させる--split-by=timings
