@@ -3,7 +3,7 @@ services:
   db:
     image: mysql:5.7
     ports:
-      - 3306:3306
+      - 4306:3306
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
       MYSQL_DATABASE: diary_app_development
@@ -14,7 +14,7 @@ services:
   test-db:
     image: mysql:5.7
     ports:
-      - 3307:3306 #開発のポート番号と別にする
+      - 4307:3307 #開発のポート番号と別にする
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
       MYSQL_DATABASE: diary_app_test

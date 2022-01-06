@@ -15,10 +15,6 @@ jobs:
           name: wait for db launch
           command: sleep 10
       - run:
-          # 既存のdatabase.ymlをdatabase.ci.ymlと入れ替える
-          name: setup database.yml
-          command: cp -v config/database.ci.yml config/database.yml
-      - run:
           name: setup db
           command: docker-compose -f docker-compose.test.yml exec web rails db:migrate RAILS_ENV=test
       - run:
