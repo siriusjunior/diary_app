@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@x.y
 jobs:
   build:
     parallelism: 1
@@ -22,6 +24,13 @@ jobs:
           MYSQL_ROOT_PASSWORD: '' #null_valueで設定
     steps: #CIで動作するコマンドを設定する必須キー
       - checkout #作業ディレクトリにGitリポジトリをコピー
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run:
+          command: |
+            google-chrome --version
+            chromedriver --version
+          name: Check install
       - run:  #コマンド実行
           name: setup bundler #任意のrunの名前
           command: |
@@ -51,21 +60,6 @@ jobs:
           key: rails-demo-yarn-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-      - run:
-          name: Chrome Driverのインストール
-          command: |
-            curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-            echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-            sudo apt-get update && sudo apt-get install -y unzip
-            wget -N http://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip -P ~/
-            unzip ~/chromedriver_linux64.zip -d ~/
-            rm ~/chromedriver_linux64.zip
-            sudo chown root:root ~/chromedriver
-            sudo chmod 755 ~/chromedriver
-            sudo mv ~/chromedriver /usr/bin/chromedriver
-            sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -'
-            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-            sudo apt-get update && sudo apt-get install -y google-chrome-stable
       - run:
           name: wait database #依存関係の待機(MySQLの場合)
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
