@@ -7,6 +7,8 @@ RUN apt-get update -qq && \
                         nodejs \
     && rm -rf /var/lib/apt/lists/*
 
+
+
 # コンテナのディレクトリ設定
 ENV APP_ROOT /app
 # /app設置
@@ -18,3 +20,4 @@ ADD Gemfile.lock ${APP_ROOT}/Gemfile.lock
 RUN bundle install
 
 ADD . ${APP_ROOT}
+RUN cp -v config/database.ci.yml config/database.yml
