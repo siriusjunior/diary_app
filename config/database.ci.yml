@@ -9,4 +9,4 @@ default: &default
 
 test:
   <<: *default
-  database: circle_test
+  database: diary_app_test
