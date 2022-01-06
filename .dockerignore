@@ -1,0 +1,16 @@
+## environment normalisation
+.bundle
+vendor/bundle
+.env
+.ruby-version
+
+## git
+.git
+.gitignore
+
+## log
+log
+tmp
+
+## docker
+.dockerignore 

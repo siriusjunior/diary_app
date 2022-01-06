@@ -6,23 +6,23 @@ class DiariesController < ApplicationController
     if current_user
       if current_user.have_following?
         # ログインユーザーでフィードデータがある場合
-        @diaries = current_user.feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+        @diaries = current_user.feed.includes(:user, :comments, :likes).page(params[:page]).per(10).order(created_at: :desc)
         @title = "みんなの最新ダイアリー"
       else
         # ログインユーザーでフォロワーがいない場合で
         if current_user.diaries.any?
           # ダイアリーが1件以上ある場合
-          @diaries = current_user.self_feed.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+          @diaries = current_user.self_feed.includes(:user, :comments, :likes).page(params[:page]).per(10).order(created_at: :desc)
           @title = "あなたの最新ダイアリー"
         else
           # ダイアリーが1件もない場合
-          @diaries = Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+          @diaries = Diary.all.includes(:user, :comments, :likes).page(params[:page]).per(10).order(created_at: :desc)
           @title = "みんなの最新ダイアリー"
         end
       end
     else
       # ログインユーザーでない場合
-      @diaries = Diary.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+      @diaries = Diary.all.includes(:user, :comments, :likes).page(params[:page]).per(10).order(created_at: :desc)
       @title = "みんなの最新ダイアリー"
     end
   end
@@ -85,14 +85,6 @@ class DiariesController < ApplicationController
       redirect_to request.referer, danger: '検索ワードを入力してください'
     end
   end
-
-  # def order
-  #   @diaries = Diary.sort(params[:term]).page(params[:page]).per(5)
-  #   respond_to do |format| 
-  #     format.html { render :index }
-  #     format.js
-  #   end
-  # end
 
   private
 

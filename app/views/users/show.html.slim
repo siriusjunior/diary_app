@@ -21,12 +21,15 @@
                             span#followers_user_count 
                                 = @user.followers.count
                                 |フォロワー
+                / 当該ユーザーとルームを形成している場合
                 - if current_user && current_user.id != @user.id && current_user.has_room_with?(@user)
                     #message-button__container.active.d-block
                         = render 'message_button', user: @user
+                / 当該ユーザーがフォロワーでルームを形成していない場合
                 - elsif current_user && current_user.id != @user.id  && current_user.following?(@user)
                     #message-button__container.active
                         = render 'message_button', user: @user
+                / 当該ユーザーフォロワーではなくルームを形成していない場合
                 - else 
                     #message-button__container
                         = render 'message_button', user: @user

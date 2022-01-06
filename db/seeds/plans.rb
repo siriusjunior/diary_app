@@ -5,7 +5,7 @@ Plan.create(
     price: 480,
     interval: 1
 ) do |plan|
-    puts "\"#{ plan.name }\" has created!"
+    puts "\"#{ plan.name }\" created!"
 end
 
 Plan.create(
@@ -14,5 +14,5 @@ Plan.create(
     price: 980,
     interval: 1
 ) do |plan|
-    puts "\"#{ plan.name }\" has created!"
+    puts "\"#{ plan.name }\" created!"
 end

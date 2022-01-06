@@ -81,13 +81,13 @@ module PayjpCustomer
         contracts.last
     end
 
-    # メッセージ制限チェック
-    def can_message?
-        # プレミアム無制限,ベーシック20件,無契約10件まで
-        subscripting_premium_plan? ||
-        subscripting_basic_plan? && messages.where(created_at: latest_contract.current_period_start...latest_contract.current_period_end).count <= 19 ||
-        messages.count <= 9
-    end
+    # # メッセージ制限チェック
+    # def can_message?
+    #     # プレミアム無制限,ベーシック20件時点でfalseに,無契約10件まで
+    #     subscripting_premium_plan? ||
+    #     subscripting_basic_plan? && messages.where(created_at: user.latest_contract.current_period_start...user.latest_contract.current_period_end).size < 20 ||
+    #     messages.size <= 9
+    # end
 
     private
     

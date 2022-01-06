@@ -13,7 +13,7 @@ puts 'Start inserting seed guest_user "diaries" ...'
         created_at: Time.current.ago(7.days)
     )
 end
-puts 'guest_user "diaries" have been created!'
+puts 'guest_user "diaries" created!'
 
 puts 'Start inserting seed "diaries" ...'
 users.each do |user|
