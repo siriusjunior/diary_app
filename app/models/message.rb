@@ -30,14 +30,9 @@ class Message < ApplicationRecord
   def number_of_times
     return if user.subscripting_premium_plan?
     # subscripting?でlatest_contract.current_period_startは有効期間内のpaymentを持つ
-    return if user.subscripting_basic_plan? &&
-              user.messages
-                  .where(created_at: user.latest_contract.current_period_start...user.latest_contract.current_period_end)
-                  .size < 20
-                  # 20件目の投稿は可能
+    return if user.subscripting_basic_plan? && user.messages.where(created_at: user.latest_contract.current_period_start...user.latest_contract.current_period_end).size < 20 # 20件目の投稿は可能
     # 契約期間が切れた,未契約者の制限,10件目の投稿は可能
-    return if user.messages.size <= 10
+    return if user.messages.size < 11
     errors.add(:base, '今月のメッセージ可能回数をオーバーしました。')
   end
-  
 end
