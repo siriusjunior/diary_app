@@ -12,6 +12,9 @@ jobs:
           name: docker-compose up
           command: docker-compose up -d
       - run:
+          name: setup database.yml
+          command: cp config/database.ci.yml config/database.yml
+      - run:
           name: wait for db launch
           command: sleep 10
       - run:
