@@ -12,10 +12,6 @@ jobs:
           name: docker-compose up
           command: docker-compose -f docker-compose.test.yml up -d
       - run:
-          # 既存のdatabase.ymlをdatabase.ci.ymlと入れ替える
-          name: setup database.yml
-          command: cp -v config/database.ci.yml config/database.yml
-      - run:
           name: wait for db launch
           command: sleep 10
       - run:

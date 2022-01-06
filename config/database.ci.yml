@@ -11,4 +11,4 @@ default: &default
 
 test:
   <<: *default
-  database: diary_app_test
+  database: test-db
