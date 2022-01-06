@@ -27,7 +27,7 @@ services:
       ports:
         - 6380:6380
       environment:
-        REDIS_URL: redis://redis:6379
+        REDIS_URL: redis://redis:6380
       command: redis-server --appendonly yes
   selenium_chrome:
     image: selenium/standalone-chrome-debug
