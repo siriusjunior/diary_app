@@ -14,12 +14,12 @@ jobs:
       - run:
           name: wait for db launch
           command: sleep 10
-      - run:
-          name: create db
-          command: docker-compose -f docker-compose.test.yml exec web rails db:create RAILS_ENV=test
+    #   - run:
+    #       name: create db
+    #       command: docker-compose -f docker-compose.test.yml exec web rails db:create
       - run:
           name: setup db
-          command: docker-compose -f docker-compose.test.yml exec web rails db:migrate RAILS_ENV=test
+          command: docker-compose -f docker-compose.test.yml run web rails db:create db:migrate
       - run:
           name: test
           command: |
