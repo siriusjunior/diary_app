@@ -7,7 +7,7 @@ services:
     tty: true # pry-byebugを使えるようにする
     stdin_open: true
     ports:
-      - 3001:3001
+      - "3000:3000"
     depends_on:
       - test-db
   test-db:
@@ -19,14 +19,18 @@ services:
       MYSQL_DATABASE: diary_app_test
       MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: "6989"
+      # MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+      MYSQL_ROOT_HOST: '%'
   redis:
       image: redis:6.2
       ports:
-        - 6380:6380
+        - 6379:6379
       environment:
         REDIS_URL: redis://redis:6380
       command: redis-server --appendonly yes
   selenium_chrome:
     image: selenium/standalone-chrome-debug
+    ports:
+      - 4444:4444
     logging:
       driver: none
