@@ -4,14 +4,14 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS"){ 5 } %>
   # host: 127.0.0.1
   # ローカルホストではなくコンテナで指定する
-  username: <%= ENV.fetch('MYSQL_ROOT_USER') { 'root' } %>
-  password: <%= ENV.fetch('MYSQL_ROOT_PASSWORD') { '6989' } %>
+  username: <%= ENV.fetch("MYSQL_ROOT_USER", "root") %>
+  password: <%= ENV.fetch("MYSQL_ROOT_PASSWORD", "6989") %>
   port: 3306
   # database: test-db
 
 test:
   <<: *default
-  database: <%= ENV.fetch('MYSQL_DATABASE') { 'diary_app_test' } %>
-  host: <%= ENV['MYSQL_ROOT_HOST'] %> { '%' } %>
+  database: <%= ENV.fetch("MYSQL_DATABASE", "diary_app_test") %>
+  host: <%= ENV.fetch("MYSQL_ROOT_HOST", "%") %>
   # host: test-db #docker-compose.ymlのservice名
   # host: test-db #docker-compose.ymlのservice名
