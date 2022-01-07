@@ -19,7 +19,7 @@ jobs:
     #       command: docker-compose -f docker-compose.test.yml exec web rails db:create
       - run:
           name: setup db
-          command: docker-compose -f docker-compose.test.yml run web rails db:create db:migrate
+          command: docker-compose -f docker-compose.test.yml run web rails db:create db:migrate RAILS_ENV=test
       - run:
           name: test
           command: |
