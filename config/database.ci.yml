@@ -12,4 +12,5 @@ default: &default
 test:
   <<: *default
   database: diary_app_test
-  host: test-db #docker-compose.ymlのservice名
+  host: <%= ENV['DB_HOST'] %>
+  # host: test-db #docker-compose.ymlのservice名
