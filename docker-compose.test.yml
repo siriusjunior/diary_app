@@ -19,6 +19,7 @@ services:
       MYSQL_DATABASE: diary_app_test
       MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: "6989"
+      MYSQL_ROOT_HOST: '172.18.0.6'
       # DB_HOST: 127.0.0.1
   redis:
       image: redis:6.2
