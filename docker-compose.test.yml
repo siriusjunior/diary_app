@@ -18,7 +18,7 @@ services:
     environment:
       MYSQL_DATABASE: diary_app_test
       MYSQL_ROOT_USER: root
-      MYSQL_ROOT_PASSWORD: "6989"
+      # MYSQL_ROOT_PASSWORD: "6989"
       # MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
       MYSQL_ROOT_HOST: '%'
   redis:
