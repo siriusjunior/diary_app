@@ -4,8 +4,6 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.test
-    environment:
-      DB_HOST: 127.0.0.1
     tty: true # pry-byebugを使えるようにする
     stdin_open: true
     ports:
@@ -21,6 +19,7 @@ services:
       MYSQL_DATABASE: diary_app_test
       MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: "6989"
+      # DB_HOST: 127.0.0.1
   redis:
       image: redis:6.2
       ports:
