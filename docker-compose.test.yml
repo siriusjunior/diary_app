@@ -6,14 +6,12 @@ services:
       dockerfile: Dockerfile.test
     tty: true # pry-byebugを使えるようにする
     stdin_open: true
-    ports:
-      - 3001:3001
     depends_on:
       - test-db
   test-db:
     image: mysql:5.7
-    ports:
-      - 4308:3308
+    # ports:
+    #   - 4306:3306
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
       MYSQL_DATABASE: diary_app_test
@@ -21,8 +19,6 @@ services:
       MYSQL_ROOT_PASSWORD: "6989"
   redis:
       image: redis:6.2
-      ports:
-        - 6380:6380
       environment:
         REDIS_URL: redis://redis:6380
       command: redis-server --appendonly yes
