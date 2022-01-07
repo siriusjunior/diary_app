@@ -10,8 +10,6 @@ services:
       - 3001:3001
     depends_on:
       - test-db
-      - redis
-      - selenium_chrome
   test-db:
     image: mysql:5.7
     ports:
@@ -19,9 +17,8 @@ services:
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
       MYSQL_DATABASE: diary_app_test
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: root
-      MYSQL_PASSWORD: "6989"
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: "6989"
   redis:
       image: redis:6.2
       ports:

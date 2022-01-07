@@ -1,5 +1,16 @@
 version: '3'
 services:
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    tty: true # pry-byebugを使えるようにする
+    stdin_open: true
+    depends_on:
+      - db #DBコンテナ起動後に実行
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app:delegated #delegatedで同期の一貫性を保証しないでパフォーマンス向上
   db:
     image: mysql:5.7
     ports:
@@ -30,17 +41,6 @@ services:
       environment:
         REDIS_URL: redis://redis:6379
       command: redis-server --appendonly yes
-  web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    tty: true # pry-byebugを使えるようにする
-    stdin_open: true
-    depends_on:
-      - db #DBコンテナ起動後に実行
-    ports:
-      - 3000:3000
-    volumes:
-      - .:/app:delegated #delegatedで同期の一貫性を保証しないでパフォーマンス向上
   selenium_chrome:
     image: selenium/standalone-chrome-debug
     ports:
