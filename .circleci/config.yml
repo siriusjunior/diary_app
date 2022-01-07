@@ -18,6 +18,9 @@ jobs:
     #       name: create db
     #       command: docker-compose -f docker-compose.test.yml exec web rails db:create
       - run:
+          name: remove db cache
+          command: docker-compose down --volumes
+      - run:
           name: setup db
           command: docker-compose -f docker-compose.test.yml run web rails db:create db:migrate RAILS_ENV=test
       - run:
