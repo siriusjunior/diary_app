@@ -8,7 +8,6 @@ default: &default
   password: <%= ENV.fetch("MYSQL_ROOT_PASSWORD", "6989") %>
   port: 3306
   # database: test-db
-
 test:
   <<: *default
   database: <%= ENV.fetch("MYSQL_DATABASE", "diary_app_test") %>
