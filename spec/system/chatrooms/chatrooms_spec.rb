@@ -192,7 +192,7 @@ RSpec.describe "チャットルーム", type: :system do
           # 11件目の投稿
           fill_in 'message_body', with: 'Nec dui nunc mattis enim'
           click_on '送信'
-          expect(page).to have_css('.alert')
+          expect(page).to have_content '今月のメッセージ可能回数をオーバーしました'
           expect(page).not_to have_content 'Nec dui nunc mattis enim'
         end
       end
@@ -222,7 +222,7 @@ RSpec.describe "チャットルーム", type: :system do
           # 21件目の投稿
           fill_in 'message_body', with: 'Nec dui nunc mattis enim'
           click_on '送信'
-          expect(page).to have_css('.alert')
+          expect(page).to have_content '今月のメッセージ可能回数をオーバーしました'
           expect(page).not_to have_content 'Nec dui nunc mattis enim'
         end
       end
@@ -263,14 +263,12 @@ RSpec.describe "チャットルーム", type: :system do
           # およそ320文字を投稿
           fill_in 'message_body', with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod'
           click_on '送信'
-          expect(page).to have_css('.alert')
           expect(page).to have_content('メッセージは300文字以内で入力してください')
         end
         it 'アラート表示後に再投稿でアラートが除去されること', js: true do
           # およそ320文字を投稿
           fill_in 'message_body', with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod'
           click_on '送信'
-          expect(page).to have_css('.alert')
           expect(page).to have_content('メッセージは300文字以内で入力してください')
           # 制限文字数以内で投稿
           fill_in 'message_body', with: 'Lorem ipsum dolor sit amet'
@@ -292,7 +290,6 @@ RSpec.describe "チャットルーム", type: :system do
           # およそ320文字で編集
           fill_in 'message-edit', with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod'
           click_on '保存'
-          expect(page).to have_css('.alert')
           expect(page).to have_content('メッセージは300文字以内で入力してください')
         end
         it 'アラート表示後に再編集でアラートが除去されること', js: true do
@@ -300,12 +297,10 @@ RSpec.describe "チャットルーム", type: :system do
           # およそ320文字で編集
           fill_in 'message-edit', with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod'
           click_on '保存'
-          expect(page).to have_css('.alert')
           expect(page).to have_content('メッセージは300文字以内で入力してください')
           # 制限文字数以内で再編集
           fill_in 'message-edit', with: 'Lorem ipsum dolor sit amet'
           click_on '保存'
-          expect(page).not_to have_css('.alert')
           expect(page).not_to have_content('メッセージは300文字以内で入力してください')
         end
       end
