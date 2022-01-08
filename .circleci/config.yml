@@ -53,7 +53,7 @@ jobs:
           path: tmp/screenshots/
       - run:
           name: Rubocop #rubocopの起動
-          command: bundle exec rubocop --lint
+          command: docker-compose -f docker-compose.test.yml exec web bundle exec rubocop --lint
       - run:
           name: docker-compose down
           command: docker-compose down
