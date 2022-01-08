@@ -28,11 +28,11 @@ jobs:
       - run:
           name: yarn install
           command: docker-compose run --rm web yarn install --cache-files
-      # - run:
-      #     name: install bootstrap material degign
-      #     command: |
-      #       yarn add bootstrap-material-design \
-      #         yarn install
+      - run:
+          name: install bootstrap material degign
+          command: |
+            docker-compose exec web yarn add bootstrap-material-design \
+              docker-compose exec web yarn install
       - run:
           name: wait for db launch
           command: sleep 10
