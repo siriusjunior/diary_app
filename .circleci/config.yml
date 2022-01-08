@@ -3,20 +3,6 @@ jobs:
   build:
     machine:
       image: circleci/classic:edge
-    # dependencies:
-    #   pre:
-    #     - |
-    #       if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
-    #         echo "Download and install Yarn."
-    #         curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
-    #       else
-    #         echo "The correct version of Yarn is already installed."
-    #       fi
-    #   override:
-    #     - yarn install
-    #   cache_directories:
-    #     - ~/.yarn
-    #     - ~/.cache/yarn
     steps:
       - checkout
       - run:
@@ -25,17 +11,9 @@ jobs:
       - run:
           name: docker-compose up
           command: docker-compose -f docker-compose.test.yml up -d
-      # - run:
-      #     name: yarn install
-      #     command: docker-compose exec web yarn install
-      # - run:
-      #     name: install bootstrap
-      #     command: |
-      #       docker-compose exec web yarn add bootstrap-material-design \
-      #         docker-compose exec web yarn install
       - run:
           name: wait for db launch
-          command: sleep 10
+          command: sleep 5
       - run:
           name: setup db
           command: docker-compose -f docker-compose.test.yml run web rails db:create db:migrate RAILS_ENV=test

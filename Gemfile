@@ -64,7 +64,6 @@ group :development, :test do
   gem 'faker'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
-  # gem 'bootstrap-sass'
 end
 
 group :development do
