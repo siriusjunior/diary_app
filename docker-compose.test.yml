@@ -3,7 +3,7 @@ services:
   web:
     build: 
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.test
     tty: true # pry-byebugを使えるようにする
     stdin_open: true
     ports:
