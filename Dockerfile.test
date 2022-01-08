@@ -26,6 +26,9 @@ RUN bundle install
 # yarn install
 RUN yarn install
 
+RUN yarn add bootstrap-material-design
+RUN yarn install
+
 COPY . $APP_ROOT
 RUN cp -v config/database.ci.yml config/database.yml
 
