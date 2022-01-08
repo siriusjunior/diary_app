@@ -26,9 +26,6 @@ jobs:
           name: docker-compose up
           command: docker-compose -f docker-compose.test.yml up -d
       - run:
-          name: docker-compose stop
-          command: docker-compose stop
-      - run:
           name: yarn install
           command: docker-compose exec web yarn install
       - run:
@@ -36,9 +33,6 @@ jobs:
           command: |
             docker-compose exec web yarn add bootstrap-material-design \
               docker-compose exec web yarn install
-      - run:
-          name: docker-compose up
-          command: docker-compose -f docker-compose.test.yml up -d
       - run:
           name: wait for db launch
           command: sleep 10
