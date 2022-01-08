@@ -10,5 +10,5 @@ meta:
     type: website
     image_path: ogp.png
 payjp:
-  pk: <%= Rails.application.credentials[:payjp][:pk] %>
-  sk: <%= Rails.application.credentials[:payjp][:sk] %>
+  pk: pk_test_bcd88620fea3ca1e2abda930
+  sk: sk_test_b9ccaf28227079f60abcea0e
