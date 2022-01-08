@@ -5,6 +5,7 @@ RUN apt-get update -qq && \
     apt-get install -y build-essential \
                         libpq-dev \
                         nodejs \
+                        yarn \
     && rm -rf /var/lib/apt/lists/*
 
 # コンテナのディレクトリ設定
@@ -16,6 +17,8 @@ ADD Gemfile ${APP_ROOT}/Gemfile
 ADD Gemfile.lock ${APP_ROOT}/Gemfile.lock
 
 RUN bundle install
+RUN yarn add bootstrap-material-design \
+    yarn install
 
 COPY . $APP_ROOT
 RUN cp -v config/database.ci.yml config/database.yml
