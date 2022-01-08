@@ -3,20 +3,20 @@ jobs:
   build:
     machine:
       image: circleci/classic:edge
-    dependencies:
-      pre:
-        - |
-          if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
-            echo "Download and install Yarn."
-            curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
-          else
-            echo "The correct version of Yarn is already installed."
-          fi
-      override:
-        - yarn install
-      cache_directories:
-        - ~/.yarn
-        - ~/.cache/yarn
+    # dependencies:
+    #   pre:
+    #     - |
+    #       if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
+    #         echo "Download and install Yarn."
+    #         curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
+    #       else
+    #         echo "The correct version of Yarn is already installed."
+    #       fi
+    #   override:
+    #     - yarn install
+    #   cache_directories:
+    #     - ~/.yarn
+    #     - ~/.cache/yarn
     steps:
       - checkout
       - run:
@@ -26,10 +26,13 @@ jobs:
           name: docker-compose up
           command: docker-compose -f docker-compose.test.yml up -d
       - run:
-          name: install bootstrap material degign
-          command: |
-            yarn add bootstrap-material-design \
-              yarn install
+          name: yarn install
+          command: docker-compose run --rm web yarn install --cache-files
+      # - run:
+      #     name: install bootstrap material degign
+      #     command: |
+      #       yarn add bootstrap-material-design \
+      #         yarn install
       - run:
           name: wait for db launch
           command: sleep 10

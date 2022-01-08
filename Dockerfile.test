@@ -5,6 +5,7 @@ RUN apt-get update -qq && \
     apt-get install -y build-essential \
                         libpq-dev \
                         nodejs \
+                        yarn \
     && rm -rf /var/lib/apt/lists/*
 
 # コンテナのディレクトリ設定
