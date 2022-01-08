@@ -11,20 +11,17 @@ jobs:
       - run:
           name: docker-compose up
           command: docker-compose -f docker-compose.test.yml up -d
-      # - run:
-      #     name: install bootstrap material degign
-      #     command: |
-      #       yarn add bootstrap-material-design \
-      #         yarn install
+      - run:
+          name: install bootstrap material degign
+          command: |
+            yarn add bootstrap-material-design \
+              yarn install
       - run:
           name: wait for db launch
           command: sleep 10
       - run:
           name: setup db
           command: docker-compose -f docker-compose.test.yml run web rails db:create db:migrate RAILS_ENV=test
-    #   - run:
-    #       name: rerun bundle install
-    #       command: docker-compose -f docker-compose.test.yml exec web bundle install
       - run:
           name: test
           command: |
