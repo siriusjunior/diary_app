@@ -4,7 +4,6 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS"){ 5 } %>
   username: 'root'
   port: 3306
-  # password: "6989"
 test:
   <<: *default
   database: diary_app_test
