@@ -8,6 +8,4 @@ default: &default
 test:
   <<: *default
   database: diary_app_test
-  host: test-db
-  # host: test-db #docker-compose.ymlのservice名
-  # host: test-db #docker-compose.ymlのservice名
+  host: test-db #docker-compose.ymlのservice名

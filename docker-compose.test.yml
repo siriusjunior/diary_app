@@ -3,7 +3,7 @@ services:
   web:
     build: 
       context: .
-      dockerfile: Dockerfile.test
+      dockerfile: Dockerfile
     tty: true # pry-byebugを使えるようにする
     stdin_open: true
     ports:
@@ -16,9 +16,6 @@ services:
       - 4306:3306
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
-      # MYSQL_DATABASE: diary_app_test
-      # MYSQL_ROOT_USER: root
-      # # MYSQL_ROOT_PASSWORD: "6989"
       MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
       MYSQL_ROOT_HOST: '%'
   redis:
