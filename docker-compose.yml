@@ -3,6 +3,8 @@ services:
   app:
     build: .
     command: bundle exec puma -C config/puma.rb
+    tty: true # pry-byebugを使えるようにする
+    stdin_open: true
     depends_on:
       - db #DBコンテナ起動後に実行
     ports:
