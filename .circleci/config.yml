@@ -20,7 +20,7 @@ jobs:
       - run:
           name: test
           command: |
-            docker-compose -f docker-compose.test.yml exec app bundle exec rspec spec  \
+            docker-compose -f docker-compose.test.yml run app bundle exec rspec spec  \
               --format RspecJunitFormatter \
               --out test_results/rspec.xml \
               --format progress \
@@ -31,7 +31,7 @@ jobs:
           path: tmp/screenshots/
       - run:
           name: Rubocop #rubocopの起動
-          command: docker-compose -f docker-compose.test.yml exec app bundle exec rubocop --lint
+          command: docker-compose -f docker-compose.test.yml run app bundle exec rubocop --lint
       - run:
           name: docker-compose down
           command: docker-compose down
