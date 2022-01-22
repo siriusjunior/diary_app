@@ -4,6 +4,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.test
+    command: bundle exec puma -C config/puma.rb
     depends_on:
       - test-db
     ports:
