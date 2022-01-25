@@ -15,6 +15,9 @@ jobs:
           name: wait for db launch
           command: sleep 10
       - run:
+          name: check containers
+          command: docker-compose ps
+      - run:
           name: check some logs
           command: docker-compose logs app
       - run:

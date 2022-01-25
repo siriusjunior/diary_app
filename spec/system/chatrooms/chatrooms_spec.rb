@@ -222,6 +222,7 @@ RSpec.describe "チャットルーム", type: :system do
           # 21件目の投稿
           fill_in 'message_body', with: 'Nec dui nunc mattis enim'
           click_on '送信'
+          sleep(5)
           # '今月のメッセージ可能回数をオーバーしました'に付与されるcss
           expect(page).to have_css('.alert')
         end
