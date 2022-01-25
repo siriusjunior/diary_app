@@ -17,3 +17,5 @@ ADD Gemfile.lock ${APP_ROOT}/Gemfile.lock
 RUN bundle install
 
 ADD . ${APP_ROOT}
+# yarnパッケージのインストール
+# RUN yarn add bootstrap bootstrap-material-design jquery popper.js
