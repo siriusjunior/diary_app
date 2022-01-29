@@ -28,6 +28,6 @@ class Plan < ApplicationRecord
     private
 
         def time_current
-            Time.zone.now 
+            Time.current
         end
 end
