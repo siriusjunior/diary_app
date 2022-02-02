@@ -9,7 +9,9 @@ RUN apt-get update -qq && \
 
 # コンテナのディレクトリ設定
 ENV APP_ROOT /app
+
 RUN mkdir ${APP_ROOT}
+
 WORKDIR ${APP_ROOT}
 
 ADD Gemfile ${APP_ROOT}/Gemfile
