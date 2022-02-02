@@ -1,0 +1,48 @@
+version: '3'
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile.prod
+    command: bundle exec puma -C config/puma.rb -e production
+    # depends_on: #本番はRDS
+    #   - db
+    volumes:
+      - .:/app
+      - public-data:/app/public
+      - tmp-data:/app/tmp
+      - log-data:/app/log
+  web:
+    build: 
+      context: containers/nginx
+      dockerfile: Dockerfile.prod
+    volumes:
+      - public-data:/app/public
+      - tmp-data:/app/tmp
+    ports:
+      - 80:80
+  # db: # 本番はRDS
+  #   image: mysql:5.7
+  #   ports:
+  #     - 4306:3306
+  #   command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  #   environment:
+  #     MYSQL_DATABASE: diary_app_development
+  #     MYSQL_ROOT_USER: root
+  #     MYSQL_ROOT_PASSWORD: "6989"
+  #   volumes:
+  #     - mysql-data:/var/lib/mysql:delegated #delegatedで同期の一貫性を保証しないでパフォーマンス向上
+  redis:
+      image: redis:6.2
+      ports:
+        - 6379:6379
+      volumes:
+        - ./data/redis:/data
+      environment:
+        REDIS_URL: redis://redis:6379
+      command: redis-server --appendonly yes
+volumes:
+  # mysql-data: # 本番はRDS
+  public-data:
+  tmp-data:
+  log-data:
