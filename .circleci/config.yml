@@ -12,17 +12,8 @@ jobs:
           name: docker-compose up
           command: docker-compose -f docker-compose.test.yml up -d
       - run:
-          name: setup database.yml #CircleCiで構築されるDBを反映
-          command: cp config/database.ci.yml config/database.yml
-      - run:
           name: wait for db launch
-          command: sleep 10
-      - run:
-          name: check containers
-          command: docker-compose ps
-      - run:
-          name: check some logs
-          command: docker-compose logs app
+          command: sleep 20
       - run:
           name: setup db
           command: docker-compose -f docker-compose.test.yml run app rails db:create db:migrate RAILS_ENV=test
