@@ -192,8 +192,8 @@ RSpec.describe "チャットルーム", type: :system do
           # 11件目の投稿
           fill_in 'message_body', with: 'Nec dui nunc mattis enim'
           click_on '送信'
-          expect(page).to have_content '今月のメッセージ可能回数をオーバーしました'
-          expect(page).not_to have_content 'Nec dui nunc mattis enim'
+          # '今月のメッセージ可能回数をオーバーしました'に付与されるcss
+          expect(page).to have_css('.alert')
         end
       end
       # 未契約ユーザー
@@ -222,8 +222,9 @@ RSpec.describe "チャットルーム", type: :system do
           # 21件目の投稿
           fill_in 'message_body', with: 'Nec dui nunc mattis enim'
           click_on '送信'
-          expect(page).to have_content '今月のメッセージ可能回数をオーバーしました'
-          expect(page).not_to have_content 'Nec dui nunc mattis enim'
+          sleep(5)
+          # '今月のメッセージ可能回数をオーバーしました'に付与されるcss
+          expect(page).to have_css('.alert')
         end
       end
       # ベーシックプラン契約者

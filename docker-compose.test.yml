@@ -1,15 +1,21 @@
 version: '3'
 services:
-  web:
+  app:
     build: 
       context: .
       dockerfile: Dockerfile.test
-    tty: true # pry-byebugを使えるようにする
-    stdin_open: true
-    ports:
-      - "3000:3000"
+    command: bundle exec puma -C config/puma.rb
     depends_on:
       - test-db
+    ports:
+      - 3000:3000
+  web:
+    build:
+      context: containers/nginx
+    ports:
+      - 80:80
+    depends_on:
+      - app
   test-db:
     image: mysql:5.7
     ports:
