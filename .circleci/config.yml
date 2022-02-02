@@ -13,7 +13,7 @@ jobs:
           command: docker-compose -f docker-compose.test.yml up -d
       - run:
           name: wait for db launch
-          command: sleep 10
+          command: sleep 20
       - run:
           name: check containers
           command: docker-compose ps
