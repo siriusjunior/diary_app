@@ -9,11 +9,6 @@ RUN apt-get update -qq && \
                         nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-# # yarnのインストール旧
-# RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-#     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-#     && apt-get update && apt-get install -y yarn
-# yarnのインストール新
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
@@ -21,28 +16,18 @@ RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
 
 # コンテナのディレクトリ設定
 ENV APP_ROOT /app
-# ルートディレクトリの作成・指定
+
 RUN mkdir ${APP_ROOT}
+
 WORKDIR ${APP_ROOT}
 
 ADD Gemfile ${APP_ROOT}/Gemfile
 ADD Gemfile.lock ${APP_ROOT}/Gemfile.lock
 RUN bundle install
 
-# 静的コンテンツとsocketをNginxコンテナから参照(https://qiita.com/na-o-ys/items/1a863419e1f6c3063ace)
+ADD . ${APP_ROOT}
 RUN mkdir -p tmp/pids
 RUN mkdir -p tmp/sockets
-# RUN touch tmp/sockets/puma.sock
-
-# yarnパッケージのインストール(一旦シェル実行コマンドより手前に配置)
-RUN yarn add bootstrap bootstrap-material-design jquery popper.js
-RUN yarn install
-
-# コンテナー起動時に実行するスクリプト(https://matsuand.github.io/docs.docker.jp.onthefly/samples/rails/)
-# COPY entrypoint.sh /usr/bin/
-# RUN chmod +x /usr/bin/entrypoint.sh
-# ENTRYPOINT ["entrypoint.sh"]
-ADD . ${APP_ROOT}
 
 # puma起動
-CMD bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+# CMD bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb -e production"
