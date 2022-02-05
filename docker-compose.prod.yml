@@ -7,7 +7,6 @@ services:
     env_file:
       - ./.env
     command: bundle exec puma -C config/puma.rb -e production
-    init: true
     volumes:
       - .:/app
       - public-data:/app/public
@@ -17,7 +16,6 @@ services:
     build: 
       context: containers/nginx
       dockerfile: Dockerfile.prod
-    init: true
     volumes:
       - public-data:/app/public
       - tmp-data:/app/tmp
