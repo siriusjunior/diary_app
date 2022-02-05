@@ -15,6 +15,8 @@ gem 'jquery-rails'
 gem 'popper_js' 
 # Use SCSS for stylesheets
 gem 'sass-rails'
+# EC2上だと重いのでバージョン指定
+gem 'sassc', '2.1.0'
 
 gem 'slim-rails'
 gem 'html2slim'

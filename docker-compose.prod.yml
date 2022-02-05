@@ -4,7 +4,10 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.prod
+    env_file:
+      - ./.env
     command: bundle exec puma -C config/puma.rb -e production
+    init: true
     volumes:
       - .:/app
       - public-data:/app/public
@@ -14,13 +17,14 @@ services:
     build: 
       context: containers/nginx
       dockerfile: Dockerfile.prod
+    init: true
     volumes:
       - public-data:/app/public
       - tmp-data:/app/tmp
     ports:
       - 80:80
-    depends_on:
-      - app
+    # depends_on:
+    #   - app
   redis:
       image: redis:6.2
       ports:
