@@ -32,3 +32,5 @@ RUN mkdir -p tmp/sockets
 RUN mkdir -p /var/run/mysqld
 RUN touch tmp/mysql.sock
 RUN touch /var/run/mysqld/mysqld.sock
+#下記コマンドを除くとSassC::SyntaxErrorになる
+RUN yarn add bootstrap-material-design

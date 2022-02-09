@@ -5,6 +5,7 @@ puts 'Start inserting first seed "user" ...'
         password: 'password',
         password_confirmation: 'password',
         activation_state: "active",
+        introduction: 'foobarの自己紹介です。',
         avatar: open("./db/fixtures/foobar.png")
     )
 puts "\"#{ first_user.username }\" created!"
@@ -30,6 +31,8 @@ puts "\"#{ guest.username }\" created!"
         username: Faker::Name.name,
         password: 'password',
         password_confirmation: 'password',
+        activation_state: 'active',
+        introduction: Faker::Quote.famous_last_words,
         remote_avatar_url: "https://i.pravatar.cc/200"
     )
     user.skip_password = true

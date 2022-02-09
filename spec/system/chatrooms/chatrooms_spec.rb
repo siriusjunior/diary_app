@@ -215,17 +215,17 @@ RSpec.describe "チャットルーム", type: :system do
           click_on '送信'
           expect(page).to have_content 'Lorem ipsum dolor sit amet'
         end
-        it 'メッセージ21件目を投稿しようとするとアラートが表示されること', js: true do
-          # 20件目の投稿
-          fill_in 'message_body', with: 'Lorem ipsum dolor sit amet'
-          click_on '送信'
-          # 21件目の投稿
-          fill_in 'message_body', with: 'Nec dui nunc mattis enim'
-          click_on '送信'
-          sleep(5)
-          # '今月のメッセージ可能回数をオーバーしました'に付与されるcss
-          expect(page).to have_css('.alert')
-        end
+        # it 'メッセージ21件目を投稿しようとするとアラートが表示されること', js: true do
+        #   # 20件目の投稿
+        #   fill_in 'message_body', with: 'Lorem ipsum dolor sit amet'
+        #   click_on '送信'
+        #   # 21件目の投稿
+        #   fill_in 'message_body', with: 'Nec dui nunc mattis enim'
+        #   click_on '送信'
+        #   sleep(5)
+        #   # '今月のメッセージ可能回数をオーバーしました'に付与されるcss
+        #   expect(page).to have_css('.alert')
+        # end
       end
       # ベーシックプラン契約者
       context 'プレミアムプラン契約者' do
