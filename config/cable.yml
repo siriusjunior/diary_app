@@ -8,5 +8,6 @@ test:
 
 production:
   adapter: redis
-  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  port: 6379
+  url: redis://diaryapp-elasticache.8kyjko.0001.apne1.cache.amazonaws.com #ElastiCacheのEndpoint
   channel_prefix: diary_app_production

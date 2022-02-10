@@ -7,12 +7,12 @@ class UserSessionsController < ApplicationController
       if session[:return_to]
         # ActionCableの認証処理に必要なcookies
         cookies.signed['user_id'] = current_user.id
-        redirect_to session[:return_to], success: "ログインしました"
+        redirect_to session[:return_to], info: "ログインしました"
         session.delete(:return_to)
       else
         # ActionCableの認証処理に必要なcookies
         cookies.signed['user_id'] = current_user.id
-        redirect_back_or_to diaries_url, success: "ログインしました"
+        redirect_back_or_to diaries_url, info: "ログインしました"
       end
     else
       flash.now[:danger] = "ログインに失敗しました"
@@ -48,7 +48,7 @@ class UserSessionsController < ApplicationController
   def destroy
     logout
     cookies.delete('user_id') if !cookies['user_id'].nil?
-    redirect_back_or_to root_path, success: "ログアウトしました"
+    redirect_back_or_to root_path, info: "ログアウトしました"
   end
 
   def store_location

@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   def activate
     if (@user = User.load_from_activation_token(params[:id]))
       @user.activate!
-      redirect_to login_path, success: 'アカウントの有効化が完了しました'
+      redirect_to login_path, info: 'アカウントの有効化が完了しました'
     else
       not_authenticated
     end

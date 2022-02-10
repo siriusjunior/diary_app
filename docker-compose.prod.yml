@@ -21,17 +21,15 @@ services:
       - tmp-data:/app/tmp
     ports:
       - 80:80
-    # depends_on:
-    #   - app
-  redis:
-      image: redis:6.2
-      ports:
-        - 6379:6379
-      volumes:
-        - ./data/redis:/data
-      environment:
-        REDIS_URL: redis://redis:6379
-      command: redis-server --appendonly yes
+  # redis:
+  #     image: redis:6.2
+  #     ports:
+  #       - 6379:6379
+  #     volumes:
+  #       - ./data/redis:/data
+  #     environment:
+  #       REDIS_URL: redis://redis:6379
+  #     command: redis-server --appendonly yes
 volumes:
   public-data:
   tmp-data:
