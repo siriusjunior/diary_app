@@ -84,7 +84,7 @@ RSpec.describe "チャットルーム", type: :system do
           expect(current_path).to eq chatroom_path(Chatroom.first)
           fill_in 'メッセージ', with: 'hello world'
           click_on('送信')
-          expect(page).to have_content 'hello world'
+          expect(page).to have_content('hello world')
         end
     
         it 'メッセージの編集ができること', js: true do

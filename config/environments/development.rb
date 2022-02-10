@@ -74,4 +74,28 @@ Rails.application.configure do
   # Cannot render console fromに対応
   config.web_console.whitelisted_ips = '172.22.0.1'
 
+  # 環境ごとにsession_store.rbから分離
+  config.session_store :redis_store, {
+    servers: [
+        {
+            host: "redis",  #Redisのサーバー名
+            port: 6379, #Redisのサーバーのポート
+            db: 0, #データーベースの番号(0~15)任意
+            namespace: "session" #名前空間,"session:セッションID"の形式
+        },
+    ],
+    expire_after: 1.day #保存期間
+  }
+  # 環境ごとにsidekiq.rbから分離
+  Sidekiq.configure_server do |config|
+    config.redis = {
+      url: 'redis://redis:6379'
+    }
+  end
+  Sidekiq.configure_client do |config|
+    config.redis = {
+      url: 'redis://redis:6379'
+    }
+  end
+
 end
