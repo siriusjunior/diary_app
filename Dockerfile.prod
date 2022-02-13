@@ -24,7 +24,7 @@ WORKDIR ${APP_ROOT}
 
 ADD Gemfile ${APP_ROOT}/Gemfile
 ADD Gemfile.lock ${APP_ROOT}/Gemfile.lock
-RUN bundle install
+RUN bundle install --without test development
 
 ADD . ${APP_ROOT}
 RUN mkdir -p tmp/pids
