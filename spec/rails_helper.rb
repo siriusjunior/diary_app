@@ -1,3 +1,7 @@
+# chromeアップデートによる対処,バージョン固定
+require 'webdrivers/chromedriver'
+Webdrivers::Chromedriver.required_version = '97.0.4692.71'
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
