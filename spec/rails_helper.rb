@@ -1,6 +1,8 @@
 # chromeアップデートによる対処,バージョン固定
 require 'webdrivers/chromedriver'
-Webdrivers::Chromedriver.required_version = '76.0.3809.68'
+
+Webdrivers::Chromedriver.required_version = '76.0.3809.68' #テスト環境でRSpec実行時,circleci実行時
+# Webdrivers::Chromedriver.required_version = '97.0.4692.71' #開発環境でRSpec実行時
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
