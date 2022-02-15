@@ -58,15 +58,11 @@ jobs:
           name: setup database.yml #CircleCiで構築されるDBを反映
           command: cp config/database.ci.yml config/database.yml
       - run:
-          name: setup database #スキーマファイルからテーブル作成、--traceでfull_traceチェック
-          command: bin/rails db:schema:load --trace
-      - run:
-          name: Rubocop #rubocopの起動
-          command: bundle exec rubocop --lint
-      # local環境との不整合が疑われるため、chrome-driverのバージョンを更新する
-      - run:
           name: update chromeDriver version
           command: bundle exec rake webdrivers:chromedriver:update
+      - run:
+          name: setup database #スキーマファイルからテーブル作成、--traceでfull_traceチェック
+          command: bin/rails db:schema:load --trace
       - run:
           name: execute rspec #Rspecの実行
           command: | #RspecJunitFormatterのgemでrspec結果をCIが読める,rspecファイルをglobしファイル名でrspecを並行させる--split-by=timings
@@ -75,6 +71,9 @@ jobs:
               --out test_results/rspec.xml \
               --format progress \
               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - run:
+          name: Rubocop #rubocopの起動
+          command: bundle exec rubocop --lint
       - store_test_results: #テスト結果のアップロード
           path: test_results
       - store_artifacts:
