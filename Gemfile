@@ -47,6 +47,7 @@ gem 'rubocop-rails', require:false
 gem 'redis-rails'
 gem 'letter_opener'
 gem 'config'
+gem 'dotenv-rails'
 gem 'sidekiq'
 gem 'sinatra'
 gem 'meta-tags'
