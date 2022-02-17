@@ -8,6 +8,5 @@ bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
 environment ENV.fetch("RAILS_ENV") { "production" }
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 plugin :tmp_restart
-app_root = File.expand_path("../..", __FILE__)
 
 stdout_redirect "#{Rails.root}/log/puma.stdout.log", "#{Rails.root}/log/puma.stderr.log", true

@@ -113,7 +113,7 @@ Rails.application.configure do
   config.session_store :redis_store, {
     servers: [
         {
-            host: "diaryapp-elasticache.8kyjko.0001.apne1.cache.amazonaws.com", #本番環境はElastiCacheのEndpoint(Redisのサーバー名)
+            host: ENV["REDIS_HOST"], #本番環境はElastiCacheのEndpoint(Redisのサーバー名)
             port: 6379, #Redisのサーバーのポート
             db: 0, #データーベースの番号(0~15)任意
             namespace: "session" #名前空間,"session:セッションID"の形式
@@ -125,12 +125,12 @@ Rails.application.configure do
   # 環境ごとにsidekiq.rbから分離
   Sidekiq.configure_server do |config|
     config.redis = {
-      url: 'redis://diaryapp-elasticache.8kyjko.0001.apne1.cache.amazonaws.com:6379' #本番環境はElastiCacheのEndpoint(Redisのサーバー名)
+      url: ENV["SIDEKIQ_URL"] #本番環境はElastiCacheのEndpoint(Redisサーバー名)
     }
   end
   Sidekiq.configure_client do |config|
     config.redis = {
-      url: 'redis://diaryapp-elasticache.8kyjko.0001.apne1.cache.amazonaws.com:6379' #本番環境はElastiCacheのEndpoint(Redisのサーバー名)
+      url: ENV["SIDEKIQ_URL"] #本番環境はElastiCacheのEndpoint(Redisサーバー名)
     }
   end
 end

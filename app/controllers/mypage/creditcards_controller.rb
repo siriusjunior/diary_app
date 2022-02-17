@@ -6,7 +6,7 @@ class Mypage::CreditcardsController < Mypage::BaseController
 
   def create
     current_user.register_creditcard!(token: params['payjp-token'])
-    redirect_to edit_mypage_creditcard_path, success: 'クレジットカードを登録しました'
+    redirect_to edit_mypage_creditcard_path, info: 'クレジットカードを登録しました'
   rescue Payjp::PayjpError => e
     redirect_to new_mypage_creditcard_path, danger: e.message
   end
@@ -19,7 +19,7 @@ class Mypage::CreditcardsController < Mypage::BaseController
 
   def update
     current_user.change_default_card!(token: params['payjp-token'])
-    redirect_to edit_mypage_creditcard_path, success: 'クレジットカードを登録しました'
+    redirect_to edit_mypage_creditcard_path, info: 'クレジットカードを登録しました'
   rescue Payjp::PayjpError => e
     redirect_to edit_mypage_creditcard_path, danger: e.message
   end

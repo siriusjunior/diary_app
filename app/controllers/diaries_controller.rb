@@ -35,7 +35,7 @@ class DiariesController < ApplicationController
     @diary = current_user.diaries.build(diary_params)
     @diary.register_date_sequence
     if @diary.save
-      redirect_to diaries_path, success: "ダイアリー#{@diary.date_sequence}日目を投稿しました"
+      redirect_to diaries_path, info: "ダイアリー#{@diary.date_sequence}日目を投稿しました"
     else
       flash.now[:danger] = 'ダイアリーの投稿に失敗しました'
       render :new
@@ -49,7 +49,7 @@ class DiariesController < ApplicationController
   def update
     @diary = current_user.diaries.find(params[:id])
     if @diary.update(diary_params)
-      redirect_to diary_path(@diary), success: "ダイアリーの変更を保存しました"
+      redirect_to diary_path(@diary), info: "ダイアリーの変更を保存しました"
     else
       flash.now[:danger] = 'ダイアリーの保存に失敗しました'
       render :edit
@@ -65,7 +65,7 @@ class DiariesController < ApplicationController
   def destroy
     @diary = current_user.diaries.find(params[:id])
     @diary.destroy!
-    redirect_to root_path, success: 'ダイアリーを削除しました'
+    redirect_to root_path, info: 'ダイアリーを削除しました'
   end
 
   def reset_image
