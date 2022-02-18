@@ -66,17 +66,17 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  # SorceryによるメールサーバーにGmailを指定
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: 'https://www.diaryapp.net/' }
+  # SorceryによるメールサーバーにSESを指定
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    enable_starttls_auto: true,
-    port: 587,
-    user_name: ENV['GMAIL_USER'],
-    password: ENV['GMAIL_PASSWORD'],
-    authentication: :plain,
+  config.action_mailer.perform_caching = true
+  config.action_mailer.default_url_options = { host: 'https://www.diaryapp.net/' }
+  ActionMailer::Base.smtp_settings = {
+      :address =>        'email-smtp.ap-northeast-1.amazonaws.com',
+      :port =>           587,
+      :domain =>         'amazonaws.com',
+      :authentication => :login,
+      :user_name =>      ENV["SES_USER"],
+      :password =>       ENV["SES_PASSWORD"]
   }
   
   # Ignore bad email addresses and do not raise email delivery errors.
