@@ -2,7 +2,11 @@ CarrierWave.configure do |config|
   if Rails.env.production?
     config.storage    = :aws
     config.aws_bucket = 's3.diaryapp.net'
-    config.aws_acl    = 'public-read'
+    config.aws_acl    = 'private'
+
+    # Optionally define an asset host for configurations that are fronted by a
+    # content host, such as CloudFront.
+    config.asset_host = 'https://d3kz0w7mdk1yih.cloudfront.net'
 
     # The maximum period for authenticated_urls is only 7 days.
     config.aws_authenticated_url_expiration = 60 * 60 * 24 * 7
