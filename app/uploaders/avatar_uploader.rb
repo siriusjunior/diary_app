@@ -23,6 +23,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
     'profile-placeholder.png'
   end
 
+  def url
+    "https://image.diaryapp.net/" + self.current_path
+  end
+
   def extension_allowlist
     %w[jpg jpeg gif png]
   end
