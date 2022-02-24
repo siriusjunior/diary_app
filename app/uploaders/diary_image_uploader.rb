@@ -16,8 +16,11 @@ class DiaryImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  def url
-    "https://image.diaryapp.net/" + self.current_path
+  if Rails.env.production?
+    # 開発環境エラー対処
+    def url
+      "https://image.diaryapp.net/" + self.current_path
+    end
   end
 
   process resize_to_limit: [700, 700]

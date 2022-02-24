@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_12_11_210346) do
 
-  create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "subject_type"
     t.bigint "subject_id"
     t.bigint "user_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
-  create_table "chatroom_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "chatroom_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "chatroom_id"
     t.datetime "last_read_at"
@@ -36,13 +36,13 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.index ["user_id"], name: "index_chatroom_users_on_user_id"
   end
 
-  create_table "chatrooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "chatrooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "comment_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "comment_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "comment_id"
     t.datetime "created_at", null: false
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.index ["user_id"], name: "index_comment_likes_on_user_id"
   end
 
-  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "body", null: false
     t.bigint "diary_id"
     t.bigint "user_id"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "contract_cancellations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "contract_cancellations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "contract_id"
     t.integer "reason"
     t.datetime "created_at", null: false
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.index ["contract_id"], name: "index_contract_cancellations_on_contract_id"
   end
 
-  create_table "contracts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "contracts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "plan_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.index ["user_id"], name: "index_contracts_on_user_id"
   end
 
-  create_table "diaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "diaries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "body", null: false
     t.text "check"
     t.string "image"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.index ["user_id"], name: "index_diaries_on_user_id"
   end
 
-  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "diary_id"
     t.datetime "created_at", null: false
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "chatroom_id"
     t.text "body", null: false
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "contract_id"
     t.string "charge_id", null: false
     t.date "current_period_start", null: false
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.index ["contract_id"], name: "index_payments_on_contract_id"
   end
 
-  create_table "plans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "plans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "code", null: false
     t.string "name", null: false
     t.integer "price", null: false
@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "follower_id", null: false
     t.integer "followed_id", null: false
     t.datetime "created_at", null: false
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
-  create_table "tag_links", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "tag_links", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "tag_id", null: false
     t.datetime "created_at", null: false
@@ -150,14 +150,14 @@ ActiveRecord::Schema.define(version: 2021_12_11_210346) do
     t.index ["user_id"], name: "index_tag_links_on_user_id"
   end
 
-  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
     t.string "salt"

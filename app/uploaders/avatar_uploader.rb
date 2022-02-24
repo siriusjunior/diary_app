@@ -18,24 +18,22 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   process resize_to_limit: [150, 150]
   
-  # Provide a default URL as a default if there hasn't been a file uploaded:
+  # In many cases, especially when working with images, it might be a good idea to provide a default url, a fallback in case no file has been uploaded. You can do this easily by overriding the default_url method in your uploader:
   def default_url
     'profile-placeholder.png'
   end
 
-  def url
-    "https://image.diaryapp.net/" + self.current_path
+  if Rails.env.production?
+    # 開発環境エラー対処
+    def url
+      "https://image.diaryapp.net/" + self.current_path
+    end
   end
 
   def extension_allowlist
     %w[jpg jpeg gif png]
   end
 
-  # You can find a full list of custom headers in AWS SDK documentation on
-  # AWS::S3::S3Object
-  # def download_url(filename)
-  #   url(response_content_disposition: %Q{attachment; filename="#{filename}"})
-  # end
   def filename
     original_filename if original_filename
   end

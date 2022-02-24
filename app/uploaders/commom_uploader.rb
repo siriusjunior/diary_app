@@ -18,13 +18,11 @@ class CommonUploader < CarrierWave::Uploader::Base
 
   process resize_to_limit: [150, 150]
   
-  # Provide a default URL as a default if there hasn't been a file uploaded:
-  def default_url
-    'profile-placeholder.png'
-  end
-
-  def url
-    "https://image.diaryapp.net/" + self.current_path
+  if Rails.env.production?
+    # 開発環境エラー対処
+    def url
+      "https://image.diaryapp.net/" + self.current_path
+    end
   end
 
   def extension_allowlist
