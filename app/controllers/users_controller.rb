@@ -27,9 +27,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.skip_password = true
-    @user.update!(avatar: open("./app/assets/images/profile-placeholder.png"))
     if @user.save
+      @user.skip_password = true
+      @user.update!(avatar: open("./app/assets/images/profile-placeholder.png"))
       # auto_login(@user)
       redirect_to login_path, info: 'メールを送信いたしました。メールをご確認の上、アカウントを有効化してください'
     else
