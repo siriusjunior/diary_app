@@ -2,7 +2,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.includes(:diaries, :tags).page(params[:page]).per(10).order(created_at: :desc)
-    # @users = User.order_by_diaries.page(params[:page]).per(10)
     respond_to do |format|
       format.html
       format.js
@@ -49,6 +48,8 @@ class UsersController < ApplicationController
     if (@user = User.load_from_activation_token(params[:id]))
       @user.activate!
       auto_login(@user)
+      # ActionCableの認証処理に必要なcookies
+      cookies.signed['user_id'] = current_user.id
       redirect_to login_path, info: 'アカウントの有効化が完了しました'
     else
       not_authenticated
