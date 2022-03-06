@@ -5,9 +5,9 @@ class DiariesController < ApplicationController
   def index
     if current_user
       if current_user.have_following?
-        # ログインユーザーでフィードデータがある場合
+        # ログインユーザーでフィードがある場合
         @diaries = current_user.feed.includes(:user, :comments, :likes).page(params[:page]).per(10).order(created_at: :desc)
-        @title = "みんなの最新ダイアリー"
+        @title = "フォロワーの最新ダイアリー"
       else
         # ログインユーザーでフォロワーがいない場合で
         if current_user.diaries.any?
@@ -35,7 +35,7 @@ class DiariesController < ApplicationController
     @diary = current_user.diaries.build(diary_params)
     @diary.register_date_sequence
     if @diary.save
-      redirect_to diaries_path, info: "ダイアリー#{@diary.date_sequence}日目を投稿しました"
+      redirect_to diaries_path, info: "ダイアリー#{ @diary.date_sequence }日目を投稿しました"
     else
       flash.now[:danger] = 'ダイアリーの投稿に失敗しました'
       render :new
