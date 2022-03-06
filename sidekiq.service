@@ -1,0 +1,43 @@
+#EC2の/usr/lib/systemd/system/sidekiq.serviceに配置
+#有効化sudo systemctl enable sidekiq
+#実行sudo systemctl start sidekiq
+#停止sudo systemctl stop sidekiq
+#状態チェックsudo systemctl status sidekiq
+
+[Unit]
+Description=sidekiq
+After=syslog.target network.target
+
+[Service]
+# v6.0.6以上の場合にはType=notify
+# v6.0.5以下の場合にはType=simple
+Type=simple
+
+# プロセスがロックアップされた場合に指定されて秒数以内に再起動する
+WatchdogSec=10
+
+# アプリケーションディレクトリの指定
+WorkingDirectory=/var/www/diary_app
+
+# rbenvを利用している場合は以下の記述
+ExecStart=/bin/bash -lc 'exec /home/sirius/.rbenv/shims/bundle exec sidekiq -e production'
+
+User=sirius
+#Group=ユーザーグループ名
+UMask=0002
+
+Environment=MALLOC_ARENA_MAX=2
+
+# クラッシュした場合にリスタートする
+RestartSec=1
+Restart=on-failure
+
+# ログの吐き出し場所
+# Ubuntuの場合/var/log/syslog 、CentOSの場合/var/log/messages
+StandardOutput=syslog
+StandardError=syslog
+
+SyslogIdentifier=sidekiq
+
+[Install]
+WantedBy=multi-user.target
