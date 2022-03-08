@@ -83,6 +83,8 @@ https://www.diaryapp.net/
 |  CVC番号  | 任意の3桁  |
 |  名前  | 任意   |
 
+## テーブル設計(ER図)
+<img width="600" alt="スクリーンショット 2022-03-08 12 12 32" src="https://user-images.githubusercontent.com/74279208/157159217-efd2ee81-d897-4a91-9f80-9101430917db.png">
 
 ## 【補足】 アプリの設計・ワイアーフレームの作成
 
