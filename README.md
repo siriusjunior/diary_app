@@ -1,24 +1,100 @@
-# README
+# ダイアリー体験フォーラム(diary_app)
+<img width="600" alt="スクリーンショット 2022-03-08 7 19 56" src="https://user-images.githubusercontent.com/74279208/157127651-02ce7cda-dc3b-4d99-be91-62b3bf3c3c66.png">
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- ユーザーが日々の生活で感じたこと、生活観をダイアリーとして投稿できるアプリです。
+- 投稿したダイアリーは期間をおいて「チェック」機能で後に自分のダイアリーを見直しメモを入れることができます。
+- ユーザーの生活観を他のユーザーとシェアをして、コメントをもらうことができて、必要に応じてコメントをオフにすることもできます。
 
-Things you may want to cover:
+## 公開リンク
+https://www.diaryapp.net/
 
-* Ruby version
+- 常時SSL化（httpsへのリダイレクト）
+- レスポンシブデザインに対応
+- ゲストログインボタンより、ゲストログインができます。
 
-* System dependencies
+## アプリの概要とペルソナ
+大学時代にメンタルヘルスのついて学ぶ機会があり、セルフケアを含めて、日々の生活態度を日記をに落とし込むことは、
+非常に意義のある行いであることを学んだ([参考サイト](https://lineblog.me/mental_health/archives/429913.html))。
 
-* Configuration
+実際に専門のカウンセラーに立ち会わないと、メンタル面で自身の抱えている課題・問題点を共有できない、
+自身の生活態度について思い悩む人々が多いことを知ったため、気軽に日記投稿としてご自身の生活態度を見直せるサービスを考えた。
+想定されるペルソナは、おもに以下の特徴を設定した。
 
-* Database creation
+- 不安を抱えながらも建設的に生活したい人
+- メンタルヘルスの健全性を保ちたい人
+- 建設的なライフワークにおいて他の実践者と繋がりたい人
 
-* Database initialization
+## インフラ構成図
+<img width="600" alt="スクリーンショット 2022-03-08 11 24 57" src="https://user-images.githubusercontent.com/74279208/157154008-dd481377-89b7-4af1-ad72-e01a74871b61.png">
 
-* How to run the test suite
+## 使用技術
+### フロントエンド
+- HTML/CSS
+- Bootstrap
+- jQuery
+### バックエンド
+- Ruby: 2.6.4
+- Rails: 5.2.6
+- Rubocop（Lintチェック）
+- RSpec(モデルスペック,システムスペック)
+- MySQL:5.7.37
+- Nginx
+- Puma
+- PayJP(決済API)
+### インフラ
+- AWS（EC2,RDS,ElastiCache,S3,Route53,ELB,CloudFront,SES）
+### 開発環境
+- Git/GitHub（Pull requestsで擬似チーム開発）
+- docker-compose（開発、テスト環境）
+- CircleCI
 
-* Services (job queues, cache servers, search engines, etc.)
+## 実装機能
+- ダイアリー投稿機能
+  - 日数カウント・リセット機能(Ajax)
+  - 投稿数制御(１日１投稿まで)
+  - 画像投稿・リセット(CarrierWave)
+  - 画像プレビュー(lightbox)
+  - ダイアリーいいね機能(Ajax)
+  - コメント認可
+- コメント投稿機能(Ajax)
+  - コメントいいね機能(Ajax)
+  - ダイアリー所有者によるコメントいいね認知
+- ダイアリーのキーワード検索機能
+- ユーザーのタグ検索機能(Ajax)
+- プロフィール編集機能
+  - プロフィール画像投稿(CarrierWave) 
+  - タグサジェスト検索・登録・バリデーション(jQuery、Ajax、Gem未使用)
+  - クレジットカード登録(月額制によるプラン契約項目)
+  - 支払い履歴
+- フォロー・コメント・いいね時の通知機能(Sidekiqによる非同期メイラー処理)
+  - 通知設定のユーザー制御
+  - 通知一覧ページ
+- ページネーション機能(Kaminari, Ajax)
+  - ダイアリー、通知リソース、タグ検索結果のユーザー
+- クレジットカード決済機能(Payjp)
+  - プラン別にチャット投稿数を制御
+- リアルタイムチャット機能(ActionCable, Ajax)
 
-* Deployment instructions
+### Payjpのテストカード
+|  項目  |  内容  |
+| ---- | ---- |
+|  カード番号 |  4242424242424242  |
+|  有効期限  |  任意の期日  |
+|  CVC番号  | 任意の3桁  |
+|  名前  | 任意   |
 
-* ...
+
+## 【補足】 アプリの設計・ワイアーフレームの作成
+
+###  ペルソナの課題(ジョブ理論)
+アプリ設計に際して、独自にペルソナの解決すべき課題として[ジョブ理論](https://www.harpercollins.co.jp/hc/books/detail/10971)を採用し、スプレッドシートにジョブと機能を洗出した。
+
+<img width="600" alt="スクリーンショット 2022-03-08 10 25 10" src="https://user-images.githubusercontent.com/74279208/157148074-ef2f7501-aaf9-44ae-8dc8-848fd6119091.png">
+
+これを元に具体的なワイヤーフレームをFigmaで作成し開発をスタートした。
+
+<img width="600" alt="スクリーンショット 2022-03-08 10 43 56" src="https://user-images.githubusercontent.com/74279208/157149272-6bb0e247-f445-4a83-ba6e-2deef7f4293a.png">
+
+### 画面設計
+<img width="600" alt="スクリーンショット 2022-03-08 10 52 25" src="https://user-images.githubusercontent.com/74279208/157150338-4c62dc8d-d93d-4a9d-a4f3-208526f36984.png">
+
