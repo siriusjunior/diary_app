@@ -183,3 +183,51 @@ class CommentsController < ApplicationController
 ### 画面設計
 <img width="600" alt="スクリーンショット 2022-03-08 10 52 25" src="https://user-images.githubusercontent.com/74279208/157150338-4c62dc8d-d93d-4a9d-a4f3-208526f36984.png">
 
+## BEM記法とscssファイルの構成
+またスタイルシートのscssの作成にあたっては、サイトの共通するベーススタール、モジュールやページ特有のもの、mixinの変数などの定義に切り分けてファイルを構成した。
+BEM記法ではBlock・Element・Modifilerを心がけることで見やすいスタイルコーディングを実現した。
+
+> - [SCSSのファイル設計について Vol.1](https://tsudoi.org/guide/detail/8.html)
+> - [BEM公式](http://getbem.com/naming/)
+
+<img width="300" alt="スクリーンショット 2022-03-11 15 31 45" src="https://user-images.githubusercontent.com/74279208/157815336-2cba5cd5-0302-4d55-8ee9-df2d856247cc.png">
+
+BEM記法によるスタイリングの一例
+```scss
+.message {
+    // ActionCableでBroadcastする際にクライアントサイドのjsのクラス付与による各々の処理
+    // current_userなら.message__containerの階層に付与
+    &__container_self {
+        justify-content: flex-end;
+        border-bottom-right-radius: 0;
+    }
+    &__body {
+        background-color: #b3ff8c;
+        color: $black;
+        border-radius: 15px;
+        border-bottom-left-radius: 0;
+    }
+     // current_userなら.message__bodyの階層に付与
+    &__body_self {
+        background-color: #36a100;
+        color: #fff;
+        border-radius: 15px;
+        border-bottom-right-radius: 0;
+    }
+    // current_userなら.message__iconの階層に付与
+    &__icon_self {
+        display: none!important;
+    }
+    &__time {
+        width: 130px;
+        bottom: -20px;
+        right: 0;
+        color: #a7a7a7;
+    }
+}
+```
+
+
+
+
+
