@@ -53,7 +53,7 @@ https://www.diaryapp.net/
   - 日数カウント・リセット機能(Ajax)
   - 投稿数制御(１日１投稿まで)
   - 画像投稿・リセット(CarrierWave)
-  - 画像プレビュー(lightbox)
+  - 画像プレビュー(Lightbox)
   - ダイアリーいいね機能(Ajax)
   - コメント認可
 - コメント投稿機能(Ajax)
@@ -184,8 +184,8 @@ class CommentsController < ApplicationController
 <img width="600" alt="スクリーンショット 2022-03-08 10 52 25" src="https://user-images.githubusercontent.com/74279208/157150338-4c62dc8d-d93d-4a9d-a4f3-208526f36984.png">
 
 ## BEM記法とscssファイルの構成
-またスタイルシートのscssの作成にあたっては、サイトの共通するベーススタール、モジュールやページ特有のもの、mixinの変数などの定義に切り分けてファイルを構成した。
-BEM記法ではBlock・Element・Modifilerを心がけることで見やすいスタイルコーディングを実現した。
+またスタイルシートのscssの作成にあたっては、サイトの共通するベーススタイル、モジュールやページ特有のもの、mixinの変数などの定義ごとに切り分けてファイルを構成した。
+BEM記法ではBlock・Element・Modifierを心がけることで責務がわかりやすいスタイルコーディングを実現した。
 
 > - [SCSSのファイル設計について Vol.1](https://tsudoi.org/guide/detail/8.html)
 > - [BEM公式](http://getbem.com/naming/)
